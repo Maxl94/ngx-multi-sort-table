@@ -49,7 +49,7 @@ export class DummyService {
   _sortData(d1: UserData, d2: UserData, sorting: string[], dirs: string[]): number {
     if (d1[sorting[0]] > d2[sorting[0]]) {
       return dirs[0] === 'asc' ? 1 : -1;
-    } else if (d1[sorting[0]] > d2[sorting[0]]) {
+    } else if (d1[sorting[0]] < d2[sorting[0]]) {
       return dirs[0] === 'asc' ? -1 : 1;
     } else {
       if (sorting.length > 1) {

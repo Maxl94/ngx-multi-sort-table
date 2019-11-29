@@ -64,10 +64,6 @@ export class AppComponent implements OnInit {
     this.table.totalElements = res.totalElements;
     this.table.pageIndex = res.page;
     this.table.pageSize = res.pagesize;
-
-    console.log(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize, res.users);
-    
-
     this.table.dataSource.setTableData(res.users);
   }
 
