@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatPaginatorModule, MatMenuModule, MatButtonModule, MatListModule, MatIconModule, MatDividerModule, MatCheckboxModule } from '@angular/material';
 
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatMultiSortModule } from 'mat-multi-sort';
+import { AppComponent } from './app.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -14,8 +15,16 @@ import { MatMultiSortModule } from 'mat-multi-sort';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatMenuModule,
     MatTableModule,
-    MatMultiSortModule
+    MatMultiSortModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatListModule,
+    DragDropModule,
+    MatIconModule,
+    MatDividerModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

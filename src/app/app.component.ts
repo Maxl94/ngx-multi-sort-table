@@ -1,23 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { TableData } from 'projects/mat-multi-sort/src/lib/table-data';
 import { MatMultiSort } from 'mat-multi-sort';
-import { orderBy, partialRight } from 'lodash';
-
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-  date: Date;
-}
+import { UserData, DummyService } from './dummy.service';
+import { MatMultiSortTableDataSource } from 'projects/mat-multi-sort/src/public_api';
 
 
-const COLORS: string[] = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
 
-const NAMES: string[] = ['000Maia', 'Asher', '111Olivia', 'Atticus', 'Amelia', 'Jack',
-  'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
+/**
+ * TODO overwrite MatDataSource to work with rest api
+ */
 
 
 @Component({
@@ -25,72 +16,59 @@ const NAMES: string[] = ['000Maia', 'Asher', '111Olivia', 'Atticus', 'Amelia', '
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color', 'date'];
-  dataSource: MatTableDataSource<UserData>;
+export class AppComponent implements OnInit {
+  displayedColumns = ['id', 'name', 'progress'];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatMultiSort) sort: MatMultiSort;
+  table: TableData<UserData>;
+  @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
 
-  constructor() {
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
 
-    this.dataSource = new MatTableDataSource(users);
+  constructor(
+    private dummyService: DummyService
+  ) {
+    this.table = new TableData<UserData>(
+      [
+        { id: 'id', name: 'ID' },
+        { id: 'name', name: 'Name' },
+        { id: 'progress', name: 'Progess' }
+      ], 100
+    );
+
+
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.dataSource.sortData = this.sortData;
-    this.dataSource.sortingDataAccessor = this.sortingDataAccessor;
+    this.table.sortObservable.subscribe(() => {
+      this.getData();
+    });
+    this.table.nextObservable.subscribe(() => {
+      this.getData();
+    });
+    this.table.previousObservable.subscribe(() => {
+      this.getData();
+    });
+    this.table.sizeObservable.subscribe(() => {
+      this.getData();
+    });
+
+
+    setTimeout(() => {
+      this.table.dataSource = new MatMultiSortTableDataSource(this.sort);
+      this.getData();
+    }, 0);
   }
 
-  sortingDataAccessor(data: UserData, sortHeaderId: string): string | number {
-    const value = (data as { [key: string]: any })[sortHeaderId];
-    switch (sortHeaderId) {
-      case 'id':
-        return Number(value);
-      case 'name':
-        return value.replace('000', '').replace('111', '');
-      case 'progress':
-        return Number(value);
-      case 'color':
-        return value;
-      case 'date':
-        return value.toLocaleString();
-      default:
-        return value;
-    }
+
+  getData() {
+    const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
+    this.table.totalElements = res.totalElements;
+    this.table.pageIndex = res.page;
+    this.table.pageSize = res.pagesize;
+
+    console.log(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize, res.users);
+    
+
+    this.table.dataSource.setTableData(res.users);
   }
 
-  sortData(data: UserData[], sort: MatMultiSort): UserData[] {
-    const actives = sort.actives.map(headerId => partialRight(this.sortingDataAccessor, headerId));
-    const directions = sort.directions as 'asc' | 'desc'[];
-    return orderBy(data, actives, directions);
-  };
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
-}
-
-
-function createNewUser(id: number): UserData {
-  const name =
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  const date = new Date(+(new Date()) - Math.floor(Math.random() * 100000000000));
-
-  return {
-    id: id.toString(),
-    name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
-    date
-  };
 }

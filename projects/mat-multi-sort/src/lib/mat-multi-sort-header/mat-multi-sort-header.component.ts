@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectorRef, Optional, Inject, HostListener, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material';
-import { MatMultiSort } from './mat-multi-sort.directive';
+import { MatMultiSort } from '../mat-multi-sort.directive';
 
 /** Column definition associated with a `MatSortHeader`. */
 interface C2MatSortHeaderColumnDef {
@@ -48,6 +48,10 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
 
   _isSorted() {
     return this._sort.actives.findIndex(activeId => activeId === this.id) > -1;
+  }
+
+  _sortId() {
+    return this._sort.actives.findIndex(activeId => activeId === this.id) + 1;
   }
 
   _updateArrowDirection() {
