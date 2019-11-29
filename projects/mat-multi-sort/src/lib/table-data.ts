@@ -41,6 +41,7 @@ export class TableData<T> {
         } else {
             this.pageSizeOptions = [10, 20, 50, 100];
         }
+        this.pageSize = this.pageSizeOptions[0];
     }
 
     public onSortEvent() {
