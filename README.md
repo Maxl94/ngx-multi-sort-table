@@ -16,9 +16,12 @@ To run the demo:
 5. `ng serve`
 
 
+## Screenvideo
+![screen video](demo.gif)
+
 ## Documentation
 ### TableData
-The `TabelData` an an use full class, which handels a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that it keeps the current state of the table, again sorting and pagnation.
+The `TabelData` an an usefull class, which handels a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that it keeps the current state of the table, again sorting and pagnation.
 
 #### Properties
 
@@ -41,7 +44,94 @@ The `TabelData` an an use full class, which handels a lot of work for your app, 
 
 #### Methods
 
-| Name          | Description                                                                                       | Parameter                                                                                                                                           |
-| ------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `constructor` | The constructor for the for the class, where you initalize your `columns` and the `totalElements` | `columns`: columns, `totalElements`: number, `options`: { `defaultSortParams`: string[], `defaultSortDirs`: string[], `pageSizeOptions`: number[] } |
-|               |
+| Name                | Description                                                                                                                                                                               | Parameter                                                                                                                                               |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| constructor         | The constructor for the for the class, where you initalize your `columns` and the `totalElements`. Optionally, you can add the default `id`s of the default sort colum and direction.     | `columns`: string[], `totalElements`: number, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[] } |
+| onSortEvent         | The method to bind to the `matSortChange` output of the table                                                                                                                             | none                                                                                                                                                    |
+| onPagnationEvent    | The method to bin to the `page` output of the `mat-paginator`                                                                                                                             | `$event`: PageEvent                                                                                                                                     |
+| setDisplayedColumns | A method to set the columns of the table. It should get bind to the `activeColumnsChange` output of `mat-multi-sort-table-settings`, in order to enable / disable and reorder the columns | `columns`: string[]                                                                                                                                     |
+|                     |                                                                                                                                                                                           |                                                                                                                                                         |
+
+### MatMultiSortHeaderComponent
+This component manages the sorting of the table. To use the multisort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
+
+### MatMultiSortTableSettingsComponent
+This component display some settings for your table. The user can selected the columns he want's to see in his table, next to that he can change the order of the columns.
+
+| Name                | Description                                                                                                                  | Parameter                              |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| columns             | An input to definde the columns to display in the menu. The `id` is the column id and `name` the name to display in the menu | @Input: { id: string, name: string }[] |
+| activeColumnsChange | The ouput gives the order of th currently display columns `id` and their order                                               | @Output: string[]                      |
+
+## Example code for the template
+```html
+<div class="mat-elevation-z8">
+  <mat-multi-sort-table-settings [columns]="table.columns" (activeColumnsChange)="table.setDisplayedColumns($event)"></mat-multi-sort-table-settings>
+  <table mat-table [dataSource]="table.dataSource" matMultiSort  (matSortChange)="table.onSortEvent()">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="progress"> Progress </th>
+      <td mat-cell *matCellDef="let row"> {{row.progress}} % </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="name"> Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="table.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: table.displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
+    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)">
+  </mat-paginator>
+</div>
+```
+## Example code for the component.ts
+
+```typescript
+  displayedColumns = ['id', 'name', 'progress'];
+
+  table: TableData<UserData>;
+  @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
+
+
+  constructor(
+    private dummyService: DummyService
+  ) {
+    this.table = new TableData<UserData>(
+      [
+        { id: 'id', name: 'ID' },
+        { id: 'name', name: 'Name' },
+        { id: 'progress', name: 'Progess' }
+      ], 100
+    );
+
+
+  }
+
+  ngOnInit() {
+    this.table.sortObservable.subscribe(() => { this.getData(); });
+    this.table.nextObservable.subscribe(() => { this.getData(); });
+    this.table.previousObservable.subscribe(() => { this.getData(); });
+    this.table.sizeObservable.subscribe(() => { this.getData(); });
+
+    setTimeout(() => {
+      this.table.dataSource = new MatMultiSortTableDataSource(this.sort);
+      this.getData();
+    }, 0);
+  }
+
+
+  getData() {
+    const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
+    this.table.totalElements = res.totalElements;
+    this.table.pageIndex = res.page;
+    this.table.pageSize = res.pagesize;
+    this.table.dataSource.setTableData(res.users);
+  }
+```

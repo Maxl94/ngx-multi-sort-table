@@ -38,19 +38,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.table.sortObservable.subscribe(() => {
-      this.getData();
-    });
-    this.table.nextObservable.subscribe(() => {
-      this.getData();
-    });
-    this.table.previousObservable.subscribe(() => {
-      this.getData();
-    });
-    this.table.sizeObservable.subscribe(() => {
-      this.getData();
-    });
-
+    this.table.sortObservable.subscribe(() => { this.getData(); });
+    this.table.nextObservable.subscribe(() => { this.getData(); });
+    this.table.previousObservable.subscribe(() => { this.getData(); });
+    this.table.sizeObservable.subscribe(() => { this.getData(); });
 
     setTimeout(() => {
       this.table.dataSource = new MatMultiSortTableDataSource(this.sort);

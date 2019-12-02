@@ -7,7 +7,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   templateUrl: './mat-multi-sort-table-settings.component.html',
   styleUrls: ['./mat-multi-sort-table-settings.component.scss']
 })
-export class MatMultiSortTableSettingsComponent implements OnInit {
+export class MatMultiSortTableSettingsComponent {
   _columns: { id: string, name: string, isActive: boolean }[];
 
   @Input() set columns(columns: { id: string, name: string, pipe?: string }[]) {
@@ -18,9 +18,6 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   @Output() activeColumnsChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this._columns, event.previousIndex, event.currentIndex);
