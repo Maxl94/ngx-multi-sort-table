@@ -15,7 +15,6 @@ To run the demo:
 4. `ng build multi-sort-table`
 5. `ng serve`
 
-
 ## Screenvideo
 ![screen video](demo.gif)
 
@@ -37,10 +36,10 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 | totalElements      | The total number of elemnts of the table, must be set from your component                                                                             | `none`                           |                                              |
 | sortParams         | An Array of the columns (`id`), which the user had chosen to sort. The order of the sorting is represented by the order of the `id`s in the parameter | `[]`                             | `['first_name', 'last_name']`                |
 | sortDirs           | An Array of the column's sortdirections, which the user had chosen to sort. The order is the same like `sortParams`                                   | `[]`                             | `['asc', 'desc']`                            |
-| nextObservable     | An `Observable` that fires, when the users clicks the `next` button                                                                                   |                                  |                                              |
-| previousObservable | An `Observable` that fires, when the users clicks the `previous` button                                                                               |                                  |                                              |
-| sizeObservable     | An `Observable` that fires, when the users changes the `pageSize`                                                                                     |                                  |                                              |
-| sortObservable     | An `Observable` that fires, when the users changes the sorted columns or direction                                                                    |                                  |                                              |
+| nextObservable     | An `Observable` that fires, when the user clicks the `next` button                                                                                   |                                  |                                              |
+| previousObservable | An `Observable` that fires, when the user clicks the `previous` button                                                                               |                                  |                                              |
+| sizeObservable     | An `Observable` that fires, when the user changes the `pageSize`                                                                                     |                                  |                                              |
+| sortObservable     | An `Observable` that fires, when the user changes the sorted columns or direction                                                                    |                                  |                                              |
 
 #### Methods
 
@@ -56,7 +55,7 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 This component manages the sorting of the table. To use the multisort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
 
 ### MatMultiSortTableSettingsComponent
-This component display some settings for your table. The user can selected the columns he want's to see in his table, next to that he can change the order of the columns.
+This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns.
 
 | Name                | Description                                                                                                                  | Parameter                              |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
@@ -99,7 +98,6 @@ This component display some settings for your table. The user can selected the c
   table: TableData<UserData>;
   @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
 
-
   constructor(
     private dummyService: DummyService
   ) {
@@ -110,7 +108,6 @@ This component display some settings for your table. The user can selected the c
         { id: 'progress', name: 'Progess' }
       ], 100
     );
-
 
   }
 
@@ -126,7 +123,6 @@ This component display some settings for your table. The user can selected the c
     }, 0);
   }
 
-
   getData() {
     const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
     this.table.totalElements = res.totalElements;
@@ -135,3 +131,4 @@ This component display some settings for your table. The user can selected the c
     this.table.dataSource.setTableData(res.users);
   }
 ```
+
