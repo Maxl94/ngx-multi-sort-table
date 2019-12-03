@@ -1,10 +1,21 @@
 {
   "name": "mat-multi-sort",
   "version": "0.0.1",
+  "description": "A extenstion for the angular material table to support serverside mulitsorting.",
+  "author": "Maximilian Balluff",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Maxl94/ngx-multi-sort-table"
+  },
+  "bugs": {
+    "url": "https://github.com/Maxl94/ngx-multi-sort-table/issues"
+  },
+  "keywords": ["angular", "javascript", "typescript", "angular-material", "table", "multi-sort"],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^8.0.3",
     "@angular/core": "^8.0.3",
-    "@angular/material": "~8.2.3",
-    "@angular/cdk": "~8.2.3"
+    "@angular/material": "^8.2.3",
+    "@angular/cdk": "^8.2.3"
   }
 }
