@@ -1,4 +1,4 @@
-import { MatTableDataSource, PageEvent } from '@angular/material';
+import { MatTableDataSource, PageEvent, SortDirection } from '@angular/material';
 
 import { Subject } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
@@ -9,7 +9,7 @@ export class TableData<T> {
     displayedColumns: string[];
     pageSize: number;
     pageIndex: number;
-    pageSizeOptions: number[];
+    readonly pageSizeOptions: number[];
     totalElements: number;
     sortParams: string[];
     sortDirs: string[];
@@ -32,13 +32,20 @@ export class TableData<T> {
         this.displayedColumns = this.columns.map(c => c.id);
 
         if (options) {
-            this.sortParams = options.defaultSortParams || [];
-            this.sortDirs = options.defaultSortDirs || [];
-            this.totalElements = options.totalElements || 0;
             if (options.pageSizeOptions && options.pageSizeOptions.length > 1) {
                 throw Error('Array of pageSizeOptions must contain at least one entry');
             }
-            this.pageSizeOptions = options.pageSizeOptions;
+
+            if (options.defaultSortParams.length !== options.defaultSortDirs.length) {
+                this.sortParams = options.defaultSortParams || [];
+                this.sortDirs = this.sortParams.map(() => 'asc');
+            } else {
+                this.sortParams = options.defaultSortParams || [];
+                this.sortDirs = options.defaultSortDirs || [];
+            }
+
+            this.totalElements = options.totalElements || 0;
+            this.pageSizeOptions = options.pageSizeOptions || [10, 20, 50, 100];
         } else {
             this.pageSizeOptions = [10, 20, 50, 100];
         }
@@ -71,5 +78,19 @@ export class TableData<T> {
 
     public setDisplayedColumns(columns: string[]) {
         this.displayedColumns = columns;
+    }
+
+    public setDatasource(dataSource: MatMultiSortTableDataSource<T>) {
+        this.dataSource = dataSource;
+        if (this.sortParams.length > 0) {
+            this.dataSource.sort.actives = this.sortParams;
+            this.dataSource.sort.directions = this.sortDirs.map(v => v as SortDirection);
+
+            // Dirty hack to display default sort column(s)
+            const temp = Object.assign([], this.displayedColumns);
+            const temp_revers = Object.assign([], this.displayedColumns);
+            this.setDisplayedColumns(temp_revers.reverse());
+            setTimeout(() => this.setDisplayedColumns(temp), 0);
+        }
     }
 }
