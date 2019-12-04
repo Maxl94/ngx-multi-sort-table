@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatMultiSortModule } from 'mat-multi-sort/mat-multi-sort';
+import { MatMultiSortModule } from 'mat-multi-sort';
 
 @NgModule({
   declarations: [

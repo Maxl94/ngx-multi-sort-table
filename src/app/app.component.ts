@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ]
+      ], { defaultSortParams: ['name'], defaultSortDirs: ['asc']}
     );
 
 
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
     this.table.sizeObservable.subscribe(() => { this.getData(); });
 
     setTimeout(() => {
-      this.table.dataSource = new MatMultiSortTableDataSource(this.sort);
+      this.table.setDatasource(new MatMultiSortTableDataSource(this.sort));
       this.getData();
     }, 0);
   }

@@ -14,7 +14,6 @@ import { MatMultiSortTableSettingsComponent } from './mat-multi-sort-table-setti
   imports: [
     CommonModule,
     MatCommonModule,
-    MatTableModule,
     MatDividerModule,
     DragDropModule,
     MatIconModule,
