@@ -4,9 +4,10 @@ import { MatTableModule, MatPaginatorModule, MatMenuModule, MatButtonModule, Mat
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatMultiSortModule } from 'mat-multi-sort';
+
 import { AppComponent } from './app.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatMultiSortModule } from 'mat-multi-sort/mat-multi-sort';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatCheckboxModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

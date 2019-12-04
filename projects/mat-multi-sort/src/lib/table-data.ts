@@ -5,7 +5,7 @@ import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
 
 export class TableData<T> {
     dataSource: MatMultiSortTableDataSource<T>;
-    columns: { id: string, name: string }[];
+    readonly columns: { id: string, name: string }[];
     displayedColumns: string[];
     pageSize: number;
     pageIndex: number;
@@ -14,26 +14,27 @@ export class TableData<T> {
     sortParams: string[];
     sortDirs: string[];
 
-    nextObservable: Subject<any> = new Subject<any>();
-    previousObservable: Subject<any> = new Subject<any>();
-    sizeObservable: Subject<any> = new Subject<any>();
-    sortObservable: Subject<void> = new Subject<void>();
+    readonly nextObservable: Subject<any> = new Subject<any>();
+    readonly previousObservable: Subject<any> = new Subject<any>();
+    readonly sizeObservable: Subject<any> = new Subject<any>();
+    readonly sortObservable: Subject<void> = new Subject<void>();
 
 
     // TODO refactor
-    constructor(columns: { id: string, name: string }[], totalElements: number,
+    constructor(columns: { id: string, name: string }[],
         options?: {
             defaultSortParams?: string[],
             defaultSortDirs?: string[],
-            pageSizeOptions: number[]
+            pageSizeOptions?: number[],
+            totalElements?: number
         }) {
-        this.totalElements = totalElements;
         this.columns = columns;
         this.displayedColumns = this.columns.map(c => c.id);
 
         if (options) {
             this.sortParams = options.defaultSortParams || [];
             this.sortDirs = options.defaultSortDirs || [];
+            this.totalElements = options.totalElements || 0;
             if (options.pageSizeOptions && options.pageSizeOptions.length > 1) {
                 throw Error('Array of pageSizeOptions must contain at least one entry');
             }
@@ -42,6 +43,10 @@ export class TableData<T> {
             this.pageSizeOptions = [10, 20, 50, 100];
         }
         this.pageSize = this.pageSizeOptions[0];
+    }
+
+    public setTotalElements(totalElements: number) {
+        this.totalElements = totalElements;
     }
 
     public onSortEvent() {

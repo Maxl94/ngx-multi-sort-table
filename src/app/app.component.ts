@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ], 100
+      ]
     );
 
 
