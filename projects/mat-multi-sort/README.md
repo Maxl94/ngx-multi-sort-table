@@ -28,7 +28,7 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | -------------------------------------------- |
 | columns            | An array of the displayed columns of the table with `id`: name of the attribute and `name`: Name to display in the header                             | `none`                           | `[{ id: 'first_name', name: 'First Name' }]` |
 | displayedColumns   | An array of the currently displayed columns (`id`) and their order                                                                                    | `all columns`                    |                                              |
-| dataSource         | A `MatMultiSortTableDataSource`, which is special `DataSource` for sorting                                                                            | `none`                           |                                              |
+| dataSource         | A `MatMultiSortTableDataSource`, which is special `DataSource` for sorting. Only accesable via getter and setter                                      | `none`                           |                                              |
 | pageSize           | The current selected pageSize                                                                                                                         | first entry of `pageSizeOptions` |                                              |
 | pageSizeOptions    | The options for the pageSize, which the user can see in the menu                                                                                      | `[10, 20, 50, 100]`              |                                              |
 |                    |                                                                                                                                                       |                                  |                                              |
@@ -36,20 +36,22 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 | totalElements      | The total number of elemnts of the table, must be set from your component                                                                             | `none`                           |                                              |
 | sortParams         | An Array of the columns (`id`), which the user had chosen to sort. The order of the sorting is represented by the order of the `id`s in the parameter | `[]`                             | `['first_name', 'last_name']`                |
 | sortDirs           | An Array of the column's sortdirections, which the user had chosen to sort. The order is the same like `sortParams`                                   | `[]`                             | `['asc', 'desc']`                            |
-| nextObservable     | An `Observable` that fires, when the user clicks the `next` button                                                                                   |                                  |                                              |
-| previousObservable | An `Observable` that fires, when the user clicks the `previous` button                                                                               |                                  |                                              |
-| sizeObservable     | An `Observable` that fires, when the user changes the `pageSize`                                                                                     |                                  |                                              |
-| sortObservable     | An `Observable` that fires, when the user changes the sorted columns or direction                                                                    |                                  |                                              |
+| nextObservable     | An `Observable` that fires, when the user clicks the `next` button                                                                                    |                                  |                                              |
+| previousObservable | An `Observable` that fires, when the user clicks the `previous` button                                                                                |                                  |                                              |
+| sizeObservable     | An `Observable` that fires, when the user changes the `pageSize`                                                                                      |                                  |                                              |
+| sortObservable     | An `Observable` that fires, when the user changes the sorted columns or direction                                                                     |                                  |                                              |
 
 #### Methods
 
-| Name                | Description                                                                                                                                                                               | Parameter                                                                                                                                               |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| constructor         | The constructor for the for the class, where you initalize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction.     | `columns`: string[], `totalElements`: number, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
-| onSortEvent         | The method to bind to the `matSortChange` output of the table                                                                                                                             | none                                                                                                                                                    |
-| onPagnationEvent    | The method to bin to the `page` output of the `mat-paginator`                                                                                                                             | `$event`: PageEvent                                                                                                                                     |
-| setDisplayedColumns | A method to set the columns of the table. It should get bind to the `activeColumnsChange` output of `mat-multi-sort-table-settings`, in order to enable / disable and reorder the columns | `columns`: string[]                                                                                                                                     |
-|                     |                                                                                                                                                                                           |                                                                                                                                                         |
+| Name                | Description                                                                                                                                                                               | Parameter                                                                                                                                                                          |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| constructor         | The constructor for the for the class, where you initalize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction.                             | `columns`: string[], `totalElements`: number, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
+| onSortEvent         | The method to bind to the `matSortChange` output of the table                                                                                                                             | none                                                                                                                                                                               |
+| onPagnationEvent    | The method to bin to the `page` output of the `mat-paginator`                                                                                                                             | `$event`: PageEvent                                                                                                                                                                |
+| setDisplayedColumns | A method to set the columns of the table. It should get bind to the `activeColumnsChange` output of `mat-multi-sort-table-settings`, in order to enable / disable and reorder the columns | `columns`: string[]                                                                                                                                                                |
+| setDataSource       | Set the dataSource to the table and update the ui to display correct sorting                                                                                                              | `dataSource`: MatMultiSortTableDataSource                                                                                                                                          |
+| getDataSource       | Returns the current dataSource                                                                                                                                                            | none                                                                                                                                                                               |
+| setTableData        | Set new data to the table                                                                                                                                                                 | `data`: T[]                                                                                                                                                                   |
 
 ### MatMultiSortHeaderComponent
 This component manages the sorting of the table. To use the multisort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
@@ -66,7 +68,8 @@ This component display some settings for your table. The user can select the col
 ```html
 <div class="mat-elevation-z8">
   <mat-multi-sort-table-settings [columns]="table.columns" (activeColumnsChange)="table.setDisplayedColumns($event)"></mat-multi-sort-table-settings>
-  <table mat-table [dataSource]="table.dataSource" matMultiSort  (matSortChange)="table.onSortEvent()">
+  <table mat-table [dataSource]="table.getDataSource()" matMultiSort  (matSortChange)="table.onSortEvent()">
+
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
       <td mat-cell *matCellDef="let row"> {{row.id}} </td>
@@ -83,7 +86,8 @@ This component display some settings for your table. The user can select the col
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="table.displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: table.displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: table.displayedColumns;">
+    </tr>
   </table>
   <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
     [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)">
@@ -93,10 +97,18 @@ This component display some settings for your table. The user can select the col
 ## Example code for the component.ts
 
 ```typescript
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
   displayedColumns = ['id', 'name', 'progress'];
 
   table: TableData<UserData>;
   @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
+
 
   constructor(
     private dummyService: DummyService
@@ -106,8 +118,9 @@ This component display some settings for your table. The user can select the col
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ], 100
+      ], { defaultSortParams: ['name'], defaultSortDirs: ['asc']}
     );
+
 
   }
 
@@ -118,17 +131,20 @@ This component display some settings for your table. The user can select the col
     this.table.sizeObservable.subscribe(() => { this.getData(); });
 
     setTimeout(() => {
-      this.table.dataSource = new MatMultiSortTableDataSource(this.sort);
+      this.table.setDataSource(new MatMultiSortTableDataSource(this.sort));
       this.getData();
     }, 0);
   }
+
 
   getData() {
     const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
     this.table.totalElements = res.totalElements;
     this.table.pageIndex = res.page;
     this.table.pageSize = res.pagesize;
-    this.table.dataSource.setTableData(res.users);
+    this.table.setTableData(res.users);
   }
+
+}
 ```
 

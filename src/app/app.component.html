@@ -1,6 +1,11 @@
 <div class="mat-elevation-z8">
-  <mat-multi-sort-table-settings [columns]="table.columns" (activeColumnsChange)="table.setDisplayedColumns($event)"></mat-multi-sort-table-settings>
-  <table mat-table [dataSource]="table.dataSource" matMultiSort  (matSortChange)="table.onSortEvent()">
+  <mat-multi-sort-table-settings [columns]="table.columns" (activeColumnsChange)="table.displayedColumns = $event;">
+    <button mat-stroked-button>
+      Spalten bearbeiten &nbsp;
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-multi-sort-table-settings>
+  <table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
@@ -15,16 +20,6 @@
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="name"> Name </th>
       <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="color">
-      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="color"> Color </th>
-      <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="date"> Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.date | date:'YYYY-MM-DD HH:mm'}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="table.displayedColumns"></tr>

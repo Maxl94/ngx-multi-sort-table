@@ -4,20 +4,20 @@ import { Subject } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
 
 export class TableData<T> {
-    dataSource: MatMultiSortTableDataSource<T>;
-    readonly columns: { id: string, name: string }[];
-    displayedColumns: string[];
+    private _dataSource: MatMultiSortTableDataSource<T>;
+    private _columns: { id: string, name: string }[];
+    private _displayedColumns: string[];
     pageSize: number;
     pageIndex: number;
-    readonly pageSizeOptions: number[];
-    totalElements: number;
-    sortParams: string[];
-    sortDirs: string[];
+    private _pageSizeOptions: number[];
+    private _totalElements: number;
+    private _sortParams: string[];
+    private _sortDirs: string[];
 
-    readonly nextObservable: Subject<any> = new Subject<any>();
-    readonly previousObservable: Subject<any> = new Subject<any>();
-    readonly sizeObservable: Subject<any> = new Subject<any>();
-    readonly sortObservable: Subject<void> = new Subject<void>();
+    private _nextObservable: Subject<void> = new Subject<void>();
+    private _previousObservable: Subject<void> = new Subject<void>();
+    private _sizeObservable: Subject<void> = new Subject<void>();
+    private _sortObservable: Subject<void> = new Subject<void>();
 
 
     // TODO refactor
@@ -28,38 +28,34 @@ export class TableData<T> {
             pageSizeOptions?: number[],
             totalElements?: number
         }) {
-        this.columns = columns;
-        this.displayedColumns = this.columns.map(c => c.id);
+        this._columns = columns;
+        this._displayedColumns = this._columns.map(c => c.id);
 
         if (options) {
             if (options.pageSizeOptions && options.pageSizeOptions.length > 1) {
                 throw Error('Array of pageSizeOptions must contain at least one entry');
             }
 
-            if (options.defaultSortParams.length !== options.defaultSortDirs.length) {
-                this.sortParams = options.defaultSortParams || [];
-                this.sortDirs = this.sortParams.map(() => 'asc');
-            } else {
-                this.sortParams = options.defaultSortParams || [];
-                this.sortDirs = options.defaultSortDirs || [];
+            this._sortParams = options.defaultSortParams || [];
+            this._sortDirs = options.defaultSortDirs || [];
+
+            if (this._sortParams.length !== this._sortDirs.length) {
+                this._sortDirs = this._sortParams.map(() => 'asc');
+                console.warn('You passed less sort directions, than sort parameter. Useing default \'asc\'');
             }
 
-            this.totalElements = options.totalElements || 0;
-            this.pageSizeOptions = options.pageSizeOptions || [10, 20, 50, 100];
+            this._totalElements = options.totalElements || 0;
+            this._pageSizeOptions = options.pageSizeOptions || [10, 20, 50, 100];
         } else {
-            this.pageSizeOptions = [10, 20, 50, 100];
+            this._pageSizeOptions = [10, 20, 50, 100];
         }
-        this.pageSize = this.pageSizeOptions[0];
-    }
-
-    public setTotalElements(totalElements: number) {
-        this.totalElements = totalElements;
+        this.pageSize = this._pageSizeOptions[0];
     }
 
     public onSortEvent() {
-        this.sortParams = this.dataSource.sort['actives'];
-        this.sortDirs = this.dataSource.sort['directions'];
-        this.sortObservable.next();
+        this._sortParams = this._dataSource.sort['actives'];
+        this._sortDirs = this._dataSource.sort['directions'];
+        this._sortObservable.next();
     }
 
     public onPagnationEvent($event: PageEvent) {
@@ -68,29 +64,82 @@ export class TableData<T> {
         this.pageIndex = $event.pageIndex;
 
         if (tmpPageSize !== this.pageSize) {
-            this.sizeObservable.next();
+            this._sizeObservable.next();
         } else if ($event.previousPageIndex < $event.pageIndex) {
-            this.nextObservable.next();
+            this._nextObservable.next();
         } else if ($event.previousPageIndex > $event.pageIndex) {
-            this.previousObservable.next();
+            this._previousObservable.next();
         }
     }
 
-    public setDisplayedColumns(columns: string[]) {
-        this.displayedColumns = columns;
+    public set totalElements(totalElements: number) {
+        this._totalElements = totalElements;
     }
 
-    public setDatasource(dataSource: MatMultiSortTableDataSource<T>) {
-        this.dataSource = dataSource;
-        if (this.sortParams.length > 0) {
-            this.dataSource.sort.actives = this.sortParams;
-            this.dataSource.sort.directions = this.sortDirs.map(v => v as SortDirection);
+    public get totalElements(): number {
+        return this._totalElements;
+    }
+
+    public set displayedColumns(displayedColumns: string[]) {
+        this._displayedColumns = displayedColumns;
+    }
+
+
+    public get displayedColumns(): string[] {
+        return this._displayedColumns;
+    }
+
+    public set dataSource(dataSource: MatMultiSortTableDataSource<T>) {
+        this._dataSource = dataSource;
+        if (this._sortParams.length > 0) {
+            this._dataSource.sort.actives = this._sortParams;
+            this._dataSource.sort.directions = this._sortDirs.map(v => v as SortDirection);
 
             // Dirty hack to display default sort column(s)
-            const temp = Object.assign([], this.displayedColumns);
-            const temp_revers = Object.assign([], this.displayedColumns);
-            this.setDisplayedColumns(temp_revers.reverse());
-            setTimeout(() => this.setDisplayedColumns(temp), 0);
+            const temp = Object.assign([], this._displayedColumns);
+            const temp_revers = Object.assign([], this._displayedColumns);
+            this._displayedColumns = temp_revers.reverse();
+            setTimeout(() => this._displayedColumns = temp, 0);
         }
+    }
+
+    public get dataSource(): MatMultiSortTableDataSource<T> {
+        return this._dataSource;
+    }
+
+    public set tableData(data: T[]) {
+        this._dataSource.setTableData(data);
+    }
+
+    public get nextObservable(): Subject<any> {
+        return this._nextObservable;
+    }
+
+    public get previousObservable(): Subject<any> {
+        return this._previousObservable;
+    }
+
+    public get sizeObservable(): Subject<any> {
+        return this._sizeObservable;
+    }
+
+    public get sortObservable(): Subject<any> {
+        return this._sortObservable;
+    }
+
+    public get sortParams(): string[] {
+        return this._sortParams;
+    }
+
+    public get sortDirs(): string[] {
+        return this._sortDirs;
+    }
+
+    public get columns(): { id: string, name: string }[] {
+        return this._columns;
+    }
+
+    public get pageSizeOptions(): number[] {
+        return this._pageSizeOptions;
     }
 }

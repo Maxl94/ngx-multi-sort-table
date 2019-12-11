@@ -31,20 +31,20 @@ export class AppComponent implements OnInit {
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ], { defaultSortParams: ['name'], defaultSortDirs: ['asc']}
+      ], { defaultSortParams: ['name'], defaultSortDirs: ['asc'] }
     );
 
 
   }
 
   ngOnInit() {
-    this.table.sortObservable.subscribe(() => { this.getData(); });
+    this.table.nextObservable.subscribe(() => { this.getData(); });
     this.table.nextObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
     this.table.sizeObservable.subscribe(() => { this.getData(); });
 
     setTimeout(() => {
-      this.table.setDatasource(new MatMultiSortTableDataSource(this.sort));
+      this.table.dataSource = new MatMultiSortTableDataSource(this.sort);
       this.getData();
     }, 0);
   }
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.table.totalElements = res.totalElements;
     this.table.pageIndex = res.page;
     this.table.pageSize = res.pagesize;
-    this.table.dataSource.setTableData(res.users);
+    this.table.tableData = res.users;
   }
 
 }

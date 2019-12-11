@@ -1,8 +1,7 @@
 <div class="table-settings">
-    <button mat-stroked-button [matMenuTriggerFor]="menu">
-        Spalten bearbeiten &nbsp;
-        <mat-icon>menu</mat-icon>
-    </button>
+    <div [matMenuTriggerFor]="menu" class="table-settings-menu">
+        <ng-content></ng-content>
+    </div>
     <mat-menu #menu="matMenu">
         <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
             <div class="example-box" *ngFor="let column of _columns" cdkDrag>
