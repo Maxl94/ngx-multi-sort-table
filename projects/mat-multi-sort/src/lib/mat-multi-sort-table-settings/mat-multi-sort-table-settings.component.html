@@ -1,6 +1,24 @@
 <div class="table-settings">
+    <div class="table-settings-sort">
+        <mat-chip-list class="drag-chip-list" cdkDropList cdkDropListOrientation='horizontal'
+            (cdkDropListDropped)="dropSort($event)">
+            <mat-chip class="drag-chip" *ngFor="let item of sort" cdkDrag (removed)="remove(item.id)"
+                (click)="updateDirection(item.id)">
+                {{item.name}}:
+                <div class="sorting" [matTooltip]="sortToolTip">
+                    {{item.direction}}
+                </div>
+                <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
+    <div style="flex: 1 1 auto;"></div>
     <div [matMenuTriggerFor]="menu" class="table-settings-menu">
-        <ng-content></ng-content>
+        <ng-content #menuRef></ng-content>
+        <!-- <button *ngIf="menuRef.nativeElement.childNodes.length == 0">
+            Edit Columns
+            <mat-icon>menu</mat-icon>
+        </button> -->
     </div>
     <mat-menu #menu="matMenu">
         <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
@@ -10,5 +28,5 @@
             </div>
         </div>
     </mat-menu>
+    <mat-divider></mat-divider>
 </div>
-<mat-divider></mat-divider>

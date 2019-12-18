@@ -35,13 +35,17 @@ export class TableData<T> {
             if (options.pageSizeOptions && options.pageSizeOptions.length > 1) {
                 throw Error('Array of pageSizeOptions must contain at least one entry');
             }
+            options.defaultSortParams.map(s => {
+                if (!this._displayedColumns.includes(s)) {
+                    throw Error(`Provided sort paramerter "${s}" is not a column.`);
+                }
+            });
 
             this._sortParams = options.defaultSortParams || [];
             this._sortDirs = options.defaultSortDirs || [];
 
             if (this._sortParams.length !== this._sortDirs.length) {
                 this._sortDirs = this._sortParams.map(() => 'asc');
-                console.warn('You passed less sort directions, than sort parameter. Useing default \'asc\'');
             }
 
             this._totalElements = options.totalElements || 0;
@@ -82,6 +86,7 @@ export class TableData<T> {
 
     public set displayedColumns(displayedColumns: string[]) {
         this._displayedColumns = displayedColumns;
+        // this.updateSortheaders();
     }
 
 
@@ -94,20 +99,23 @@ export class TableData<T> {
         if (this._sortParams.length > 0) {
             this._dataSource.sort.actives = this._sortParams;
             this._dataSource.sort.directions = this._sortDirs.map(v => v as SortDirection);
-
-            // Dirty hack to display default sort column(s)
-            const temp = Object.assign([], this._displayedColumns);
-            const temp_revers = Object.assign([], this._displayedColumns);
-            this._displayedColumns = temp_revers.reverse();
-            setTimeout(() => this._displayedColumns = temp, 0);
+            this.updateSortheaders();
         }
+    }
+
+    public updateSortheaders(): void {
+        // Dirty hack to display default sort column(s)
+        const temp = Object.assign([], this._displayedColumns);
+        this._displayedColumns = []; // temp_revers.reverse();
+        setTimeout(() => this._displayedColumns = temp, 0);
+        this._sortObservable.next();
     }
 
     public get dataSource(): MatMultiSortTableDataSource<T> {
         return this._dataSource;
     }
 
-    public set tableData(data: T[]) {
+    public set data(data: T[]) {
         this._dataSource.setTableData(data);
     }
 
@@ -142,4 +150,16 @@ export class TableData<T> {
     public get pageSizeOptions(): number[] {
         return this._pageSizeOptions;
     }
+
+    public set sortParams(v: string[]) {
+        this._sortParams = v;
+        this._dataSource.sort.actives = this._sortParams;
+    }
+
+    public set sortDirs(v: string[]) {
+        this._sortDirs = v;
+        this._dataSource.sort.directions = this._sortDirs.map(v => v as SortDirection);
+    }
+
+
 }

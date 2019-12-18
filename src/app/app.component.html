@@ -1,5 +1,5 @@
-<div class="mat-elevation-z8">
-  <mat-multi-sort-table-settings [columns]="table.columns" (activeColumnsChange)="table.displayedColumns = $event;">
+<div class="mat-elevation-z8" style="padding: 8px;">
+  <mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern">
     <button mat-stroked-button>
       Spalten bearbeiten &nbsp;
       <mat-icon>menu</mat-icon>

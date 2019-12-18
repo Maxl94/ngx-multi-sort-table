@@ -1,14 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { TableData } from 'projects/mat-multi-sort/src/lib/table-data';
 import { MatMultiSort } from 'mat-multi-sort';
 import { UserData, DummyService } from './dummy.service';
-import { MatMultiSortTableDataSource } from 'projects/mat-multi-sort/src/public_api';
+import { MatMultiSortTableDataSource, TableData } from 'projects/mat-multi-sort/src/public_api';
 
 
-
-/**
- * TODO overwrite MatDataSource to work with rest api
- */
 
 
 @Component({
@@ -39,7 +34,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.table.nextObservable.subscribe(() => { this.getData(); });
-    this.table.nextObservable.subscribe(() => { this.getData(); });
+    this.table.sortObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
     this.table.sizeObservable.subscribe(() => { this.getData(); });
 
@@ -55,7 +50,7 @@ export class AppComponent implements OnInit {
     this.table.totalElements = res.totalElements;
     this.table.pageIndex = res.page;
     this.table.pageSize = res.pagesize;
-    this.table.tableData = res.users;
+    this.table.data = res.users;
   }
 
 }
