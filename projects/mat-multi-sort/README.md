@@ -5,7 +5,7 @@ The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesro
 
 The provied example is based on Angular 8 and Angular Material 8, I have not tested previous versions.
 
-Client side multi sorting is not implementes yet, it might follow in the future or feel free to make a pull request.
+~~Client side multi sorting is not implementes yet, it might follow in the future or feel free to make a pull request.~~
 
 ## Demo
 To run the demo:
@@ -15,8 +15,20 @@ To run the demo:
 4. `ng build multi-sort-table`
 5. `ng serve`
 
-## Screenvideo
-![screen video](demo.gif)
+![demo gif](demo.gif)
+
+## Update News
+### Version 0.1.4
+- Bugfix for client-side sorting
+- Updated docs
+
+### Version 0.1.4
+- Client-side sorting is now available. To use it, just set the flag in the constructor of the `MatMultiSortTableDataSource`.
+  
+  **Don't use `pagenation`, when client-side sorting is active!** 
+  
+  Sorting is only working for the active page. Activating it might lead to negativ user experience! If you need pagnation use the normal sorting mode and provide the data in a way like the `DummyService` of the demo.
+  
 
 ## Documentation
 ### TableData
@@ -43,8 +55,8 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 
 #### Methods
 
-| Name              | Description                                                                                                                                                                                                                                     | Parameter                                                                                                                                                                            |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name | Description | Parameter |
+| ---- | ----------- | --------- |
 | constructor       | The constructor for the for the class, where you initalize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction. If `defaultSortParams` are provided, but not the directions `asc` will be default | `columns`: Array<{ id: string, name: string }>, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
 | onSortEvent       | The method to bind to the `matSortChange` output of the table                                                                                                                                                                                   | none                                                                                                                                                                                 |
 | onPagnationEvent  | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                   | `$event`: PageEvent                                                                                                                                                                  |
@@ -62,51 +74,52 @@ The user can easyly change the sorting order by drag and drop the chips and also
 | tableData   | An input of `tableData` object which holds the complete tabele state | @Input: TabeleData |
 | sortToolTip | A input test for the tooltip to show up over the sorting chips       | @Input: string     |
 
+### MatMultiSortTableDataSource
+This is the datasource of the MultiSortTable, it works like the ` MatTableDataSource`´.
+
+| Name| Description| Parameter|
+| - | - | - |
+| constructor | The constructor of the class | `sort:` MatMultiSort, `clientSideSorting:` boolean = false |
+
+
 ## Example code for the template
 ```html
-<div class="mat-elevation-z8" style="padding: 8px;">
-  <mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern">
-    <button mat-stroked-button>
-      Spalten bearbeiten &nbsp;
-      <mat-icon>menu</mat-icon>
-    </button>
-  </mat-multi-sort-table-settings>
-  <table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
+<mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern">
+  <button mat-stroked-button>
+    Spalten bearbeiten &nbsp;
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-multi-sort-table-settings>
+<table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
-      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-    </ng-container>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
+    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="progress">
-      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="progress"> Progress </th>
-      <td mat-cell *matCellDef="let row"> {{row.progress}} % </td>
-    </ng-container>
+  <ng-container matColumnDef="progress">
+    <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="progress"> Progress </th>
+    <td mat-cell *matCellDef="let row"> {{row.progress}} % </td>
+  </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="name"> Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-    </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="name"> Name </th>
+    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="table.displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: table.displayedColumns;">
-    </tr>
-  </table>
-  <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
-    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)">
-  </mat-paginator>
-</div>
+  <tr mat-header-row *matHeaderRowDef="table.displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: table.displayedColumns;">
+  </tr>
+</table>
+<mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
+  [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)" [disabled]="CLIENT_SIDE">
+</mat-paginator>
 ```
 ## Example code for the component.ts
 
 ```typescript
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
 export class AppComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'progress'];
+  CLIENT_SIDE = true;
 
   table: TableData<UserData>;
   @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
@@ -130,14 +143,33 @@ export class AppComponent implements OnInit {
     this.table.sizeObservable.subscribe(() => { this.getData(); });
 
     setTimeout(() => {
-      this.table.dataSource = new MatMultiSortTableDataSource(this.sort);
-      this.getData();
+      this.initData();
     }, 0);
   }
 
+  initData() {
+    this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
+    if (this.CLIENT_SIDE) {
+      this.getOfflineData();
+    } else {
+      this.table.pageSize = 10;
+      this.getData();
+    }
+  }
+
   getData() {
-    const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
-    this.table.totalElements = res.totalElements;
+    if (!this.CLIENT_SIDE) {
+      const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
+      this.table.totalElements = res.totalElements;
+      this.table.pageIndex = res.page;
+      this.table.pageSize = res.pagesize;
+      this.table.data = res.users;
+    }
+  }
+
+  getOfflineData() {
+    const res = this.dummyService.list([], [], 0, 25);
+    this.table.totalElements = 25;
     this.table.pageIndex = res.page;
     this.table.pageSize = res.pagesize;
     this.table.data = res.users;

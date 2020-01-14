@@ -19,9 +19,7 @@ export interface UserData {
 export class DummyService {
   users: UserData[];
 
-  constructor(
-
-  ) {
+  constructor() {
     this.users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
   }
 

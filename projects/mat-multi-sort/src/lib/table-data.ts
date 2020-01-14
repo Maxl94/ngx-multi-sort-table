@@ -7,6 +7,7 @@ export class TableData<T> {
     private _dataSource: MatMultiSortTableDataSource<T>;
     private _columns: { id: string, name: string }[];
     private _displayedColumns: string[];
+    private _clientSideSorting: boolean;
     pageSize: number;
     pageIndex: number;
     private _pageSizeOptions: number[];
@@ -26,7 +27,7 @@ export class TableData<T> {
             defaultSortParams?: string[],
             defaultSortDirs?: string[],
             pageSizeOptions?: number[],
-            totalElements?: number
+            totalElements?: number,
         }) {
         this._columns = columns;
         this._displayedColumns = this._columns.map(c => c.id);
@@ -56,9 +57,14 @@ export class TableData<T> {
         this.pageSize = this._pageSizeOptions[0];
     }
 
+    private _clientSideSort() {
+        this._dataSource.orderData();
+    }
+
     public onSortEvent() {
         this._sortParams = this._dataSource.sort['actives'];
         this._sortDirs = this._dataSource.sort['directions'];
+        this._clientSideSort();
         this._sortObservable.next();
     }
 
@@ -108,6 +114,7 @@ export class TableData<T> {
         const temp = Object.assign([], this._displayedColumns);
         this._displayedColumns = []; // temp_revers.reverse();
         setTimeout(() => this._displayedColumns = temp, 0);
+        this._clientSideSort();
         this._sortObservable.next();
     }
 
@@ -117,6 +124,11 @@ export class TableData<T> {
 
     public set data(data: T[]) {
         this._dataSource.setTableData(data);
+        this._clientSideSort();
+    }
+
+    public set columns(v: { id: string, name: string }[]) {
+        this._columns = Object.assign({}, v);
     }
 
     public get nextObservable(): Subject<any> {

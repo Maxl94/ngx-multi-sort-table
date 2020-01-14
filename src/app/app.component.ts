@@ -12,7 +12,7 @@ import { MatMultiSortTableDataSource, TableData } from 'projects/mat-multi-sort/
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  displayedColumns = ['id', 'name', 'progress'];
+  CLIENT_SIDE = true;
 
   table: TableData<UserData>;
   @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
@@ -28,8 +28,6 @@ export class AppComponent implements OnInit {
         { id: 'progress', name: 'Progess' }
       ], { defaultSortParams: ['name'], defaultSortDirs: ['asc'] }
     );
-
-
   }
 
   ngOnInit() {
@@ -39,15 +37,35 @@ export class AppComponent implements OnInit {
     this.table.sizeObservable.subscribe(() => { this.getData(); });
 
     setTimeout(() => {
-      this.table.dataSource = new MatMultiSortTableDataSource(this.sort);
-      this.getData();
+      this.initData();
     }, 0);
+  }
+
+  initData() {
+    this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
+    if (this.CLIENT_SIDE) {
+      this.getOfflineData();
+    } else {
+      this.table.pageSize = 10;
+      this.getData();
+    }
   }
 
 
   getData() {
-    const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
-    this.table.totalElements = res.totalElements;
+    if (!this.CLIENT_SIDE) {
+      const res = this.dummyService.list(this.table.sortParams, this.table.sortDirs, this.table.pageIndex, this.table.pageSize);
+      this.table.totalElements = res.totalElements;
+      this.table.pageIndex = res.page;
+      this.table.pageSize = res.pagesize;
+      this.table.data = res.users;
+    }
+
+  }
+
+  getOfflineData() {
+    const res = this.dummyService.list([], [], 0, 25);
+    this.table.totalElements = 25;
     this.table.pageIndex = res.page;
     this.table.pageSize = res.pagesize;
     this.table.data = res.users;

@@ -1,3 +1,8 @@
+<div class="mat-elevation-z8" style="padding: 8px; margin-bottom: 48px;">
+  <mat-checkbox [(ngModel)]="CLIENT_SIDE" (ngModelChange)="initData()">Use client-side sorting and data only (pagnation is disabled, only 25 entires available)</mat-checkbox>
+
+</div>
+
 <div class="mat-elevation-z8" style="padding: 8px;">
   <mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern">
     <button mat-stroked-button>
@@ -27,6 +32,6 @@
     </tr>
   </table>
   <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
-    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)">
+    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)" [disabled]="CLIENT_SIDE">
   </mat-paginator>
 </div>

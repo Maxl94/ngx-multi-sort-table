@@ -2,20 +2,25 @@ import { DataSource } from "@angular/cdk/collections";
 import { BehaviorSubject, Observable } from "rxjs";
 import { MatMultiSort } from "./mat-multi-sort.directive";
 
-export class MatMultiSortTableDataSource<T> implements DataSource<T> {
+export class MatMultiSortTableDataSource<T> extends DataSource<T> {
     private tableDataSubject = new BehaviorSubject<T[]>([]);
     private tableData: T[] = [];
-    private enableClientSideSorting;
+    private clientSideSorting;
     sort: MatMultiSort;
 
-    constructor(sort: MatMultiSort, enableClientSideSorting = false) {
+    constructor(sort: MatMultiSort, clientSideSorting = false) {
+        super();
         this.sort = sort;
-        this.enableClientSideSorting = enableClientSideSorting;
+        this.clientSideSorting = clientSideSorting;
     }
 
     public setTableData(data: T[]) {
         this.tableData = Object.assign([], data);
         this.tableDataSubject.next(this.tableData);
+    }
+
+    public getTableData(): T[] {
+        return Object.assign(new Array<T>(), this.tableData);
     }
 
     connect(): BehaviorSubject<T[]> {
@@ -26,22 +31,24 @@ export class MatMultiSortTableDataSource<T> implements DataSource<T> {
         this.tableDataSubject.complete();
     }
 
-    sortData(data: T[], sort: MatMultiSort): T[] {
-        console.log('Sorting');
-        if (this.enableClientSideSorting) {
-            return data.sort((i1, i2) => {
-                return this._sortData(i1, i2, sort.actives, sort.directions);
+    orderData() {
+        this.tableDataSubject.next(this.sortData(this.tableData, this.sort.actives, this.sort.directions));
+    }
+
+    sortData(data: T[], actives: string[], directions: string[]): T[] {
+        const _data = Object.assign(new Array<T>(), data);
+        if (this.clientSideSorting) {
+            return _data.sort((i1, i2) => {
+                return this._sortData(i1, i2, actives, directions);
             });
         }
-        return this.tableData;
+        return _data;
     }
 
     _sortData(d1: T, d2: T, params: string[], dirs: string[]): number {
-        console.log('Sorting data');
-
         if (d1[params[0]] > d2[params[0]]) {
             return dirs[0] === 'asc' ? 1 : -1;
-        } else if (d1[params[0]] > d2[params[0]]) {
+        } else if (d1[params[0]] < d2[params[0]]) {
             return dirs[0] === 'asc' ? -1 : 1;
         } else {
             if (params.length > 1) {

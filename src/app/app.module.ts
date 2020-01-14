@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatMultiSortModule } from 'mat-multi-sort';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatMultiSortModule } from 'mat-multi-sort';
     DragDropModule,
     MatIconModule,
     MatDividerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
