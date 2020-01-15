@@ -44,8 +44,18 @@ export class AppComponent implements OnInit {
   initData() {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
     if (this.CLIENT_SIDE) {
+      this.table.updateColumNames([
+        { id: 'id', name: 'Inter ID' },
+        { id: 'name', name: 'Name des Mitarbeiter' },
+        { id: 'progress', name: 'Fortschritt' }
+      ]);
       this.getOfflineData();
     } else {
+      this.table.updateColumNames([
+        { id: 'id', name: 'ID' },
+        { id: 'name', name: 'Name' },
+        { id: 'progress', name: 'Progess' }
+      ]);
       this.table.pageSize = 10;
       this.getData();
     }

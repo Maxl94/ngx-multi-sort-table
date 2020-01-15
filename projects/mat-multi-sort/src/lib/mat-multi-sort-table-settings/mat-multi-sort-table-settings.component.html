@@ -22,11 +22,10 @@
     </div>
     <mat-menu #menu="matMenu">
         <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let column of _columns" cdkDrag>
+            <div class="example-box" *ngFor="let column of _tableData.columns" cdkDrag>
                 <mat-icon>drag_indicator</mat-icon>
                 <mat-checkbox [(ngModel)]="column.isActive" (change)="toggle()">{{column.name}}</mat-checkbox>
             </div>
         </div>
     </mat-menu>
-    <mat-divider></mat-divider>
 </div>

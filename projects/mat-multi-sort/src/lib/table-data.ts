@@ -1,11 +1,11 @@
 import { MatTableDataSource, PageEvent, SortDirection } from '@angular/material';
 
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
 
 export class TableData<T> {
     private _dataSource: MatMultiSortTableDataSource<T>;
-    private _columns: { id: string, name: string }[];
+    private readonly _columns: BehaviorSubject<{ id: string, name: string, isActive?: boolean  }[]>;
     private _displayedColumns: string[];
     private _clientSideSorting: boolean;
     pageSize: number;
@@ -22,15 +22,15 @@ export class TableData<T> {
 
 
     // TODO refactor
-    constructor(columns: { id: string, name: string }[],
+    constructor(columns: { id: string, name: string, isActive?: boolean }[],
         options?: {
             defaultSortParams?: string[],
             defaultSortDirs?: string[],
             pageSizeOptions?: number[],
             totalElements?: number,
         }) {
-        this._columns = columns;
-        this._displayedColumns = this._columns.map(c => c.id);
+        this._columns = new BehaviorSubject(columns.map(c => { if (c.isActive === undefined) { c.isActive = true; } return c; }));
+        this._displayedColumns = this._columns.value.map(c => c.id);
 
         if (options) {
             if (options.pageSizeOptions && options.pageSizeOptions.length > 1) {
@@ -95,7 +95,6 @@ export class TableData<T> {
         // this.updateSortheaders();
     }
 
-
     public get displayedColumns(): string[] {
         return this._displayedColumns;
     }
@@ -123,12 +122,22 @@ export class TableData<T> {
     }
 
     public set data(data: T[]) {
-        this._dataSource.setTableData(data);
+        this._dataSource.data = data;
         this._clientSideSort();
     }
 
-    public set columns(v: { id: string, name: string }[]) {
-        this._columns = Object.assign({}, v);
+    public set columns(v: { id: string, name: string, isActive?: boolean }[]) {
+        this._columns.next(v.map(c => { if (c.isActive === undefined) { c.isActive = true; } return c; }));
+    }
+
+    public onColumnsChange(): BehaviorSubject<{ id: string, name: string, isActive?: boolean  }[]> {
+        return this._columns;
+    }
+
+    public updateColumNames(v: { id: string, name: string }[]) {
+        const dict = new Object();
+        v.forEach(c => dict[c.id] = c.name);
+        this._columns.next(this._columns.value.map(c => { c.name = dict[c.id] || c.name; return c; }));
     }
 
     public get nextObservable(): Subject<any> {
@@ -155,8 +164,8 @@ export class TableData<T> {
         return this._sortDirs;
     }
 
-    public get columns(): { id: string, name: string }[] {
-        return this._columns;
+    public get columns(): { id: string, name: string, isActive?: boolean }[] {
+        return this._columns.value;
     }
 
     public get pageSizeOptions(): number[] {

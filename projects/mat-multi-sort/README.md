@@ -18,7 +18,14 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
-### Version 0.1.4
+### Version 0.1.7
+- removed `<mat-divider></mat-divider>` from `mat-multi-sort-table-settings`.
+
+### Version 0.1.6
+- New method `updateColumNames`, that allows you to dynamicly update the displayed names of your columns
+- Some smaller internal imrpovments and fixes
+
+### Version 0.1.5
 - Bugfix for client-side sorting
 - Updated docs
 
@@ -61,6 +68,8 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 | onSortEvent       | The method to bind to the `matSortChange` output of the table                                                                                                                                                                                   | none                                                                                                                                                                                 |
 | onPagnationEvent  | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                   | `$event`: PageEvent                                                                                                                                                                  |
 | updateSortheaders | The method triggers a rerendering of the headers to show the soriting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                   | none                                                                                                                                                                                 |
+| updateColumNames | The method allows you to change the displayed name of the colums|{ `id:` string, `name:` string }[]|
+
 
 ### MatMultiSortHeaderComponent
 This component manages the sorting of the table. To use the multisort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
@@ -92,20 +101,27 @@ This is the datasource of the MultiSortTable, it works like the ` MatTableDataSo
 </mat-multi-sort-table-settings>
 <table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
 
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
-    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-  </ng-container>
+    <!-- Create all your columns with *ngfor, this is the lazy way out and only works if the display of the data does not differ -->
+    <ng-container *ngFor="let column of table.columns" [matColumnDef]="column.id">
+      <th mat-header-cell *matHeaderCellDef [mat-multi-sort-header]="column.id"> {{column.name}} </th>
+      <td mat-cell *matCellDef="let row"> {{row[column.id]}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="progress">
-    <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="progress"> Progress </th>
-    <td mat-cell *matCellDef="let row"> {{row.progress}} % </td>
-  </ng-container>
+    <!-- Or define your in a normal, more individuell way -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="name"> Name </th>
-    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-  </ng-container>
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="progress"> Progress </th>
+      <td mat-cell *matCellDef="let row"> {{row.progress}} % </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="name"> Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="table.displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: table.displayedColumns;">

@@ -3,8 +3,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { MatMultiSort } from "./mat-multi-sort.directive";
 
 export class MatMultiSortTableDataSource<T> extends DataSource<T> {
-    private tableDataSubject = new BehaviorSubject<T[]>([]);
-    private tableData: T[] = [];
+    private _data: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
     private clientSideSorting;
     sort: MatMultiSort;
 
@@ -14,25 +13,24 @@ export class MatMultiSortTableDataSource<T> extends DataSource<T> {
         this.clientSideSorting = clientSideSorting;
     }
 
-    public setTableData(data: T[]) {
-        this.tableData = Object.assign([], data);
-        this.tableDataSubject.next(this.tableData);
+    public set data(data: T[]) {
+        this._data.next(data);
     }
 
-    public getTableData(): T[] {
-        return Object.assign(new Array<T>(), this.tableData);
+    public get data(): T[] {
+        return this._data.value;
     }
 
     connect(): BehaviorSubject<T[]> {
-        return this.tableDataSubject;
+        return this._data;
     }
 
     disconnect(): void {
-        this.tableDataSubject.complete();
+        this._data.complete();
     }
 
     orderData() {
-        this.tableDataSubject.next(this.sortData(this.tableData, this.sort.actives, this.sort.directions));
+        this._data.next(this.sortData(this._data.value, this.sort.actives, this.sort.directions));
     }
 
     sortData(data: T[], actives: string[], directions: string[]): T[] {

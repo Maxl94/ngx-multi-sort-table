@@ -9,7 +9,6 @@ import { TableData } from '../table-data';
   styleUrls: ['./mat-multi-sort-table-settings.component.scss']
 })
 export class MatMultiSortTableSettingsComponent implements OnInit {
-  _columns: { id: string, name: string, isActive: boolean }[];
   _tableData: TableData<any>;
   sort = [];
 
@@ -19,9 +18,6 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   @Input()
   set tableData(tableData: TableData<any>) {
     this._tableData = tableData;
-    this._columns = tableData.columns.map(c => {
-      return { id: c.id, name: c.name, isActive: true };
-    });
   }
 
 
@@ -30,11 +26,12 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.sort = this.getSort();
     this._tableData.sortObservable.subscribe(() => this.sort = this.getSort());
+    this._tableData.onColumnsChange().subscribe(() => this.sort = this.getSort());
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this._columns, event.previousIndex, event.currentIndex);
-    this._tableData.displayedColumns = this._columns.filter(c => c.isActive).map(c => c.id);
+    moveItemInArray(this._tableData.columns, event.previousIndex, event.currentIndex);
+    this._tableData.displayedColumns = this._tableData.columns.filter(c => c.isActive).map(c => c.id);
   }
 
   dropSort(event: CdkDragDrop<string[]>) {
@@ -43,7 +40,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   }
 
   toggle() {
-    this._tableData.displayedColumns = this._columns.filter(c => {
+    this._tableData.displayedColumns = this._tableData.columns.filter(c => {
       if (!c.isActive) {
         this.sort = this.sort.filter(s => s.id !== c.id);
         console.log(this.sort, c.id);
@@ -59,7 +56,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
     for (let i = 0; i < this._tableData.sortParams.length; i++) {
       sorting.push({
         id: this._tableData.sortParams[i],
-        name: this._columns.find(c => c.id === this._tableData.sortParams[i]).name,
+        name: this._tableData.columns.find(c => c.id === this._tableData.sortParams[i]).name,
         direction: this._tableData.sortDirs[i]
       });
     }
