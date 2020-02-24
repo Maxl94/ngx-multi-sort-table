@@ -3,7 +3,7 @@
 This is the implementation for a multiple sortable table based on the Angluar Material Design. The focus is on server-side loaded and sorted data. Next to that the libarry provides some unsefull classes to reduce the duplicated code when useing the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
 
-The provied example is based on Angular 8 and Angular Material 8, I have not tested previous versions.
+The provied example is based on **Angular 8 and Angular Material 8**, I have not tested previous or later versions.
 
 Client side multi sorting is not implementes yet, it might follow in the future or feel free to make a pull request.
 
