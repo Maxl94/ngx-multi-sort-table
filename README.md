@@ -128,7 +128,7 @@ This component display some settings for your table. The user can select the col
     this.table.totalElements = res.totalElements;
     this.table.pageIndex = res.page;
     this.table.pageSize = res.pagesize;
-    this.table.dataSource.setTableData(res.users);
+    this.table.data = res.users;
   }
 ```
 
