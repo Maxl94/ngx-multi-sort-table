@@ -1,5 +1,5 @@
 import { Component, Input, ChangeDetectorRef, Optional, Inject, HostListener, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material';
+import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
 import { MatMultiSort } from '../mat-multi-sort.directive';
 
 /** Column definition associated with a `MatSortHeader`. */

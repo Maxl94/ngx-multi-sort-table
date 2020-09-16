@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   CLIENT_SIDE = true;
 
   table: TableData<UserData>;
-  @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
+  @ViewChild(MatMultiSort) sort: MatMultiSort;
 
 
   constructor(
