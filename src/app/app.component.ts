@@ -1,10 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatMultiSort } from 'mat-multi-sort';
-import { UserData, DummyService } from './dummy.service';
-import { MatMultiSortTableDataSource, TableData } from 'projects/mat-multi-sort/src/public_api';
-
-
-
+import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'mat-multi-sort';
+import {DummyService, UserData} from './dummy.service';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,18 @@
-import { Component, Input, ChangeDetectorRef, Optional, Inject, HostListener, HostBinding, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectorRef,
+  Optional,
+  Inject,
+  HostListener,
+  HostBinding,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ElementRef
+} from '@angular/core';
 import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
 import { MatMultiSort } from '../mat-multi-sort.directive';
+import {FocusMonitor} from '@angular/cdk/a11y';
 
 /** Column definition associated with a `MatSortHeader`. */
 interface C2MatSortHeaderColumnDef {
@@ -30,8 +42,10 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
   constructor(public _intl: MatSortHeaderIntl,
     changeDetectorRef: ChangeDetectorRef,
     @Optional() public _sort: MatMultiSort,
-    @Inject('C2_SORT_HEADER_COLUMN_DEF') @Optional() public _columnDef: C2MatSortHeaderColumnDef) {
-    super(_intl, changeDetectorRef, _sort, _columnDef);
+    @Inject('C2_SORT_HEADER_COLUMN_DEF') @Optional() public _columnDef: C2MatSortHeaderColumnDef,
+    _focusMonitor: FocusMonitor,
+    _elementRef: ElementRef<HTMLElement>) {
+    super(_intl, changeDetectorRef, _sort, _columnDef, _focusMonitor, _elementRef);
   }
 
   @HostListener('mouseenter', ['true'])
