@@ -1,5 +1,5 @@
 import { Directive, OnChanges, OnInit } from '@angular/core';
-import { MatSort, MatSortable, SortDirection } from '@angular/material';
+import { MatSort, MatSortable, SortDirection } from '@angular/material/sort';
 
 @Directive({
   selector: '[matMultiSort]',
