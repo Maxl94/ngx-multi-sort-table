@@ -1,4 +1,6 @@
-import { MatTableDataSource, PageEvent, SortDirection } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
+import { SortDirection } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { Subject, BehaviorSubject } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
