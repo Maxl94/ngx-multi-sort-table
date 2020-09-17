@@ -3,7 +3,8 @@
 This is the implementation for a multiple sortable table based on the Angluar Material Design. The focus is on server-side loaded and sorted data. Next to that the libarry provides some unsefull classes to reduce the duplicated code when useing the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
 
-The provied example is based on Angular 8 and Angular Material 8, I have not tested previous versions.
+~~The provied example is based on **Angular 8 and Angular Material 8**, I have not tested previous or later versions.~~
+I am happy to annouce the angular 10 version of this library, special credits go to [Dominik](https://github.com/Dafnik), who made this possible. If you still need the angular 8 version, you can build it locally (there is a angular 8 branch) or just use version 1.9 this the latest angular 8 version.
 
 ~~Client side multi sorting is not implementes yet, it might follow in the future or feel free to make a pull request.~~
 
@@ -18,6 +19,17 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
+### Version 0.2.0
+- Angular 10 now supported. Special credits go to [Dominik](https://github.com/Dafnik), who made this possible
+
+### Version 0.1.9
+- **IMPORTANT: This is the last version supporting Angular 8!**
+- fixed readme
+
+### Version 0.1.8
+- several security fixes
+- fixed readme
+
 ### Version 0.1.7
 - removed `<mat-divider></mat-divider>` from `mat-multi-sort-table-settings`.
 
