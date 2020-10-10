@@ -1,6 +1,6 @@
-import { DataSource } from "@angular/cdk/collections";
-import { BehaviorSubject, Observable } from "rxjs";
-import { MatMultiSort } from "./mat-multi-sort.directive";
+import { DataSource } from '@angular/cdk/collections';
+import { BehaviorSubject } from 'rxjs';
+import { MatMultiSort } from './mat-multi-sort.directive';
 
 export class MatMultiSortTableDataSource<T> extends DataSource<T> {
     private _data: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
