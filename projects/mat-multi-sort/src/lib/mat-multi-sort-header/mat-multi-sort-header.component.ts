@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
 import { MatMultiSort } from '../mat-multi-sort.directive';
-import {FocusMonitor} from '@angular/cdk/a11y';
+import { FocusMonitor } from '@angular/cdk/a11y';
 
 /** Column definition associated with a `MatSortHeader`. */
 interface C2MatSortHeaderColumnDef {

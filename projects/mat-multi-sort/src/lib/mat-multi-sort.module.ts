@@ -7,9 +7,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCommonModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
@@ -17,8 +16,16 @@ import { MatMultiSortTableSettingsComponent } from './mat-multi-sort-table-setti
 
 
 @NgModule({
-  declarations: [MatMultiSortHeaderComponent, MatMultiSort, MatMultiSortTableSettingsComponent],
-  exports: [MatMultiSortHeaderComponent, MatMultiSort, MatMultiSortTableSettingsComponent],
+  declarations: [
+    MatMultiSortHeaderComponent,
+    MatMultiSort,
+    MatMultiSortTableSettingsComponent
+  ],
+  exports: [
+    MatMultiSortHeaderComponent,
+    MatMultiSort,
+    MatMultiSortTableSettingsComponent
+  ],
   imports: [
     CommonModule,
     MatCommonModule,
@@ -33,4 +40,5 @@ import { MatMultiSortTableSettingsComponent } from './mat-multi-sort-table-setti
     MatTooltipModule
   ]
 })
-export class MatMultiSortModule { }
+export class MatMultiSortModule {
+}

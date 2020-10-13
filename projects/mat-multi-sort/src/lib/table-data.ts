@@ -1,15 +1,12 @@
-import { PageEvent } from '@angular/material/paginator';
-import { SortDirection } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-
 import { Subject, BehaviorSubject } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
+import { PageEvent } from '@angular/material/paginator';
+import { SortDirection } from '@angular/material/sort';
 
 export class TableData<T> {
     private _dataSource: MatMultiSortTableDataSource<T>;
     private readonly _columns: BehaviorSubject<{ id: string, name: string, isActive?: boolean  }[]>;
     private _displayedColumns: string[];
-    private _clientSideSorting: boolean;
     pageSize: number;
     pageIndex: number;
     private _pageSizeOptions: number[];
@@ -40,7 +37,7 @@ export class TableData<T> {
             }
             options.defaultSortParams.map(s => {
                 if (!this._displayedColumns.includes(s)) {
-                    throw Error(`Provided sort paramerter "${s}" is not a column.`);
+                    throw Error(`Provided sort parameter "${s}" is not a column.`);
                 }
             });
 
@@ -181,8 +178,6 @@ export class TableData<T> {
 
     public set sortDirs(v: string[]) {
         this._sortDirs = v;
-        this._dataSource.sort.directions = this._sortDirs.map(v => v as SortDirection);
+        this._dataSource.sort.directions = this._sortDirs.map(elem => elem as SortDirection);
     }
-
-
 }
