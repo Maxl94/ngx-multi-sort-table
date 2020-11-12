@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
       [
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
-        { id: 'progress', name: 'Progess' }
+        { id: 'progress', name: 'Progress' }
       ], { defaultSortParams: ['name'], defaultSortDirs: ['asc'] }
     );
   }
@@ -40,17 +40,17 @@ export class AppComponent implements OnInit {
   initData() {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
     if (this.CLIENT_SIDE) {
-      this.table.updateColumNames([
+      this.table.updateColumnNames([
         { id: 'id', name: 'Inter ID' },
         { id: 'name', name: 'Name des Mitarbeiter' },
         { id: 'progress', name: 'Fortschritt' }
       ]);
       this.getOfflineData();
     } else {
-      this.table.updateColumNames([
+      this.table.updateColumnNames([
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
-        { id: 'progress', name: 'Progess' }
+        { id: 'progress', name: 'Progress' }
       ]);
       this.table.pageSize = 10;
       this.getData();
