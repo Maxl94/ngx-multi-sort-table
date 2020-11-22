@@ -55,7 +55,6 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
     super._setIndicatorHintVisible(visible as boolean);
   }
 
-  @HostListener('click')
   _handleClick() {
     super._handleClick();
   }
