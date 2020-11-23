@@ -1,6 +1,6 @@
 <div class="mat-elevation-z8" style="padding: 8px; margin-bottom: 48px;">
-  <mat-checkbox [(ngModel)]="CLIENT_SIDE" (ngModelChange)="initData()">Use client-side sorting and data only (pagnation
-    is disabled, only 25 entires available)</mat-checkbox>
+  <mat-checkbox [(ngModel)]="CLIENT_SIDE" (ngModelChange)="initData()">Use client-side sorting and data only (pagination
+    is disabled, only 25 entries available)</mat-checkbox>
 
 </div>
 
@@ -19,7 +19,7 @@
       <td mat-cell *matCellDef="let row"> {{row[column.id]}} </td>
     </ng-container>
 
-    <!-- Or define your in a normal, more individuell way -->
+    <!-- Or define your in a normal, more individual way -->
     <!-- <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
       <td mat-cell *matCellDef="let row"> {{row.id}} </td>
@@ -40,7 +40,7 @@
     </tr>
   </table>
   <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
-    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)"
+    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPaginationEvent($event)"
     [disabled]="CLIENT_SIDE">
   </mat-paginator>
 </div>

@@ -29,7 +29,7 @@ export class TableData<T> {
             totalElements?: number,
         }) {
         this._columns = new BehaviorSubject(columns.map(c => { if (c.isActive === undefined) { c.isActive = true; } return c; }));
-        this._displayedColumns = this._columns.value.map(c => c.id);
+        this._displayedColumns = this._columns.value.filter(c => c.isActive).map(c => c.id);
 
         if (options) {
             if (options.pageSizeOptions && options.pageSizeOptions.length > 1) {
@@ -69,7 +69,7 @@ export class TableData<T> {
         this._sortObservable.next();
     }
 
-    public onPagnationEvent($event: PageEvent) {
+    public onPaginationEvent($event: PageEvent) {
         const tmpPageSize: number = this.pageSize;
         this.pageSize = $event.pageSize;
         this.pageIndex = $event.pageIndex;
@@ -134,8 +134,8 @@ export class TableData<T> {
         return this._columns;
     }
 
-    public updateColumNames(v: { id: string, name: string }[]) {
-        const dict = new Object();
+    public updateColumnNames(v: { id: string, name: string }[]) {
+        const dict = {};
         v.forEach(c => dict[c.id] = c.name);
         this._columns.next(this._columns.value.map(c => { c.name = dict[c.id] || c.name; return c; }));
     }
