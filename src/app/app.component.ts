@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
       ]);
       this.getOfflineData();
     } else {
-      this.table.updateColumNames([
+      this.table.updateColumnNames([
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progress' }
