@@ -56,6 +56,7 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
   }
 
   _handleClick() {
+    this._sort.direction = this.getSortDirection();
     super._handleClick();
   }
 
