@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'mat-multi-sort';
-import {DummyService, UserData} from './dummy.service';
+import { MatMultiSort, MatMultiSortTableDataSource, TableData } from 'mat-multi-sort';
+import { DummyService, UserData } from './dummy.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ], { defaultSortParams: ['name'], defaultSortDirs: ['asc'] }
+      ]
     );
   }
 
