@@ -52,6 +52,8 @@ export class TableData<T> {
             this._pageSizeOptions = options.pageSizeOptions || [10, 20, 50, 100];
         } else {
             this._pageSizeOptions = [10, 20, 50, 100];
+            this._sortParams = [];
+            this._sortDirs = [];
         }
         this.pageSize = this._pageSizeOptions[0];
     }
@@ -91,7 +93,6 @@ export class TableData<T> {
 
     public set displayedColumns(displayedColumns: string[]) {
         this._displayedColumns = displayedColumns;
-        // this.updateSortheaders();
     }
 
     public get displayedColumns(): string[] {
@@ -110,7 +111,7 @@ export class TableData<T> {
     public updateSortheaders(): void {
         // Dirty hack to display default sort column(s)
         const temp = Object.assign([], this._displayedColumns);
-        this._displayedColumns = []; // temp_revers.reverse();
+        this._displayedColumns = [];
         setTimeout(() => this._displayedColumns = temp, 0);
         this._clientSideSort();
         this._sortObservable.next();

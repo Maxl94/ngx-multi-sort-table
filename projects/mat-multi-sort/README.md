@@ -19,6 +19,10 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
+### Version 0.2.1
+- Fixed bug, where an unset sortParams and sortDirs in the options leed to an excpetion
+- some smaller improvements
+
 ### Version 0.2.0
 - Angular 10 now supported. Special credits go to [Dominik](https://github.com/Dafnik), who made this possible
 
