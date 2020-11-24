@@ -4,13 +4,26 @@
     // Weitere Informationen finden Sie unter https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
-        }
+      {
+        "type": "firefox",
+        "request": "launch",
+        "reAttach": true,
+        "name": "Launch Firefox localhost",
+        "url": "http://localhost:4200",
+        "webRoot": "${workspaceFolder}",
+        "pathMappings": [
+          {
+            "url": "webpack:///projects/mat-multi-sort/src/lib",
+            "path": "${workspaceFolder}/projects/mat-multi-sort/src/lib"
+          }
+        ]
+      },
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Launch Chrome localhost",
+        "url": "http://localhost:4200",
+        "webRoot": "${workspaceFolder}"
+      }
     ]
 }
