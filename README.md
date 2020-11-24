@@ -6,7 +6,7 @@ The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesro
 ~~The provied example is based on **Angular 8 and Angular Material 8**, I have not tested previous or later versions.~~
 I am happy to annouce the angular 10 version of this library, special credits go to [Dominik](https://github.com/Dafnik), who made this possible. If you still need the angular 8 version, you can build it locally (there is a angular 8 branch) or just use version 1.9 this the latest angular 8 version.
 
-Client side multi sorting is not implementes yet, it might follow in the future or feel free to make a pull request.
+~~Client side multi sorting is not implementes yet, it might follow in the future or feel free to make a pull request.~~ If you need client side sorting, provide your data from a Service like in the demo.
 
 ## Demo
 To run the demo:
