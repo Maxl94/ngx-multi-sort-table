@@ -24,6 +24,7 @@ To run the demo:
 ## Update News
 ### Version 0.3.0
 - Updated to Angular 11, the version should be backward compatible. Special credits again go to [Dominik](https://github.com/Dafnik).
+- Fixed some typos in the docs
 
 ### Version 0.2.1
 - Fixed bug, where an unset sortParams and sortDirs in the options lead to an exception
