@@ -84,16 +84,16 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 | ---- | ----------- | --------- |
 | constructor       | The constructor for the for the class, where you initalize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction. If `defaultSortParams` are provided, but not the directions `asc` will be default | `columns`: Array<{ id: string, name: string }>, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
 | onSortEvent       | The method to bind to the `matSortChange` output of the table                                                                                                                                                                                   | none                                                                                                                                                                                 |
-| onPagnationEvent  | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                   | `$event`: PageEvent                                                                                                                                                                  |
+| onPaginationEvent  | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                   | `$event`: PageEvent                                                                                                                                                                  |
 | updateSortheaders | The method triggers a rerendering of the headers to show the soriting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                   | none                                                                                                                                                                                 |
-| updateColumNames | The method allows you to change the displayed name of the colums|{ `id:` string, `name:` string }[]|
+| updateColumnNames | The method allows you to change the displayed name of the colums|{ `id:` string, `name:` string }[]|
 
 
 ### MatMultiSortHeaderComponent
 This component manages the sorting of the table. To use the multisort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
 
 ### MatMultiSortTableSettingsComponent
-This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Addionaly, the component shows the current chosesn sorting columns as chips above the tabel.
+This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Addionaly, the component shows the current chosen sorting columns as chips above the tabel.
 The user can easyly change the sorting order by drag and drop the chips and also change the sorting direction of each column. 
 
 | Name        | Description                                                          | Parameter          |
