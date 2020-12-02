@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/ngx-mat-multi-sort.png)](https://npmjs.org/package/ngx-mat-multi-sort)
+
 # NgxMultiSortTable
 
 This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
