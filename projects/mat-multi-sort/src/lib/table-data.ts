@@ -32,7 +32,7 @@ export class TableData<T> {
         this._displayedColumns = this._columns.value.filter(c => c.isActive).map(c => c.id);
 
         if (options) {
-            if (options.pageSizeOptions && options.pageSizeOptions.length > 1) {
+            if (options.pageSizeOptions && options.pageSizeOptions.length < 1) {
                 throw Error('Array of pageSizeOptions must contain at least one entry');
             }
             options.defaultSortParams.map(s => {
