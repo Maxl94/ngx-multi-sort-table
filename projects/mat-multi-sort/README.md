@@ -1,12 +1,15 @@
 # NgxMultiSortTable
 
-This is the implementation for a multiple sortable table based on the Angluar Material Design. The focus is on server-side loaded and sorted data. Next to that the libarry provides some unsefull classes to reduce the duplicated code when useing the material `paginator`.
+This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
 
-~~The provied example is based on **Angular 8 and Angular Material 8**, I have not tested previous or later versions.~~
-I am happy to annouce the angular 10 version of this library, special credits go to [Dominik](https://github.com/Dafnik), who made this possible. If you still need the angular 8 version, you can build it locally (there is a angular 8 branch) or just use version 1.9 this the latest angular 8 version.
+I am happy to announce the angular 11 version of this library, special credits go to [Dominik](https://github.com/Dafnik), who made this possible. If you still need the angular 8 or 10 version, you can build it locally (there is a angular 8 & 10 branch) or just use version 0.1.9 for latest angular 8 version or 0.2.1 the latest angular 10 version.
 
-~~Client side multi sorting is not implementes yet, it might follow in the future or feel free to make a pull request.~~
+
+## Discussion: 
+
+**I like to improve the library, so please use [this](https://github.com/Maxl94/ngx-multi-sort-table/issues/33) thread, if you have any feature requests, bug fixes or suggest api changes.**
+
 
 ## Demo
 To run the demo:
@@ -19,6 +22,16 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
+### Version 0.3.0
+- Updated to Angular 11, the version should be backward compatible. Special credits again go to [Dominik](https://github.com/Dafnik).
+- Fixed some typos in the docs
+
+### Version 0.2.1
+- Fixed bug, where an unset sortParams and sortDirs in the options lead to an exception
+- Fixed bug, where clicks on the header where handled twice - thanks to [Hellysonrp](https://github.com/Hellysonrp)
+- Fixed bug, where column was unselected in table-settings, but still visible in column - thanks to [Lotec724](https://github.com/Lotec724)
+- some smaller improvements, spelling improvements - thanks to [bsongis](https://github.com/bsongis)
+
 ### Version 0.2.0
 - Angular 10 now supported. Special credits go to [Dominik](https://github.com/Dafnik), who made this possible
 
@@ -29,29 +42,11 @@ To run the demo:
 ### Version 0.1.8
 - several security fixes
 - fixed readme
-
-### Version 0.1.7
-- removed `<mat-divider></mat-divider>` from `mat-multi-sort-table-settings`.
-
-### Version 0.1.6
-- New method `updateColumNames`, that allows you to dynamicly update the displayed names of your columns
-- Some smaller internal imrpovments and fixes
-
-### Version 0.1.5
-- Bugfix for client-side sorting
-- Updated docs
-
-### Version 0.1.4
-- Client-side sorting is now available. To use it, just set the flag in the constructor of the `MatMultiSortTableDataSource`.
-  
-  **Don't use `pagenation`, when client-side sorting is active!** 
-  
-  Sorting is only working for the active page. Activating it might lead to negativ user experience! If you need pagnation use the normal sorting mode and provide the data in a way like the `DummyService` of the demo.
   
 
 ## Documentation
 ### TableData
-The `TabelData` an an usefull class, which handels a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that it keeps the current state of the table, again sorting and pagnation.
+The `TableData` an an useful class, which handles a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that it keeps the current state of the table, again sorting and pagination.
 
 #### Properties
 
@@ -60,13 +55,13 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 | columns            | An array of the displayed columns of the table with `id`: name of the attribute and `name`: Name to display in the header                             | `none`                           | `[{ id: 'first_name', name: 'First Name' }]` |
 | displayedColumns   | An array of the currently displayed columns (`id`) and their order                                                                                    | `all columns`                    |                                              |
 | dataSource         | A `MatMultiSortTableDataSource`, which is special `DataSource` for sorting. Only accesable via getter and setter                                      | `none`                           |                                              |
-| data               | The table data of the dataSource                                                                                                                      | `Arry<T>`                        |
+| data               | The table data of the dataSource                                                                                                                      | `Array<T>`                        |
 | pageSize           | The current selected pageSize                                                                                                                         | first entry of `pageSizeOptions` |                                              |
 | pageSizeOptions    | The options for the pageSize, which the user can see in the menu                                                                                      | `[10, 20, 50, 100]`              |                                              |
 | pageIndex          | The index of the page                                                                                                                                 | `0`                              |                                              |
-| totalElements      | The total number of elemnts of the table, must be set from your component                                                                             | `none`                           |                                              |
+| totalElements      | The total number of elements of the table, must be set from your component                                                                             | `none`                           |                                              |
 | sortParams         | An Array of the columns (`id`), which the user had chosen to sort. The order of the sorting is represented by the order of the `id`s in the parameter | `[]`                             | `['first_name', 'last_name']`                |
-| sortDirs           | An Array of the column's sortdirections, which the user had chosen to sort. The order is the same like `sortParams`                                   | `[]`                             | `['asc', 'desc']`                            |
+| sortDirs           | An Array of the column's sort-directions, which the user had chosen to sort. The order is the same like `sortParams`                                   | `[]`                             | `['asc', 'desc']`                            |
 | nextObservable     | An `Observable` that fires, when the user clicks the `next` button                                                                                    |                                  |                                              |
 | previousObservable | An `Observable` that fires, when the user clicks the `previous` button                                                                                |                                  |                                              |
 | sizeObservable     | An `Observable` that fires, when the user changes the `pageSize`                                                                                      |                                  |                                              |
@@ -76,23 +71,23 @@ The `TabelData` an an usefull class, which handels a lot of work for your app, s
 
 | Name | Description | Parameter |
 | ---- | ----------- | --------- |
-| constructor       | The constructor for the for the class, where you initalize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction. If `defaultSortParams` are provided, but not the directions `asc` will be default | `columns`: Array<{ id: string, name: string }>, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
+| constructor       | The constructor for the for the class, where you initialize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction. If `defaultSortParams` are provided, but not the directions `asc` will be default | `columns`: Array<{ id: string, name: string }>, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
 | onSortEvent       | The method to bind to the `matSortChange` output of the table                                                                                                                                                                                   | none                                                                                                                                                                                 |
-| onPagnationEvent  | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                   | `$event`: PageEvent                                                                                                                                                                  |
-| updateSortheaders | The method triggers a rerendering of the headers to show the soriting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                   | none                                                                                                                                                                                 |
-| updateColumNames | The method allows you to change the displayed name of the colums|{ `id:` string, `name:` string }[]|
+| onPaginationEvent  | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                   | `$event`: PageEvent                                                                                                                                                                  |
+| updateSortheaders | The method triggers a rerendering of the headers to show the sorting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                   | none                                                                                                                                                                                 |
+| updateColumnNames | The method allows you to change the displayed name of the columns|{ `id:` string, `name:` string }[]|
 
 
 ### MatMultiSortHeaderComponent
-This component manages the sorting of the table. To use the multisort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
+This component manages the sorting of the table. To use the multi-sort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
 
 ### MatMultiSortTableSettingsComponent
-This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Addionaly, the component shows the current chosesn sorting columns as chips above the tabel.
+This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Additionally, the component shows the current chosen sorting columns as chips above the table.
 The user can easyly change the sorting order by drag and drop the chips and also change the sorting direction of each column. 
 
 | Name        | Description                                                          | Parameter          |
 | ----------- | -------------------------------------------------------------------- | ------------------ |
-| tableData   | An input of `tableData` object which holds the complete tabele state | @Input: TabeleData |
+| tableData   | An input of `tableData` object which holds the complete table state | @Input: TableData |
 | sortToolTip | A input test for the tooltip to show up over the sorting chips       | @Input: string     |
 
 ### MatMultiSortTableDataSource
