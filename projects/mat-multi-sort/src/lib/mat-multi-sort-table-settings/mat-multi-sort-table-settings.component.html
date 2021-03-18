@@ -15,9 +15,5 @@
     <div style="flex: 1 1 auto;"></div>
     <div #settingsMenu (click)="openDialog()" class="table-settings-menu">
         <ng-content #menuRef></ng-content>
-        <!-- <button *ngIf="menuRef.nativeElement.childNodes.length == 0">
-            Edit Columns
-            <mat-icon>menu</mat-icon>
-        </button> -->
     </div>
 </div>
