@@ -27,7 +27,6 @@ To run the demo:
 ### Version 0.5.0
 - Added support to store the table settings in localStorage. Just add a key e.g. `{ localStorageKey: 'settings' }` for the storage item with in the `constructor options` of the `TableData` object. See the code example on the bottom.
 
-
 ### Version 0.4.0
 - Replaced mat-menu for the table settings with a dialog. You are no able to control the closing behavior via `[closeDialogOnChoice]="false"` in the `<mat-multi-sort-table-settings>`. The default is set to `true`. Thanks go to  - thanks to [Lotec724], who did most of the work
 
