@@ -24,6 +24,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
+### Version 0.5.0
+- Added support to store the table settings in localStorage. Just add a key e.g. `{ localStorageKey: 'settings' }` for the storage item with in the `constructor options` of the `TableData` object. See the code example on the bottom.
+
 
 ### Version 0.4.0
 - Replaced mat-menu for the table settings with a dialog. You are no able to control the closing behavior via `[closeDialogOnChoice]="false"` in the `<mat-multi-sort-table-settings>`. The default is set to `true`. Thanks go to  - thanks to [Lotec724], who did most of the work
@@ -75,8 +78,9 @@ The `TableData` an an useful class, which handles a lot of work for your app, su
 | constructor       | The constructor for the for the class, where you initialize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction. If `defaultSortParams` are provided, but not the directions `asc` will be default | `columns`: Array<{ id: string, name: string }>, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
 | onSortEvent       | The method to bind to the `matSortChange` output of the table                                                                                                                                                                                    | none                                                                                                                                                                                 |
 | onPaginationEvent | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                    | `$event`: PageEvent                                                                                                                                                                  |
-| updateSortheaders | The method triggers a rerendering of the headers to show the sorting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                     | none                                                                                                                                                                                 |
+| updateSortHeaders | The method triggers a rerendering of the headers to show the sorting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                     | none                                                                                                                                                                                 |
 | updateColumnNames | The method allows you to change the displayed name of the columns                                                                                                                                                                                | { `id:` string, `name:` string }[]                                                                                                                                                   |
+| localStorageKey   | A key to store the table settings, like selected columns, order of the columns, sorting directions in the local storage. If no key is passed the settings are not stored. **Do not set the same key for different tables, this might lead to unexpected behavior. There is an validation of the loaded settings, if that fails, the defaults are used**                                                                                                                                                                                                                                                   | string
 
 
 ### MatMultiSortHeaderComponent
@@ -157,7 +161,7 @@ export class AppComponent implements OnInit {
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ], { defaultSortParams: ['name'], defaultSortDirs: ['asc'] }
+      ], { localStorageKey: 'settings' }
     );
   }
 

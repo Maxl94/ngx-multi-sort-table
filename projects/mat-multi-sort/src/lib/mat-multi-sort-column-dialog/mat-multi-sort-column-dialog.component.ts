@@ -28,13 +28,13 @@ export class MatMultiSortColumnDialogComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this._tableData.columns, event.previousIndex, event.currentIndex);
     this._tableData.displayedColumns = this._tableData.columns.filter(c => c.isActive).map(c => c.id);
+    this._tableData.storeTableSettings();
   }
 
   toggle() {
     this._tableData.displayedColumns = this._tableData.columns.filter(c => {
       if (!c.isActive) {
         this.sort = this.sort.filter(s => s.id !== c.id);
-        console.log(this.sort, c.id);
       }
 
       return c.isActive;
@@ -45,10 +45,9 @@ export class MatMultiSortColumnDialogComponent implements OnInit {
   private updateSort() {
     this._tableData.sortParams = this.sort.map(v => v.id);
     this._tableData.sortDirs = this.sort.map(v => v.direction);
-    this._tableData.updateSortheaders();
+    this._tableData.updateSortHeaders();
     if (this.closeOnChoice) {
       this.dialogRef.close();
     }
   }
-
 }
