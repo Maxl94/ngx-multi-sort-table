@@ -12,6 +12,8 @@ I am happy to announce the angular 11 version of this library, special credits g
 
 
 ## Demo
+Visit the [github-pages demo](https://maxl94.github.io/ngx-multi-sort-table/) or clone and run it locally.
+
 To run the demo:
 1.  `clone` the repository
 2. `cd ngx-multi-sort-table`
@@ -22,6 +24,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
+### Version 0.3.1
+- Updated readme
+
 ### Version 0.3.0
 - Updated to Angular 11, the version should be backward compatible. Special credits again go to [Dominik](https://github.com/Dafnik).
 - Fixed some typos in the docs
