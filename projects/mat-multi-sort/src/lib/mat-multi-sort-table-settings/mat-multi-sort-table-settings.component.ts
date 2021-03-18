@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatMultiSortColumnDialogComponent } from '../mat-multi-sort-column-dialog/mat-multi-sort-column-dialog.component';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -11,9 +14,15 @@ import { TableData } from '../table-data';
 export class MatMultiSortTableSettingsComponent implements OnInit {
   _tableData: TableData<any>;
   sort = [];
+  dialogRef: MatDialogRef<any>;
+
+  @ViewChild('settingsMenu') buttonRef: ElementRef;
 
   @Input()
   sortToolTip: string;
+
+  @Input()
+  closeDialogOnChoice = true;
 
   @Input()
   set tableData(tableData: TableData<any>) {
@@ -21,7 +30,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.sort = this.getSort();
@@ -29,25 +38,24 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
     this._tableData.onColumnsChange().subscribe(() => this.sort = this.getSort());
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this._tableData.columns, event.previousIndex, event.currentIndex);
-    this._tableData.displayedColumns = this._tableData.columns.filter(c => c.isActive).map(c => c.id);
+  openDialog() {
+    if (this.dialogRef) { return; }
+    const button = this.buttonRef.nativeElement;
+    const posRight: number = window.innerWidth - (button.offsetLeft + button.offsetWidth + 16);
+    const posTop: number = button.offsetTop + button.offsetHeight;
+
+    this.dialogRef = this.dialog.open(MatMultiSortColumnDialogComponent, {
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      panelClass: 'column-dialog',
+      position: { right: `${posRight}px`, top: `${posTop}px` },
+      data: { tableData: this._tableData, sort: this.sort, closeOnChoice: this.closeDialogOnChoice }
+    });
+    this.dialogRef.backdropClick().subscribe(() => this.dialogRef.close());
+    this.dialogRef.afterClosed().pipe(finalize(() => this.dialogRef = null)).subscribe();
   }
 
   dropSort(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.sort, event.previousIndex, event.currentIndex);
-    this.updateSort();
-  }
-
-  toggle() {
-    this._tableData.displayedColumns = this._tableData.columns.filter(c => {
-      if (!c.isActive) {
-        this.sort = this.sort.filter(s => s.id !== c.id);
-        console.log(this.sort, c.id);
-      }
-
-      return c.isActive;
-    }).map(c => c.id);
     this.updateSort();
   }
 
