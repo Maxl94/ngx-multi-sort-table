@@ -56,13 +56,13 @@ The `TableData` an an useful class, which handles a lot of work for your app, su
 | columns            | An array of the displayed columns of the table with `id`: name of the attribute and `name`: Name to display in the header                             | `none`                           | `[{ id: 'first_name', name: 'First Name' }]` |
 | displayedColumns   | An array of the currently displayed columns (`id`) and their order                                                                                    | `all columns`                    |                                              |
 | dataSource         | A `MatMultiSortTableDataSource`, which is special `DataSource` for sorting. Only accesable via getter and setter                                      | `none`                           |                                              |
-| data               | The table data of the dataSource                                                                                                                      | `Array<T>`                        |
+| data               | The table data of the dataSource                                                                                                                      | `Array<T>`                       |
 | pageSize           | The current selected pageSize                                                                                                                         | first entry of `pageSizeOptions` |                                              |
 | pageSizeOptions    | The options for the pageSize, which the user can see in the menu                                                                                      | `[10, 20, 50, 100]`              |                                              |
 | pageIndex          | The index of the page                                                                                                                                 | `0`                              |                                              |
-| totalElements      | The total number of elements of the table, must be set from your component                                                                             | `none`                           |                                              |
+| totalElements      | The total number of elements of the table, must be set from your component                                                                            | `none`                           |                                              |
 | sortParams         | An Array of the columns (`id`), which the user had chosen to sort. The order of the sorting is represented by the order of the `id`s in the parameter | `[]`                             | `['first_name', 'last_name']`                |
-| sortDirs           | An Array of the column's sort-directions, which the user had chosen to sort. The order is the same like `sortParams`                                   | `[]`                             | `['asc', 'desc']`                            |
+| sortDirs           | An Array of the column's sort-directions, which the user had chosen to sort. The order is the same like `sortParams`                                  | `[]`                             | `['asc', 'desc']`                            |
 | nextObservable     | An `Observable` that fires, when the user clicks the `next` button                                                                                    |                                  |                                              |
 | previousObservable | An `Observable` that fires, when the user clicks the `previous` button                                                                                |                                  |                                              |
 | sizeObservable     | An `Observable` that fires, when the user changes the `pageSize`                                                                                      |                                  |                                              |
@@ -70,13 +70,13 @@ The `TableData` an an useful class, which handles a lot of work for your app, su
 
 #### Methods
 
-| Name | Description | Parameter |
-| ---- | ----------- | --------- |
+| Name              | Description                                                                                                                                                                                                                                      | Parameter                                                                                                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | constructor       | The constructor for the for the class, where you initialize your `columns`. Optionally, you can add the default `id`s of the default sort colum and direction. If `defaultSortParams` are provided, but not the directions `asc` will be default | `columns`: Array<{ id: string, name: string }>, `options`: { `defaultSortParams?`: string[], `defaultSortDirs?`: string[], `pageSizeOptions?`: number[],  `totalElements?`: number } |
-| onSortEvent       | The method to bind to the `matSortChange` output of the table                                                                                                                                                                                   | none                                                                                                                                                                                 |
-| onPaginationEvent  | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                   | `$event`: PageEvent                                                                                                                                                                  |
-| updateSortheaders | The method triggers a rerendering of the headers to show the sorting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                   | none                                                                                                                                                                                 |
-| updateColumnNames | The method allows you to change the displayed name of the columns|{ `id:` string, `name:` string }[]|
+| onSortEvent       | The method to bind to the `matSortChange` output of the table                                                                                                                                                                                    | none                                                                                                                                                                                 |
+| onPaginationEvent | The method to bin to the `page` output of the `mat-paginator`                                                                                                                                                                                    | `$event`: PageEvent                                                                                                                                                                  |
+| updateSortheaders | The method triggers a rerendering of the headers to show the sorting directions correctly. The functions forces a complete new render of the data, what is not optimal, but only working solution right now.                                     | none                                                                                                                                                                                 |
+| updateColumnNames | The method allows you to change the displayed name of the columns                                                                                                                                                                                | { `id:` string, `name:` string }[]                                                                                                                                                   |
 
 
 ### MatMultiSortHeaderComponent
@@ -86,16 +86,17 @@ This component manages the sorting of the table. To use the multi-sort add `matM
 This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Additionally, the component shows the current chosen sorting columns as chips above the table.
 The user can easyly change the sorting order by drag and drop the chips and also change the sorting direction of each column. 
 
-| Name        | Description                                                          | Parameter          |
-| ----------- | -------------------------------------------------------------------- | ------------------ |
-| tableData   | An input of `tableData` object which holds the complete table state | @Input: TableData |
-| sortToolTip | A input test for the tooltip to show up over the sorting chips       | @Input: string     |
+| Name                | Description                                                                                                                                                                                                                              | Parameter         |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| tableData           | An input of `tableData` object which holds the complete table state                                                                                                                                                                      | @Input: TableData |
+| sortToolTip         | A input test for the tooltip to show up over the sorting chips                                                                                                                                                                           | @Input: string    |
+| closeDialogOnChoice | A input to control the behavior of the settings menu. If set to `true` the dialog closes after the user has selected a column, if `false` it stays open, so the user can select/deselect multiple columns with out reopening the dialog. | @Input: boolean   |
 
 ### MatMultiSortTableDataSource
 This is the datasource of the MultiSortTable, it works like the ` MatTableDataSource`´.
 
-| Name| Description| Parameter|
-| - | - | - |
+| Name        | Description                  | Parameter                                                  |
+| ----------- | ---------------------------- | ---------------------------------------------------------- |
 | constructor | The constructor of the class | `sort:` MatMultiSort, `clientSideSorting:` boolean = false |
 
 
