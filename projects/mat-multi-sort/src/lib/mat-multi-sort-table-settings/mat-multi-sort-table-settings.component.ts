@@ -89,7 +89,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   private updateSort() {
     this._tableData.sortParams = this.sort.map(v => v.id);
     this._tableData.sortDirs = this.sort.map(v => v.direction);
-    this._tableData.updateSortheaders();
+    this._tableData.updateSortHeaders();
   }
 }
 

@@ -15,6 +15,10 @@
           {
             "url": "webpack:///projects/mat-multi-sort/src/lib",
             "path": "${workspaceFolder}/projects/mat-multi-sort/src/lib"
+          },
+          {
+            "url": "webpack:///projects/mat-multi-sort/src/lib",
+            "path": "${workspaceFolder}/projects/mat-multi-sort/src/lib"
           }
         ]
       },

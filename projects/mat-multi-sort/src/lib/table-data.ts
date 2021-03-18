@@ -2,10 +2,11 @@ import { Subject, BehaviorSubject } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
 import { PageEvent } from '@angular/material/paginator';
 import { SortDirection } from '@angular/material/sort';
+import { Settings } from './utils';
 
 export class TableData<T> {
     private _dataSource: MatMultiSortTableDataSource<T>;
-    private readonly _columns: BehaviorSubject<{ id: string, name: string, isActive?: boolean  }[]>;
+    private readonly _columns: BehaviorSubject<{ id: string, name: string, isActive?: boolean }[]>;
     private _displayedColumns: string[];
     pageSize: number;
     pageIndex: number;
@@ -13,6 +14,7 @@ export class TableData<T> {
     private _totalElements: number;
     private _sortParams: string[];
     private _sortDirs: string[];
+    private _key: string;
 
     private _nextObservable: Subject<void> = new Subject<void>();
     private _previousObservable: Subject<void> = new Subject<void>();
@@ -27,19 +29,22 @@ export class TableData<T> {
             defaultSortDirs?: string[],
             pageSizeOptions?: number[],
             totalElements?: number,
+            localStorageKey?: string
         }) {
         this._columns = new BehaviorSubject(columns.map(c => { if (c.isActive === undefined) { c.isActive = true; } return c; }));
-        this._displayedColumns = this._columns.value.filter(c => c.isActive).map(c => c.id);
 
         if (options) {
             if (options.pageSizeOptions && options.pageSizeOptions.length < 1) {
                 throw Error('Array of pageSizeOptions must contain at least one entry');
             }
-            options.defaultSortParams.map(s => {
-                if (!this._displayedColumns.includes(s)) {
-                    throw Error(`Provided sort parameter "${s}" is not a column.`);
-                }
-            });
+
+            if (options.defaultSortParams) {
+                options.defaultSortParams.map(s => {
+                    if (!this._displayedColumns.includes(s)) {
+                        throw Error(`Provided sort parameter "${s}" is not a column.`);
+                    }
+                });
+            }
 
             this._sortParams = options.defaultSortParams || [];
             this._sortDirs = options.defaultSortDirs || [];
@@ -50,16 +55,17 @@ export class TableData<T> {
 
             this._totalElements = options.totalElements || 0;
             this._pageSizeOptions = options.pageSizeOptions || [10, 20, 50, 100];
+            this._key = options.localStorageKey;
         } else {
             this._pageSizeOptions = [10, 20, 50, 100];
             this._sortParams = [];
             this._sortDirs = [];
         }
         this.pageSize = this._pageSizeOptions[0];
-    }
 
-    private _clientSideSort() {
-        this._dataSource.orderData();
+        this.init();
+        this._displayedColumns = this._columns.value.filter(c => c.isActive).map(c => c.id);
+
     }
 
     public onSortEvent() {
@@ -67,6 +73,7 @@ export class TableData<T> {
         this._sortDirs = this._dataSource.sort['directions'];
         this._clientSideSort();
         this._sortObservable.next();
+        this.storeTableSettings();
     }
 
     public onPaginationEvent($event: PageEvent) {
@@ -80,6 +87,62 @@ export class TableData<T> {
             this._nextObservable.next();
         } else if ($event.previousPageIndex > $event.pageIndex) {
             this._previousObservable.next();
+        }
+    }
+
+    public updateSortHeaders(): void {
+        // Dirty hack to display default sort column(s)
+        const temp = Object.assign([], this._displayedColumns);
+        this._displayedColumns = [];
+        setTimeout(() => this._displayedColumns = temp, 0);
+        this._clientSideSort();
+        this._sortObservable.next();
+        this.storeTableSettings();1
+    }
+
+    private init() {
+        console.debug("init");
+        if (this._key) {
+            const settings = new Settings(this._key);
+            settings.load();
+            if (this._isLocalStorageSettingsValid(settings)) {
+                this.columns = settings.columns;
+                this._sortDirs = settings.sortDirs;
+                this._sortParams = settings.sortParams;
+            } else {
+                console.warn("Stored tableSettings are invalid. Using default");
+            }
+        }
+    }
+
+    private _clientSideSort() {
+        this._dataSource.orderData();
+    }
+
+    private _isLocalStorageSettingsValid(settings: Settings): boolean {
+        // check if number of columns matching
+        if (settings.columns.length !== this._columns.value.length) {
+            return false;
+        }
+
+        // check if columns are the same
+        for (var column of settings.columns) {
+            var match = this._columns.value.filter(c => c.id == column.id && c.name == column.name);
+            if (match === undefined) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public storeTableSettings(): void {
+        console.log("Store")
+        if (this._key) {
+            const settings: Settings = new Settings(this._key);
+            settings.columns = this._columns.value;
+            settings.sortParams = this._sortParams;
+            settings.sortDirs = this._sortDirs;
+            settings.save();
         }
     }
 
@@ -104,17 +167,8 @@ export class TableData<T> {
         if (this._sortParams.length > 0) {
             this._dataSource.sort.actives = this._sortParams;
             this._dataSource.sort.directions = this._sortDirs.map(v => v as SortDirection);
-            this.updateSortheaders();
+            this.updateSortHeaders();
         }
-    }
-
-    public updateSortheaders(): void {
-        // Dirty hack to display default sort column(s)
-        const temp = Object.assign([], this._displayedColumns);
-        this._displayedColumns = [];
-        setTimeout(() => this._displayedColumns = temp, 0);
-        this._clientSideSort();
-        this._sortObservable.next();
     }
 
     public get dataSource(): MatMultiSortTableDataSource<T> {
@@ -130,7 +184,7 @@ export class TableData<T> {
         this._columns.next(v.map(c => { if (c.isActive === undefined) { c.isActive = true; } return c; }));
     }
 
-    public onColumnsChange(): BehaviorSubject<{ id: string, name: string, isActive?: boolean  }[]> {
+    public onColumnsChange(): BehaviorSubject<{ id: string, name: string, isActive?: boolean }[]> {
         return this._columns;
     }
 
