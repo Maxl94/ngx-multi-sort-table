@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {MatMultiSortColumnDialogComponent} from '../mat-multi-sort-column-dialog/mat-multi-sort-column-dialog.component';
-import {finalize} from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatMultiSortColumnDialogComponent } from '../mat-multi-sort-column-dialog/mat-multi-sort-column-dialog.component';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -15,6 +15,8 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   _tableData: TableData<any>;
   sort = [];
   dialogRef: MatDialogRef<any>;
+
+  @ViewChild('settingsMenu') buttonRef: ElementRef;
 
   @Input()
   sortToolTip: string;
@@ -38,12 +40,15 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
 
   openDialog() {
     if (this.dialogRef) { return; }
-    const button = document.getElementById('settings-menu');
+    const button = this.buttonRef.nativeElement;
+    const posRight: number = window.innerWidth - (button.offsetLeft + button.offsetWidth + 16);
+    const posTop: number = button.offsetTop + button.offsetHeight;
+
     this.dialogRef = this.dialog.open(MatMultiSortColumnDialogComponent, {
       backdropClass: 'cdk-overlay-transparent-backdrop',
       panelClass: 'column-dialog',
-      position: {left: `${button.offsetLeft}px`, top: `${button.offsetTop + 36}px`},
-      data: {tableData: this._tableData, sort: this.sort, closeOnChoice: this.closeDialogOnChoice}
+      position: { right: `${posRight}px`, top: `${posTop}px` },
+      data: { tableData: this._tableData, sort: this.sort, closeOnChoice: this.closeDialogOnChoice }
     });
     this.dialogRef.backdropClick().subscribe(() => this.dialogRef.close());
     this.dialogRef.afterClosed().pipe(finalize(() => this.dialogRef = null)).subscribe();
