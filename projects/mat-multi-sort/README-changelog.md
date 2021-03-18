@@ -1,4 +1,11 @@
 # Old Versions
+### Version 0.1.9
+- **IMPORTANT: This is the last version supporting Angular 8!**
+- fixed readme
+
+### Version 0.1.8
+- several security fixes
+- fixed readme
 
 ### Version 0.1.7
 - removed `<mat-divider></mat-divider>` from `mat-multi-sort-table-settings`.

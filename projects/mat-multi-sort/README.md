@@ -22,6 +22,10 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
+
+### Version 0.4.0
+- Replaced mat-menu for the table settings with a dialog. You are no able to control the closing behavior via `[closeDialogOnChoice]="false"` in the `<mat-multi-sort-table-settings>`. The default is set to `true`. Thanks go to  - thanks to [Lotec724], who did most of the work
+
 ### Version 0.3.0
 - Updated to Angular 11, the version should be backward compatible. Special credits again go to [Dominik](https://github.com/Dafnik).
 - Fixed some typos in the docs
@@ -34,14 +38,6 @@ To run the demo:
 
 ### Version 0.2.0
 - Angular 10 now supported. Special credits go to [Dominik](https://github.com/Dafnik), who made this possible
-
-### Version 0.1.9
-- **IMPORTANT: This is the last version supporting Angular 8!**
-- fixed readme
-
-### Version 0.1.8
-- several security fixes
-- fixed readme
   
 
 ## Documentation
@@ -100,7 +96,7 @@ This is the datasource of the MultiSortTable, it works like the ` MatTableDataSo
 
 ## Example code for the template
 ```html
-<mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern">
+<mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern"  [closeDialogOnChoice]="false">>
   <button mat-stroked-button>
     Spalten bearbeiten &nbsp;
     <mat-icon>menu</mat-icon>
