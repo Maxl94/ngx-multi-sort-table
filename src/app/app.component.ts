@@ -9,6 +9,7 @@ import { DummyService, UserData } from './dummy.service';
 })
 export class AppComponent implements OnInit {
   CLIENT_SIDE = true;
+  CLOSE_MENU_BEHAVIOR = true;
 
   table: TableData<UserData>;
   @ViewChild(MatMultiSort) sort: MatMultiSort;
