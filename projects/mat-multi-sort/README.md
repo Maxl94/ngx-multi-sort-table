@@ -24,6 +24,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Update News
+### Version 0.5.2
+- Security update
+
 ### Version 0.5.1
 - Updated readme
 
