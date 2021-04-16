@@ -41,8 +41,8 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   openDialog() {
     if (this.dialogRef) { return; }
     const button = this.buttonRef.nativeElement;
-    const posRight: number = window.innerWidth - (button.offsetLeft + button.offsetWidth + 16);
-    const posTop: number = button.offsetTop + button.offsetHeight;
+    const posRight: number = window.innerWidth - (button.getBoundingClientRect().left + button.offsetWidth + 16);
+    const posTop: number = button.getBoundingClientRect().top + button.offsetHeight;
 
     this.dialogRef = this.dialog.open(MatMultiSortColumnDialogComponent, {
       backdropClass: 'cdk-overlay-transparent-backdrop',
