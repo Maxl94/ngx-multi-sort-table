@@ -1,4 +1,20 @@
 # Old Versions
+### Version 0.3.1
+- Updated readme
+
+### Version 0.3.0
+- Updated to Angular 11, the version should be backward compatible. Special credits again go to [Dominik](https://github.com/Dafnik).
+- Fixed some typos in the docs
+
+### Version 0.2.1
+- Fixed bug, where an unset sortParams and sortDirs in the options lead to an exception
+- Fixed bug, where clicks on the header where handled twice - thanks to [Hellysonrp](https://github.com/Hellysonrp)
+- Fixed bug, where column was unselected in table-settings, but still visible in column - thanks to [Lotec724](https://github.com/Lotec724)
+- some smaller improvements, spelling improvements - thanks to [bsongis](https://github.com/bsongis)
+
+### Version 0.2.0
+- Angular 10 now supported. Special credits go to [Dominik](https://github.com/Dafnik), who made this possible
+  
 ### Version 0.1.9
 - **IMPORTANT: This is the last version supporting Angular 8!**
 - fixed readme

@@ -23,7 +23,11 @@ To run the demo:
 
 ![demo gif](demo.gif)
 
-## Update News
+## Changelog
+### Version 0.5.3
+- Fixed bug where position of settings dialog was calculated wrong, if placed in some nested element witch has a relative or absolute position. Thanks to [forbik0](https://github.com/forbik0).
+- Fixed bug where defaultSortParams could not get set via TableData constructor.
+
 ### Version 0.5.2
 - Security update
 
@@ -34,24 +38,7 @@ To run the demo:
 - Added support to store the table settings in localStorage. Just add a key e.g. `{ localStorageKey: 'settings' }` for the storage item with in the `constructor options` of the `TableData` object. See the code example on the bottom.
 
 ### Version 0.4.0
-- Replaced mat-menu for the table settings with a dialog. You are no able to control the closing behavior via `[closeDialogOnChoice]="false"` in the `<mat-multi-sort-table-settings>`. The default is set to `true`. Thanks to [Lotec724](https://github.com/Lotec724), who did most of the work
-
-### Version 0.3.1
-- Updated readme
-
-### Version 0.3.0
-- Updated to Angular 11, the version should be backward compatible. Special credits again go to [Dominik](https://github.com/Dafnik).
-- Fixed some typos in the docs
-
-### Version 0.2.1
-- Fixed bug, where an unset sortParams and sortDirs in the options lead to an exception
-- Fixed bug, where clicks on the header where handled twice - thanks to [Hellysonrp](https://github.com/Hellysonrp)
-- Fixed bug, where column was unselected in table-settings, but still visible in column - thanks to [Lotec724](https://github.com/Lotec724)
-- some smaller improvements, spelling improvements - thanks to [bsongis](https://github.com/bsongis)
-
-### Version 0.2.0
-- Angular 10 now supported. Special credits go to [Dominik](https://github.com/Dafnik), who made this possible
-  
+- Replaced mat-menu for the table settings with a dialog. You are no able to control the closing behavior via `[closeDialogOnChoice]="false"` in the `<mat-multi-sort-table-settings>`. The default is set to `true`. Thanks to [Lotec724](https://github.com/Lotec724), who did most of the work.
 
 ## Documentation
 ### TableData

@@ -32,6 +32,8 @@ export class TableData<T> {
             localStorageKey?: string
         }) {
         this._columns = new BehaviorSubject(columns.map(c => { if (c.isActive === undefined) { c.isActive = true; } return c; }));
+        this._displayedColumns = this._columns.value.filter(c => c.isActive).map(c => c.id);
+        this.pageSize = this._pageSizeOptions[0];
 
         if (options) {
             if (options.pageSizeOptions && options.pageSizeOptions.length < 1) {
@@ -61,11 +63,7 @@ export class TableData<T> {
             this._sortParams = [];
             this._sortDirs = [];
         }
-        this.pageSize = this._pageSizeOptions[0];
-
         this.init();
-        this._displayedColumns = this._columns.value.filter(c => c.isActive).map(c => c.id);
-
     }
 
     public onSortEvent() {
