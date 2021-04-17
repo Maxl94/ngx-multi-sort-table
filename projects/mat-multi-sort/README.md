@@ -18,7 +18,7 @@ To run the demo:
 1.  `clone` the repository
 2. `cd ngx-multi-sort-table`
 3. `npm install`
-4. `ng build multi-sort-table`
+4. `ng build mat-multi-sort`
 5. `ng serve`
 
 ![demo gif](demo.gif)
