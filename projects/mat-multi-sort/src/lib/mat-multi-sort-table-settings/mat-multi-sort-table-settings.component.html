@@ -4,9 +4,15 @@
             (cdkDropListDropped)="dropSort($event)">
             <mat-chip class="drag-chip" *ngFor="let item of sort" cdkDrag (removed)="remove(item.id)"
                 (click)="updateDirection(item.id)">
-                {{item.name}}:
-                <div class="sorting" [matTooltip]="sortToolTip">
-                    {{item.direction}}
+                <ng-container *ngIf="sortIndicatorRef"
+                              [ngTemplateOutlet]="sortIndicatorRef"
+                              [ngTemplateOutletContext]="{direction:item.direction, columnName: item.name }">
+                </ng-container>
+                <div *ngIf="!sortIndicatorRef">
+                    {{item.name}}:
+                    <div class="sorting" [matTooltip]="sortToolTip">
+                        {{item.direction}}
+                    </div>
                 </div>
                 <mat-icon matChipRemove>cancel</mat-icon>
             </mat-chip>

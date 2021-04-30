@@ -24,6 +24,10 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.6.0
+- Added support for custom content in the settings chip list (when icons are desired instead of 'asc | desc' labels i.g.)
+- Extended the example to showcase the icons as sort indicators instead of text labels
+
 ### Version 0.5.3
 - Fixed bug where position of settings dialog was calculated wrong, if placed in some nested element witch has a relative or absolute position. Thanks to [forbik0](https://github.com/forbik0).
 - Fixed bug where defaultSortParams could not get set via TableData constructor.
@@ -103,6 +107,11 @@ This is the datasource of the MultiSortTable, it works like the ` MatTableDataSo
     Spalten bearbeiten &nbsp;
     <mat-icon>menu</mat-icon>
   </button>
+  <!-- Optional custom content for the sort indicator chip (here column name with icons)  --> 
+  <ng-template #sortIndicator let-direction='direction' let-columnName='columnName'>
+    {{columnName}}
+    <mat-icon *ngIf="direction">{{direction === 'asc' ? 'arrow_upward' : 'arrow_downward'}}</mat-icon>
+  </ng-template>
 </mat-multi-sort-table-settings>
 <table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
 

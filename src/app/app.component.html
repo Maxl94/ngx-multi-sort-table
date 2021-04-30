@@ -7,13 +7,23 @@
     <mat-checkbox [(ngModel)]="CLOSE_MENU_BEHAVIOR">Close settings menu on selection (if disabled it stays open, so the
       user can select/deselect multiple items)</mat-checkbox>
   </p>
+  <p>
+  <p>
+    <mat-checkbox [(ngModel)]="TOGGLE_INDICATOR_ICONS">
+      Toggle sort Indicator icons instead of text based labels
+    </mat-checkbox>
+  </p>
 </div>
 
 <div class="mat-elevation-z8" style="padding: 8px;">
-  <mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern"
+  <mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfolge ändern"
     [closeDialogOnChoice]="CLOSE_MENU_BEHAVIOR">
     <button mat-stroked-button> Spalten bearbeiten &nbsp; <mat-icon>menu</mat-icon>
     </button>
+    <ng-template *ngIf="TOGGLE_INDICATOR_ICONS"  #sortIndicator let-direction='direction' let-columnName='columnName'>
+      {{columnName}}
+      <mat-icon [matTooltip]="'Sortierreihenfolge ändern'" *ngIf="direction">{{direction === 'asc' ? 'arrow_upward' : 'arrow_downward'}}</mat-icon>
+    </ng-template>
   </mat-multi-sort-table-settings>
   <table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
 
