@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -17,6 +17,8 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   dialogRef: MatDialogRef<any>;
 
   @ViewChild('settingsMenu') buttonRef: ElementRef;
+
+  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef: TemplateRef<any>;
 
   @Input()
   sortToolTip: string;
