@@ -24,9 +24,13 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.6.1
+- Security Updates
+
 ### Version 0.6.0
-- Added support for custom content in the settings chip list (when icons are desired instead of 'asc | desc' labels i.g.)
-- Extended the example to showcase the icons as sort indicators instead of text labels
+- Added support for custom content in the settings chip list (when icons are desired instead of 'asc | desc' labels i.g.) Thanks to [khalil khalil ](https://github.com/khalilof)
+- Extended the example to showcase the icons as sort indicators instead of text labels Thanks to [khalil khalil ](https://github.com/khalilof)
+- Security Updates
 
 ### Version 0.5.3
 - Fixed bug where position of settings dialog was calculated wrong, if placed in some nested element witch has a relative or absolute position. Thanks to [forbik0](https://github.com/forbik0).
@@ -40,9 +44,6 @@ To run the demo:
 
 ### Version 0.5.0
 - Added support to store the table settings in localStorage. Just add a key e.g. `{ localStorageKey: 'settings' }` for the storage item with in the `constructor options` of the `TableData` object. See the code example on the bottom.
-
-### Version 0.4.0
-- Replaced mat-menu for the table settings with a dialog. You are no able to control the closing behavior via `[closeDialogOnChoice]="false"` in the `<mat-multi-sort-table-settings>`. The default is set to `true`. Thanks to [Lotec724](https://github.com/Lotec724), who did most of the work.
 
 ## Documentation
 ### TableData

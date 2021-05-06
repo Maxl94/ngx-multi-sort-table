@@ -1,4 +1,7 @@
 # Old Versions
+### Version 0.4.0
+- Replaced mat-menu for the table settings with a dialog. You are no able to control the closing behavior via `[closeDialogOnChoice]="false"` in the `<mat-multi-sort-table-settings>`. The default is set to `true`. Thanks to [Lotec724](https://github.com/Lotec724), who did most of the work.
+
 ### Version 0.3.1
 - Updated readme
 
