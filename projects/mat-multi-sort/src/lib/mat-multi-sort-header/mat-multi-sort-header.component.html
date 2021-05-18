@@ -1,13 +1,10 @@
 <div class="mat-sort-header-container"
      [class.mat-sort-header-sorted]="_isSorted()"
      [class.mat-sort-header-position-before]="arrowPosition == 'before'">
-  <button class="mat-sort-header-button" type="button"
-          [attr.disabled]="_isDisabled() || null"
-          [attr.aria-label]="_intl.sortButtonLabel(id)"
-          (focus)="_setIndicatorHintVisible(true)"
-          (blur)="_setIndicatorHintVisible(false)">
+
+  <div class="mat-sort-header-content">
     <ng-content></ng-content>
-  </button>
+  </div>
 
   <!-- Disable animations while a current animation is running -->
   <div class="mat-sort-header-arrow"
