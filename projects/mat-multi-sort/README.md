@@ -24,8 +24,11 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.7.1
+- Fixed update to Angular 12. Thanks to [SlasherZet](https://github.com/SlasherZet) and [Hellyson Rodrigo Parteka](https://github.com/Hellysonrp)
+
 ### Version 0.7.0
-- Update to Angular 12. Thanks to [Hellyson Rodrigo Parteka](https://github.com/Hellysonrp).
+- ~~Update to Angular 12. Thanks to [Hellyson Rodrigo Parteka](https://github.com/Hellysonrp).~~
 - Security Updates
 
 ### Version 0.6.2
@@ -38,19 +41,6 @@ To run the demo:
 - Added support for custom content in the settings chip list (when icons are desired instead of 'asc | desc' labels i.g.) Thanks to [khalil khalil ](https://github.com/khalilof)
 - Extended the example to showcase the icons as sort indicators instead of text labels Thanks to [khalil khalil ](https://github.com/khalilof)
 - Security Updates
-
-### Version 0.5.3
-- Fixed bug where position of settings dialog was calculated wrong, if placed in some nested element witch has a relative or absolute position. Thanks to [forbik0](https://github.com/forbik0).
-- Fixed bug where defaultSortParams could not get set via TableData constructor.
-
-### Version 0.5.2
-- Security update
-
-### Version 0.5.1
-- Updated readme
-
-### Version 0.5.0
-- Added support to store the table settings in localStorage. Just add a key e.g. `{ localStorageKey: 'settings' }` for the storage item with in the `constructor options` of the `TableData` object. See the code example on the bottom.
 
 ## Documentation
 ### TableData
