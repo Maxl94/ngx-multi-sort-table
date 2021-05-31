@@ -24,6 +24,11 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.7.0
+- Update to Angular 12. Thanks to [Hellyson Rodrigo Parteka](https://github.com/Hellysonrp).
+- Security Updates
+
+
 ### Version 0.6.2
 - Security Updates
 
