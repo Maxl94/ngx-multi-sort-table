@@ -9,19 +9,10 @@
   .mat-sort-header-position-before {
     flex-direction: row-reverse;
   }
-  .mat-sort-header-button {
-    border: none;
-    background: 0 0;
+  .mat-sort-header-content {
+    text-align: center;
     display: flex;
     align-items: center;
-    padding: 0;
-    cursor: inherit;
-    outline: 0;
-    font: inherit;
-    color: currentColor;
-  }
-  .mat-sort-header-button::-moz-focus-inner {
-    border: 0;
   }
   .mat-sort-header-arrow {
     height: 12px;
