@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   table: TableData<UserData>;
   @ViewChild(MatMultiSort) sort: MatMultiSort;
-
+  demo;
 
   constructor(
     private dummyService: DummyService
@@ -55,6 +55,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.demo = Array(10);
+
     this.table.nextObservable.subscribe(() => { this.getData(); });
     this.table.sortObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
