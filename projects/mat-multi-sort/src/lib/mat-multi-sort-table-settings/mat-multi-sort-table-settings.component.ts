@@ -1,9 +1,8 @@
-import { Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatMultiSortColumnDialogComponent } from '../mat-multi-sort-column-dialog/mat-multi-sort-column-dialog.component';
-import { finalize } from 'rxjs/operators';
+import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import {TemplatePortal} from '@angular/cdk/portal';
 
 
 @Component({
@@ -14,7 +13,9 @@ import { finalize } from 'rxjs/operators';
 export class MatMultiSortTableSettingsComponent implements OnInit {
   _tableData: TableData<any>;
   sort = [];
-  dialogRef: MatDialogRef<any>;
+  overlayRef: OverlayRef;
+
+  @ViewChild('templateRef', { static: true }) private templateRef: TemplateRef<HTMLElement>;
 
   @ViewChild('settingsMenu') buttonRef: ElementRef;
 
@@ -32,7 +33,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   }
 
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef) { }
 
   ngOnInit(): void {
     this.sort = this.getSort();
@@ -41,19 +42,56 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   }
 
   openDialog() {
-    if (this.dialogRef) { return; }
     const button = this.buttonRef.nativeElement;
-    const posRight: number = window.innerWidth - (button.getBoundingClientRect().left + button.offsetWidth + 16);
-    const posTop: number = button.getBoundingClientRect().top + button.offsetHeight;
+    const positionStrategyBuilder = this.overlay.position();
+    const positionStrategy = positionStrategyBuilder
+      .flexibleConnectedTo(button)
+      .withFlexibleDimensions(true)
+      .withViewportMargin(10)
+      .withGrowAfterOpen(true)
+      .withPush(true)
+      .withPositions([{
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'top'
+      }]);
 
-    this.dialogRef = this.dialog.open(MatMultiSortColumnDialogComponent, {
+    const scrollStrategy = this.overlay.scrollStrategies.block();
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
-      panelClass: 'column-dialog',
-      position: { right: `${posRight}px`, top: `${posTop}px` },
-      data: { tableData: this._tableData, sort: this.sort, closeOnChoice: this.closeDialogOnChoice }
+      panelClass: 'column-overlay',
+      positionStrategy,
+      scrollStrategy
     });
-    this.dialogRef.backdropClick().subscribe(() => this.dialogRef.close());
-    this.dialogRef.afterClosed().pipe(finalize(() => this.dialogRef = null)).subscribe();
+    const templatePortal = new TemplatePortal(this.templateRef, this.viewContainerRef);
+    this.overlayRef.attach(templatePortal);
+
+    this.overlayRef.backdropClick().subscribe(() => {
+
+      this.overlayRef.dispose();
+    });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this._tableData.columns, event.previousIndex, event.currentIndex);
+    this._tableData.displayedColumns = this._tableData.columns.filter(c => c.isActive).map(c => c.id);
+    this._tableData.storeTableSettings();
+  }
+
+  toggle() {
+    this._tableData.displayedColumns = this._tableData.columns.filter(c => {
+      if (!c.isActive) {
+        this.sort = this.sort.filter(s => s.id !== c.id);
+      }
+
+      return c.isActive;
+    }).map(c => c.id);
+    this.updateSort();
+    if (this.closeDialogOnChoice) {
+      this.overlayRef.dispose();
+    }
   }
 
   dropSort(event: CdkDragDrop<string[]>) {

@@ -13,7 +13,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { MatMultiSortTableSettingsComponent } from './mat-multi-sort-table-settings/mat-multi-sort-table-settings.component';
-import { MatMultiSortColumnDialogComponent } from './mat-multi-sort-column-dialog/mat-multi-sort-column-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
@@ -22,7 +21,6 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatMultiSortHeaderComponent,
     MatMultiSort,
     MatMultiSortTableSettingsComponent,
-    MatMultiSortColumnDialogComponent
   ],
   exports: [
     MatMultiSortHeaderComponent,

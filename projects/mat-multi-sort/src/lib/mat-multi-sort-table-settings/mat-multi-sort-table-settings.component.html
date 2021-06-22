@@ -23,3 +23,12 @@
         <ng-content #menuRef></ng-content>
     </div>
 </div>
+
+<ng-template #templateRef>
+  <div cdkDropList class="column-list" (cdkDropListDropped)="drop($event)">
+    <div class="column-item" *ngFor="let column of _tableData.columns" cdkDrag>
+      <mat-icon>drag_indicator</mat-icon>
+      <mat-checkbox [(ngModel)]="column.isActive" (change)="toggle()">{{column.name}}</mat-checkbox>
+    </div>
+  </div>
+</ng-template>
