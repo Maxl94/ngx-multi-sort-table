@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
 
   table: TableData<UserData>;
   @ViewChild(MatMultiSort) sort: MatMultiSort;
-  demo;
 
   constructor(
     private dummyService: DummyService
@@ -23,40 +22,12 @@ export class AppComponent implements OnInit {
       [
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
-        { id: 'progress', name: 'Progess' },
-        { id: 'a', name: 'A' },
-        { id: 'b', name: 'B' },
-        { id: 'c', name: 'C' },
-        { id: 'd', name: 'D' },
-        { id: 'e', name: 'E' },
-        { id: 'f', name: 'F' },
-        { id: 'g', name: 'G' },
-        { id: 'h', name: 'H' },
-        { id: 'i', name: 'I' },
-        { id: 'j', name: 'J' },
-        { id: 'k', name: 'K' },
-        { id: 'l', name: 'L' },
-        { id: 'm', name: 'M' },
-        { id: 'n', name: 'N' },
-        { id: 'o', name: 'O' },
-        { id: 'p', name: 'P' },
-        { id: 'q', name: 'Q' },
-        { id: 'r', name: 'R' },
-        { id: 's', name: 'S' },
-        { id: 't', name: 'T' },
-        { id: 'u', name: 'U' },
-        { id: 'v', name: 'V' },
-        { id: 'w', name: 'W' },
-        { id: 'x', name: 'X' },
-        { id: 'y', name: 'Y' },
-        { id: 'z', name: 'Z' },
+        { id: 'progress', name: 'Progess' }
       ], { localStorageKey: 'settings' }
     );
   }
 
   ngOnInit() {
-    this.demo = Array(10);
-
     this.table.nextObservable.subscribe(() => { this.getData(); });
     this.table.sortObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
