@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   table: TableData<UserData>;
   @ViewChild(MatMultiSort) sort: MatMultiSort;
 
-
   constructor(
     private dummyService: DummyService
   ) {
