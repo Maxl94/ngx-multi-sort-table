@@ -1,7 +1,7 @@
 import {Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
-import {BlockScrollStrategy, Overlay, OverlayRef, ViewportRuler} from '@angular/cdk/overlay';
+import {BlockScrollStrategy, Overlay, OverlayRef, ScrollStrategy, ViewportRuler} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 
 
@@ -28,7 +28,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   closeDialogOnChoice = true;
 
   @Input()
-  scrollStrategy = new BlockScrollStrategy(this.viewportRuler, document);
+  scrollStrategy: ScrollStrategy = new BlockScrollStrategy(this.viewportRuler, document);
 
   @Input()
   set tableData(tableData: TableData<any>) {
