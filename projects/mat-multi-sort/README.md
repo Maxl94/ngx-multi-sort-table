@@ -81,6 +81,7 @@ The user can easyly change the sorting order by drag and drop the chips and also
 | tableData           | An input of `tableData` object which holds the complete table state                                                                                                                                                                      | @Input: TableData |
 | sortToolTip         | A input test for the tooltip to show up over the sorting chips                                                                                                                                                                           | @Input: string    |
 | closeDialogOnChoice | A input to control the behavior of the settings menu. If set to `true` the dialog closes after the user has selected a column, if `false` it stays open, so the user can select/deselect multiple columns with out reopening the dialog. | @Input: boolean   |
+| scrollStrategy      | An input of ScrollStrategy for the CDK overlay. Sets the behavior for scrolling when the dialog is opened. Possible options are the predefined strategies: Noop, Close, Block or Reposition, with Block being the default value.         | @Input: ScrollStrategy
 
 ### MatMultiSortTableDataSource
 This is the datasource of the MultiSortTable, it works like the ` MatTableDataSource`´.

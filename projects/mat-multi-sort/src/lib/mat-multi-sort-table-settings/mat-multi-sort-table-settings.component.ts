@@ -1,7 +1,7 @@
 import {Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
-import {Overlay, OverlayRef} from '@angular/cdk/overlay';
+import {BlockScrollStrategy, Overlay, OverlayRef, ScrollStrategy, ViewportRuler} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 
 
@@ -28,12 +28,15 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   closeDialogOnChoice = true;
 
   @Input()
+  scrollStrategy: ScrollStrategy = new BlockScrollStrategy(this.viewportRuler, document);
+
+  @Input()
   set tableData(tableData: TableData<any>) {
     this._tableData = tableData;
   }
 
 
-  constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef) { }
+  constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef, private viewportRuler: ViewportRuler) { }
 
   ngOnInit(): void {
     this.sort = this.getSort();
@@ -56,14 +59,12 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
         overlayX: 'end',
         overlayY: 'top'
       }]);
-
-    const scrollStrategy = this.overlay.scrollStrategies.block();
     this.overlayRef = this.overlay.create({
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
       panelClass: 'column-overlay',
       positionStrategy,
-      scrollStrategy
+      scrollStrategy: this.scrollStrategy
     });
     const templatePortal = new TemplatePortal(this.templateRef, this.viewContainerRef);
     this.overlayRef.attach(templatePortal);
