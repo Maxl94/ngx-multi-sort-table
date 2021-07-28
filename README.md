@@ -60,18 +60,33 @@ This component manages the sorting of the table. To use the multi-sort add `matM
 This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Additionally, the component shows the current chosen sorting columns as chips above the table.
 The user can easyly change the sorting order by drag and drop the chips and also change the sorting direction of each column. 
 
-| Name        | Description                                                          | Parameter          |
-| ----------- | -------------------------------------------------------------------- | ------------------ |
-| tableData   | An input of `tableData` object which holds the complete table state | @Input: TableData |
-| sortToolTip | A input test for the tooltip to show up over the sorting chips       | @Input: string     |                                             | @Output: string[]                      |
+| Name                | Description                                                                                                                                                                                                                              | Parameter         |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| tableData           | An input of `tableData` object which holds the complete table state                                                                                                                                                                      | @Input: TableData |
+| sortToolTip         | A input test for the tooltip to show up over the sorting chips                                                                                                                                                                           | @Input: string    |
+| closeDialogOnChoice | A input to control the behavior of the settings menu. If set to `true` the dialog closes after the user has selected a column, if `false` it stays open, so the user can select/deselect multiple columns with out reopening the dialog. | @Input: boolean   |
+| scrollStrategy      | An input of ScrollStrategy for the CDK overlay. Sets the behavior for scrolling when the dialog is opened. Possible options are the predefined strategies: Noop, Close, Block or Reposition, with Block being the default value.         | @Input: ScrollStrategy
+
+### MatMultiSortTableDataSource
+This is the datasource of the MultiSortTable, it works like the ` MatTableDataSource`´.
+
+| Name        | Description                  | Parameter                                                  |
+| ----------- | ---------------------------- | ---------------------------------------------------------- |
+| constructor | The constructor of the class | `sort:` MatMultiSort, `clientSideSorting:` boolean = false |
+
 
 ## Example code for the template
 ```html
-<mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern">
+<mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern"  [closeDialogOnChoice]="false">>
   <button mat-stroked-button>
     Spalten bearbeiten &nbsp;
     <mat-icon>menu</mat-icon>
   </button>
+  <!-- Optional custom content for the sort indicator chip (here column name with icons)  --> 
+  <ng-template #sortIndicator let-direction='direction' let-columnName='columnName'>
+    {{columnName}}
+    <mat-icon *ngIf="direction">{{direction === 'asc' ? 'arrow_upward' : 'arrow_downward'}}</mat-icon>
+  </ng-template>
 </mat-multi-sort-table-settings>
 <table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
 
@@ -122,7 +137,7 @@ export class AppComponent implements OnInit {
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ], { defaultSortParams: ['name'], defaultSortDirs: ['asc'] }
+      ], { localStorageKey: 'settings' }
     );
   }
 
@@ -166,4 +181,3 @@ export class AppComponent implements OnInit {
   }
 }
 ```
-
