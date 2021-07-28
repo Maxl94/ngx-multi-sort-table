@@ -24,6 +24,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.7.3
+- Making the scrollStrategy of the overlay configurable. Thanks to [Lotec724](https://github.com/Lotec724).
+
 ### Version 0.7.2
 - Fixed bug where settings dialog was to large and not scrollable, if table has many columns. Thanks to [Lotec724](https://github.com/Lotec724).
 
