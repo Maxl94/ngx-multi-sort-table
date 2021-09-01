@@ -24,6 +24,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.7.4
+- Security fixes
+
 ### Version 0.7.3
 - Making the scrollStrategy of the overlay configurable. Thanks to [Lotec724](https://github.com/Lotec724).
 
