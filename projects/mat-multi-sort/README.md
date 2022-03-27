@@ -39,6 +39,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.8.2
+- Fixed but, where angular 13 is rendering infinite. Thanks to [NiklasLoechte](https://github.com/NiklasLoechte).
+
 ### Version 0.8.1
 - Serverall Security fixes.
 
