@@ -1,13 +1,13 @@
 # NgxMultiSortTable
 
-This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
+This is the implementation for a multiple sortable table based on the Angular Material Design.The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
 
 
 ## Supported Angular Versions:
 | Angular Version | Latest Update of this lib   | Branch          |
 | --------------- | --------------------------- | --------------- |
-| Angular 13      | 0.8.0 (not tested)          | current master  |
+| Angular 13      | 0.8.1 (tested)              | current master  |
 | Angular 12      | 0.7.4 (tested)              | angular-12      |
 | Angular 11      | 0.6.2 (tested)              | angular-11      |
 | Angular 10      | 0.7.4 (tested)              | angular-10      |
@@ -39,6 +39,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.8.1
+- Serverall Security fixes.
+
 ### Version 0.8.0
 - Added Support for Angular 13  Thanks to [Mohamed Salah ](https://github.com/mosamman)
 
