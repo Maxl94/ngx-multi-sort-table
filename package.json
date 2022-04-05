@@ -3,6 +3,12 @@
   "version": "0.8.2",
   "description": "An extension for the Angular Material Table to support multi-column sorting.",
   "author": "Maximilian Balluff",
+  "private": false,
+  "type": "module",
+  "engines": {
+    "node": "^16.14.2",
+    "npm": "^8.6.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nstuyvesant/ngx-multi-sort-table"
