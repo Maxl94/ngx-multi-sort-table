@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatMultiSort, MatMultiSortTableDataSource, TableData } from 'mat-multi-sort';
 import { DummyService, UserData } from './dummy.service';
 
@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
   @ViewChild(MatMultiSort) sort: MatMultiSort;
 
   constructor(
-    private dummyService: DummyService
+    private dummyService: DummyService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.table = new TableData<UserData>(
       [
@@ -32,10 +33,8 @@ export class AppComponent implements OnInit {
     this.table.sortObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
     this.table.sizeObservable.subscribe(() => { this.getData(); });
-
-    setTimeout(() => {
-      this.initData();
-    }, 0);
+    this.changeDetectorRef.detectChanges()
+    this.initData();
   }
 
   initData() {
