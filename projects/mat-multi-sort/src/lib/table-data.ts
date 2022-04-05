@@ -173,6 +173,12 @@ export class TableData<T> {
 
     public set displayedColumns(displayedColumns: string[]) {
         this._displayedColumns = displayedColumns;
+        this._columns.next(this._columns.value.map(c => {
+            if (this._displayedColumns.includes(c.id)) {
+                c.isActive = true;
+            } else c.isActive = false;
+            return c;
+        }));
     }
 
     public get displayedColumns(): string[] {

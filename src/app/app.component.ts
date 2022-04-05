@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
 
   initData() {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
+    this.table.displayedColumns = ['id', 'name'] // intentionally left out 'progress' to show the bug
     if (this.CLIENT_SIDE) {
       this.table.updateColumnNames([
         { id: 'id', name: 'Inter ID' },
