@@ -1,51 +1,24 @@
 {
-  "name": "ngx-multi-sort-table",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+  "name": "ngx-mat-multi-sort",
+  "version": "0.8.2",
+  "description": "An extension for the Angular Material Table to support multi-column sorting.",
+  "author": "Maximilian Balluff",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nstuyvesant/ngx-multi-sort-table"
   },
-  "private": true,
+  "bugs": {
+    "url": "https://github.com/nstuyvesant/ngx-multi-sort-table/issues"
+  },
+  "keywords": ["angular", "javascript", "typescript", "angular-material", "table", "multi-sort"],
+  "license": "MIT",
   "dependencies": {
-    "@angular-devkit/build-angular": "^13.3.0",
-    "@angular/animations": "^13.0.3",
-    "@angular/cdk": "~13.1.0",
-    "@angular/common": "^13.0.3",
-    "@angular/compiler": "^13.0.3",
-    "@angular/core": "^13.0.3",
-    "@angular/forms": "^13.0.3",
-    "@angular/material": "~13.1.0",
-    "@angular/platform-browser": "^13.0.3",
-    "@angular/platform-browser-dynamic": "^13.0.3",
-    "@angular/router": "^13.0.3",
-    "core-js": "^3.8.0",
-    "rxjs": "^7.4.0",
-    "tslib": "^2.2.0",
-    "zone.js": "~0.11.4"
+    "tslib": "^2.3.1"
   },
-  "devDependencies": {
-    "@angular/cli": "~13.0.4",
-    "@angular/compiler-cli": "^13.0.3",
-    "@angular/language-service": "^13.0.3",
-    "@types/jasmine": "~3.8.2",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^14.14.10",
-    "codelyzer": "^6.0.1",
-    "jasmine-core": "~3.8.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "^6.3.17",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage-istanbul-reporter": "~3.0.2",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.7.0",
-    "ng-packagr": "^13.1.1",
-    "protractor": "~7.0.0",
-    "ts-node": "^9.0.0",
-    "tslint": "~6.1.0",
-    "typescript": "~4.4.4"
+  "peerDependencies": {
+    "@angular/common": "^13.3.1",
+    "@angular/core": "^13.3.1",
+    "@angular/material": "^13.3.1",
+    "@angular/cdk": "^13.3.1"
   }
 }
