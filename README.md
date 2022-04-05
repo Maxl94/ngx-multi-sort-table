@@ -17,9 +17,6 @@ To run the demo:
 4. `ng build mat-multi-sort`
 5. `ng serve`
 
-## Screenvideo
-![screen video](demo.gif)
-
 ## Documentation
 
 ### TableData
