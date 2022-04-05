@@ -3,15 +3,15 @@
 # NgxMultiSortTable
 
 This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
-The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
+The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) [ng-mat-multi-sort](https://github.com/farantesrodrigues/ng-mat-multi-sort). Francisco - thanks for your great work.
 
-## Discussion: 
+## Improving this library
 
-**I like to improve the library, so please use [this](https://github.com/Maxl94/ngx-multi-sort-table/issues/33) thread, if you have any feature requests, bug fixes or suggest api changes.**
+**Please add comments to [this thread](https://github.com/Maxl94/ngx-multi-sort-table/issues/33) for feature requests, bug fixes or to suggest API changes.**
 
 ## Demo
 To run the demo:
-1.  `clone` the repository
+1. `git clone https://github.com/Maxl94/ngx-multi-sort-table.git`
 2. `cd ngx-multi-sort-table`
 3. `npm install`
 4. `ng build mat-multi-sort`
@@ -21,12 +21,13 @@ To run the demo:
 ![screen video](demo.gif)
 
 ## Documentation
+
 ### TableData
-The `TabelData` an an useful class, which handles a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that it keeps the current state of the table, again sorting and pagination.
+The `TableData` class handles a lot of the work such as paging (`next`, `previous`, `sizeChange`) and sorting events. It also keeps the current state of the table including sorting and pagination.
 
 #### Properties
 
-| Name               | Description                                                                                                                                           | default                          | Exampe                                       |
+| Name               | Description                                                                                                                                           | default                          | Example                                       |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | -------------------------------------------- |
 | columns            | An array of the displayed columns of the table with `id`: name of the attribute and `name`: Name to display in the header                             | `none`                           | `[{ id: 'first_name', name: 'First Name' }]` |
 | displayedColumns   | An array of the currently displayed columns (`id`) and their order                                                                                    | `all columns`                    |                                              |
@@ -57,8 +58,8 @@ The `TabelData` an an useful class, which handles a lot of work for your app, su
 This component manages the sorting of the table. To use the multi-sort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
 
 ### MatMultiSortTableSettingsComponent
-This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Additionally, the component shows the current chosen sorting columns as chips above the table.
-The user can easyly change the sorting order by drag and drop the chips and also change the sorting direction of each column. 
+This component displays settings for your table. Users can select the columns they want to see in their table. Additionally, they can change the order of the columns. The component shows the chosen column for sorting as chips above the table.
+The sorting order can be changed by dragging and dropping the chips or clicking the chip to change the sort direction. 
 
 | Name                | Description                                                                                                                                                                                                                              | Parameter         |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
@@ -123,6 +124,7 @@ This is the datasource of the MultiSortTable, it works like the ` MatTableDataSo
 ## Example code for the component.ts
 
 ```typescript
+// imports and component decorations omitted for brevity
 export class AppComponent implements OnInit {
   CLIENT_SIDE = true;
 
@@ -130,7 +132,8 @@ export class AppComponent implements OnInit {
   @ViewChild(MatMultiSort, { static: false }) sort: MatMultiSort;
 
   constructor(
-    private dummyService: DummyService
+    private dummyService: DummyService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.table = new TableData<UserData>(
       [
@@ -146,10 +149,8 @@ export class AppComponent implements OnInit {
     this.table.sortObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
     this.table.sizeObservable.subscribe(() => { this.getData(); });
-
-    setTimeout(() => {
-      this.initData();
-    }, 0);
+    this.changeDetectorRef.detectChanges()
+    this.initData();
   }
 
   initData() {
