@@ -39,6 +39,10 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.8.3
+- Fixed bug where in column menu. Thanks to [Nate Stuyvesant](https://github.com/nstuyvesant)
+- Fixed errors in readme. Thanks to [Nate Stuyvesant ](https://github.com/nstuyvesant)
+
 ### Version 0.8.2
 - Fixed but, where angular 13 is rendering infinite. Thanks to [NiklasLoechte](https://github.com/NiklasLoechte).
 
@@ -47,22 +51,6 @@ To run the demo:
 
 ### Version 0.8.0
 - Added Support for Angular 13  Thanks to [Mohamed Salah ](https://github.com/mosamman)
-
-### Version 0.7.4
-- Security fixes
-
-### Version 0.7.3
-- Making the scrollStrategy of the overlay configurable. Thanks to [Lotec724](https://github.com/Lotec724).
-
-### Version 0.7.2
-- Fixed bug where settings dialog was to large and not scrollable, if table has many columns. Thanks to [Lotec724](https://github.com/Lotec724).
-
-### Version 0.7.1
-- Fixed update to Angular 12. Thanks to [SlasherZet](https://github.com/SlasherZet) and [Hellyson Rodrigo Parteka ](https://github.com/Hellysonrp).
-
-### Version 0.7.0
-- Update to Angular 12. Thanks to [Hellyson Rodrigo Parteka](https://github.com/Hellysonrp).
-- Security Updates
 
 ## Documentation
 ### TableData
