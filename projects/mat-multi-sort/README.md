@@ -1,10 +1,25 @@
 # NgxMultiSortTable
 
-This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
+This is the implementation for a multiple sortable table based on the Angular Material Design.The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
 
-I am happy to announce the angular 11 version of this library, special credits go to [Dominik](https://github.com/Dafnik), who made this possible. If you still need the angular 8 or 10 version, you can build it locally (there is a angular 8 & 10 branch) or just use version 0.1.9 for latest angular 8 version or 0.2.1 the latest angular 10 version.
 
+## Supported Angular Versions:
+| Angular Version | Latest Update of this lib   | Branch          |
+| --------------- | --------------------------- | --------------- |
+| Angular 13      | 0.8.1 (tested)              | current master  |
+| Angular 12      | 0.7.4 (tested)              | angular-12      |
+| Angular 11      | 0.6.2 (tested)              | angular-11      |
+| Angular 10      | 0.7.4 (tested)              | angular-10      |
+| Angular 8       | 0.7.4 (tested)              | angular-8       |
+
+
+---
+**Warning:**
+
+- Older versions might have know security issues. So keep up-to-date!
+- Older versions of this library lack some features.
+---
 
 ## Discussion: 
 
@@ -24,21 +39,18 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
-### Version 0.7.4
-- Security fixes
+### Version 0.8.3
+- Fixed bug where in column menu. Thanks to [Nate Stuyvesant](https://github.com/nstuyvesant)
+- Fixed errors in readme. Thanks to [Nate Stuyvesant ](https://github.com/nstuyvesant)
 
-### Version 0.7.3
-- Making the scrollStrategy of the overlay configurable. Thanks to [Lotec724](https://github.com/Lotec724).
+### Version 0.8.2
+- Fixed but, where angular 13 is rendering infinite. Thanks to [NiklasLoechte](https://github.com/NiklasLoechte).
 
-### Version 0.7.2
-- Fixed bug where settings dialog was to large and not scrollable, if table has many columns. Thanks to [Lotec724](https://github.com/Lotec724).
+### Version 0.8.1
+- Serverall Security fixes.
 
-### Version 0.7.1
-- Fixed update to Angular 12. Thanks to [SlasherZet](https://github.com/SlasherZet) and [Hellyson Rodrigo Parteka ](https://github.com/Hellysonrp).
-
-### Version 0.7.0
-- Update to Angular 12. Thanks to [Hellyson Rodrigo Parteka](https://github.com/Hellysonrp).
-- Security Updates
+### Version 0.8.0
+- Added Support for Angular 13  Thanks to [Mohamed Salah ](https://github.com/mosamman)
 
 ## Documentation
 ### TableData

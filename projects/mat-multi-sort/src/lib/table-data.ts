@@ -1,4 +1,4 @@
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject, delay, filter, tap } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
 import { PageEvent } from '@angular/material/paginator';
 import { SortDirection } from '@angular/material/sort';
@@ -20,7 +20,10 @@ export class TableData<T> {
     private _previousObservable: Subject<void> = new Subject<void>();
     private _sizeObservable: Subject<void> = new Subject<void>();
     private _sortObservable: Subject<void> = new Subject<void>();
+    private _displayedSortDirs?: string[]
+    private _displayedSortParams?: string[]
 
+    private _sortHeadersObservable: Subject<string[]> = new Subject<string[]>();
 
     // TODO refactor
     constructor(columns: { id: string, name: string, isActive?: boolean }[],
@@ -90,14 +93,31 @@ export class TableData<T> {
     public updateSortHeaders(): void {
         // Dirty hack to display default sort column(s)
         const temp = Object.assign([], this._displayedColumns);
-        this._displayedColumns = [];
-        setTimeout(() => this._displayedColumns = temp, 0);
+        this._sortHeadersObservable.next([]);
+        this._sortHeadersObservable.next(temp);
         this._clientSideSort();
         this._sortObservable.next();
         this.storeTableSettings();1
     }
 
+    // this fixes an infine loop of rerendering
+    private subscribeSortHeaders(): void {
+        this._sortHeadersObservable.pipe(
+            delay(0),
+            // ignore when there is no update in the sort (params or dirs)
+            filter(() => this._displayedSortDirs !== this.sortDirs && this._displayedSortParams !== this.sortParams),
+            tap((column) => {
+                // update the displayed sort when it is not the empty array
+                if(column.length > 0) {
+                    this._displayedSortDirs = this.sortDirs;
+                    this._displayedSortParams = this.sortParams;
+                }
+            })
+        ).subscribe(columns => this._displayedColumns = columns)
+    }
+
     private init() {
+        this.subscribeSortHeaders();
         console.debug("init");
         if (this._key) {
             const settings = new Settings(this._key);
@@ -153,6 +173,12 @@ export class TableData<T> {
 
     public set displayedColumns(displayedColumns: string[]) {
         this._displayedColumns = displayedColumns;
+        this._columns.next(this._columns.value.map(c => {
+            if (this._displayedColumns.includes(c.id)) {
+                c.isActive = true;
+            } else c.isActive = false;
+            return c;
+        }));
     }
 
     public get displayedColumns(): string[] {

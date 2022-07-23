@@ -1,4 +1,20 @@
 # Old Versions
+### Version 0.7.4
+- Security fixes
+
+### Version 0.7.3
+- Making the scrollStrategy of the overlay configurable. Thanks to [Lotec724](https://github.com/Lotec724).
+
+### Version 0.7.2
+- Fixed bug where settings dialog was to large and not scrollable, if table has many columns. Thanks to [Lotec724](https://github.com/Lotec724).
+
+### Version 0.7.1
+- Fixed update to Angular 12. Thanks to [SlasherZet](https://github.com/SlasherZet) and [Hellyson Rodrigo Parteka ](https://github.com/Hellysonrp).
+
+### Version 0.7.0
+- Update to Angular 12. Thanks to [Hellyson Rodrigo Parteka](https://github.com/Hellysonrp).
+- Security Updates
+
 ### Version 0.6.2
 - Security Updates
 
