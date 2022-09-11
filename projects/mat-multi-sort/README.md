@@ -5,13 +5,14 @@ The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesro
 
 
 ## Supported Angular Versions:
-| Angular Version | Latest Update of this lib   | Branch          |
-| --------------- | --------------------------- | --------------- |
-| Angular 13      | 0.8.1 (tested)              | current master  |
-| Angular 12      | 0.7.4 (tested)              | angular-12      |
-| Angular 11      | 0.6.2 (tested)              | angular-11      |
-| Angular 10      | 0.7.4 (tested)              | angular-10      |
-| Angular 8       | 0.7.4 (tested)              | angular-8       |
+| Angular Version | Latest Update of this lib   | Branch          | Tag     |
+| --------------- | --------------------------- | --------------- |-------- |
+| Angular 13      | 0.8.4 (tested)              | current master  | v0.9.0  |
+| Angular 13      | 0.8.4 (tested)              |                 | v0.8.4  |
+| Angular 12      | 0.7.4 (tested)              | angular-12      | -       |
+| Angular 11      | 0.6.2 (tested)              | angular-11      | -       |
+| Angular 10      | 0.7.4 (tested)              | angular-10      | -       |
+| Angular 8       | 0.7.4 (tested)              | angular-8       | -       |
 
 
 ---
@@ -61,7 +62,7 @@ The `TableData` an an useful class, which handles a lot of work for your app, su
 
 #### Properties
 
-| Name               | Description                                                                                                                                           | default                          | Exampe                                       |
+| Name               | Description                                                                                                                                           | default                          | Example                                       |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- | -------------------------------------------- |
 | columns            | An array of the displayed columns of the table with `id`: name of the attribute and `name`: Name to display in the header                             | `none`                           | `[{ id: 'first_name', name: 'First Name' }]` |
 | displayedColumns   | An array of the currently displayed columns (`id`) and their order                                                                                    | `all columns`                    |                                              |
