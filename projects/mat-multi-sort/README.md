@@ -39,6 +39,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.8.4
+- Update some packages
+- Fixed security relevant dependencies
 ### Version 0.8.3
 - Fixed bug where in column menu. Thanks to [Nate Stuyvesant](https://github.com/nstuyvesant)
 - Fixed errors in readme. Thanks to [Nate Stuyvesant ](https://github.com/nstuyvesant)
