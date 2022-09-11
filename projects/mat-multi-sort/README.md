@@ -40,6 +40,9 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+
+### Version 0.9.1
+- Fixed readme
 ### Version 0.9.0
 - Update to angular 14
 ### Version 0.8.4
