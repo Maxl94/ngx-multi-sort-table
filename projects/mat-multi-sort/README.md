@@ -7,7 +7,7 @@ The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesro
 ## Supported Angular Versions:
 | Angular Version | Latest Update of this lib   | Branch          | Tag     |
 | --------------- | --------------------------- | --------------- |-------- |
-| Angular 13      | 0.8.4 (tested)              | current master  | v0.9.0  |
+| Angular 14      | 0.8.4 (tested)              | current master  | v0.9.0  |
 | Angular 13      | 0.8.4 (tested)              | -               | v0.8.4  |
 | Angular 12      | 0.7.4 (tested)              | angular-12      | -       |
 | Angular 11      | 0.6.2 (tested)              | angular-11      | -       |
@@ -40,6 +40,8 @@ To run the demo:
 ![demo gif](demo.gif)
 
 ## Changelog
+### Version 0.9.0
+- Update to angular 14
 ### Version 0.8.4
 - Update some packages
 - Fixed security relevant dependencies
