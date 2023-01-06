@@ -13,7 +13,7 @@
   "keywords": ["angular", "javascript", "typescript", "angular-material", "table", "multi-sort"],
   "license": "MIT",
   "dependencies": {
-    "tslib": "^2.0.0"
+    "tslib": "^2.2.0"
   },
   "peerDependencies": {
     "@angular/common": "^15.0.4",
