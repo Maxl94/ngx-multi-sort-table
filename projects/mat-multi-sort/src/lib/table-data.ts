@@ -1,6 +1,6 @@
 import { Subject, BehaviorSubject, delay, filter, tap } from 'rxjs';
 import { MatMultiSortTableDataSource } from './mat-multi-sort-data-source';
-import { PageEvent } from '@angular/material/paginator';
+import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
 import { SortDirection } from '@angular/material/sort';
 import { Settings } from './utils';
 
