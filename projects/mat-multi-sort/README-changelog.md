@@ -1,4 +1,20 @@
-# Old Versions
+# Old Versions#
+### Version 0.8.4
+- Update some packages
+Fixed security-relevant dependencies
+### Version 0.8.3
+- Fixed bug where in column menu. Thanks to [Nate Stuyvesant](https://github.com/nstuyvesant)
+- Fixed errors in the readme. Thanks to [Nate Stuyvesant ](https://github.com/nstuyvesant)
+
+### Version 0.8.2
+- Fixed bug, where angular 13 is rendering infinite. Thanks to [NiklasLoechte](https://github.com/NiklasLoechte).
+
+### Version 0.8.1
+Several Security fixes.
+
+### Version 0.8.0
+- Added Support for Angular 13  Thanks to [Mohamed Salah ](https://github.com/mosamman)
+
 ### Version 0.7.4
 - Security fixes
 

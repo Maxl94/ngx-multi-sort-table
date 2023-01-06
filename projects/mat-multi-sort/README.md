@@ -28,7 +28,7 @@ The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesro
 
 
 ## Demo
-Visit the [github-pages demo](https://maxl94.github.io/ngx-multi-sort-table/) or clone and run it locally.
+Visit the [GitHub-pages demo](https://maxl94.github.io/ngx-multi-sort-table/) or clone and run it locally.
 
 To run the demo:
 1.  `clone` the repository
@@ -41,29 +41,16 @@ To run the demo:
 
 ## Changelog
 
+### Version 0.10.0
+- Update to angular 15
 ### Version 0.9.1
 - Fixed readme
 ### Version 0.9.0
 - Update to angular 14
-### Version 0.8.4
-- Update some packages
-- Fixed security relevant dependencies
-### Version 0.8.3
-- Fixed bug where in column menu. Thanks to [Nate Stuyvesant](https://github.com/nstuyvesant)
-- Fixed errors in readme. Thanks to [Nate Stuyvesant ](https://github.com/nstuyvesant)
-
-### Version 0.8.2
-- Fixed but, where angular 13 is rendering infinite. Thanks to [NiklasLoechte](https://github.com/NiklasLoechte).
-
-### Version 0.8.1
-- Serverall Security fixes.
-
-### Version 0.8.0
-- Added Support for Angular 13  Thanks to [Mohamed Salah ](https://github.com/mosamman)
 
 ## Documentation
 ### TableData
-The `TableData` an an useful class, which handles a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that it keeps the current state of the table, again sorting and pagination.
+The `TableData` an useful class, which handles a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that, it keeps the current state of the table, again sorting and pagination.
 
 #### Properties
 
