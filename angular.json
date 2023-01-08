@@ -185,5 +185,8 @@
       }
     }
   },
-  "defaultProject": "ngx-multi-sort-table"
+  "defaultProject": "ngx-multi-sort-table",
+  "cli": {
+    "analytics": false
+  }
 }
