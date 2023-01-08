@@ -9,12 +9,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
 
       - run: npm install
-        name: NPM install
+        name: Install dependencies
 
-      - run: npm run build mat-multi-sort
-        name: NPM build
+      - run: npm install -g @angular/cli
+        name: Install angular cli
+
+      - run: ng build mat-multi-sort --configuration production
+        name: npm build
 
       - uses: actions/upload-artifact@v3
         with:
@@ -27,19 +32,13 @@ jobs:
     steps:
       - uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
-          registry-url: 'https://registry.npmjs.org'
-          
+          node-version: "18.x"
+          registry-url: "https://registry.npmjs.org"
+
       - uses: actions/download-artifact@v3
         with:
           name: package
-  
+
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-  
-
-
-
-
+          NODE_AUTH_TOKEN: ${{ secrets.npm_TOKEN }}
