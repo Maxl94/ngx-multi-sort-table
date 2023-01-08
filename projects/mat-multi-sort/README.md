@@ -1,37 +1,38 @@
 # NgxMultiSortTable
 
-This is the implementation for a multiple sortable table based on the Angular Material Design.The focus is on server-side loaded and sorted data. Next to that the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
+This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that, the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
 
+## Supported Angular Versions
 
-## Supported Angular Versions:
 | Angular Version | Latest Update of this lib   | Branch          | Tag     |
 | --------------- | --------------------------- | --------------- |-------- |
-| Angular 14      | 0.8.4 (tested)              | current master  | v0.9.0  |
-| Angular 13      | 0.8.4 (tested)              | -               | v0.8.4  |
-| Angular 12      | 0.7.4 (tested)              | angular-12      | -       |
-| Angular 11      | 0.6.2 (tested)              | angular-11      | -       |
-| Angular 10      | 0.7.4 (tested)              | angular-10      | -       |
-| Angular 8       | 0.7.4 (tested)              | angular-8       | -       |
-
+| Angular 15      | 0.10.1                      | master          | v0.10.1 |
+| Angular 14      | 0.8.4                       | -               | v0.9.0  |
+| Angular 13      | 0.8.4                       | -               | v0.8.4  |
+| Angular 12      | 0.7.4                       | angular-12      | -       |
+| Angular 11      | 0.6.2                       | angular-11      | -       |
+| Angular 10      | 0.7.4                       | angular-10      | -       |
+| Angular 8       | 0.7.4                       | angular-8       | -       |
 
 ---
 **Warning:**
 
-- Older versions might have know security issues. So keep up-to-date!
+- Older versions might have known security issues. So keep up-to-date!
 - Older versions of this library lack some features.
+
 ---
 
-## Discussion: 
+## Discussion
 
 **I like to improve the library, so please use [this](https://github.com/Maxl94/ngx-multi-sort-table/issues/33) thread, if you have any feature requests, bug fixes or suggest api changes.**
 
-
 ## Demo
-Visit the [GitHub-pages demo](https://maxl94.github.io/ngx-multi-sort-table/) or clone and run it locally.
+Visit the [GitHub pages demo](https://maxl94.github.io/ngx-multi-sort-table/) or clone and run it locally.
 
 To run the demo:
-1.  `clone` the repository
+
+1. `clone` the repository
 2. `cd ngx-multi-sort-table`
 3. `npm install`
 4. `ng build mat-multi-sort`
@@ -41,16 +42,13 @@ To run the demo:
 
 ## Changelog
 
-### Version 0.10.0
-- Update to angular 15
-### Version 0.9.1
-- Fixed readme
-### Version 0.9.0
-- Update to angular 14
+See the [GitHub release notes](https://github.com/Maxl94/ngx-multi-sort-table/releases).
 
 ## Documentation
+
 ### TableData
-The `TableData` an useful class, which handles a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting event. Next to that, it keeps the current state of the table, again sorting and pagination.
+
+The `TableData` a useful class, which handles a lot of work for your app, such as page events (`next`, `previous`, `sizeChange`) and sorting events. Next to that, it keeps the current state of the table, again sorting and pagination.
 
 #### Properties
 
@@ -82,13 +80,14 @@ The `TableData` an useful class, which handles a lot of work for your app, such 
 | updateColumnNames | The method allows you to change the displayed name of the columns                                                                                                                                                                                | { `id:` string, `name:` string }[]                                                                                                                                                   |
 | localStorageKey   | A key to store the table settings, like selected columns, order of the columns, sorting directions in the local storage. If no key is passed the settings are not stored. **Do not set the same key for different tables, this might lead to unexpected behavior. There is an validation of the loaded settings, if that fails, the defaults are used**                                                                                                                                                                                                                                                   | string
 
-
 ### MatMultiSortHeaderComponent
+
 This component manages the sorting of the table. To use the multi-sort add `matMultiSort` to your table and pass the `mat-multi-sort-header="<your-column-id>"` to the `<th mat-header-cell>`.
 
 ### MatMultiSortTableSettingsComponent
+
 This component display some settings for your table. The user can select the columns he wants to see in his table, next to that he can change the order of the columns. Additionally, the component shows the current chosen sorting columns as chips above the table.
-The user can easyly change the sorting order by drag and drop the chips and also change the sorting direction of each column. 
+The user can easyly change the sorting order by drag and drop the chips and also change the sorting direction of each column.
 
 | Name                | Description                                                                                                                                                                                                                              | Parameter         |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
@@ -98,14 +97,15 @@ The user can easyly change the sorting order by drag and drop the chips and also
 | scrollStrategy      | An input of ScrollStrategy for the CDK overlay. Sets the behavior for scrolling when the dialog is opened. Possible options are the predefined strategies: Noop, Close, Block or Reposition, with Block being the default value.         | @Input: ScrollStrategy
 
 ### MatMultiSortTableDataSource
-This is the datasource of the MultiSortTable, it works like the ` MatTableDataSource`´.
+
+This is the datasource of the MultiSortTable, it works like the `MatTableDataSource`´.
 
 | Name        | Description                  | Parameter                                                  |
 | ----------- | ---------------------------- | ---------------------------------------------------------- |
 | constructor | The constructor of the class | `sort:` MatMultiSort, `clientSideSorting:` boolean = false |
 
-
 ## Example code for the template
+
 ```html
 <mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern"  [closeDialogOnChoice]="false">>
   <button mat-stroked-button>
@@ -150,6 +150,7 @@ This is the datasource of the MultiSortTable, it works like the ` MatTableDataSo
   [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)" [disabled]="CLIENT_SIDE">
 </mat-paginator>
 ```
+
 ## Example code for the component.ts
 
 ```typescript
@@ -211,4 +212,3 @@ export class AppComponent implements OnInit {
   }
 }
 ```
-
