@@ -104,7 +104,7 @@ export class TableData<T> {
         this._sortHeadersObservable.next(temp);
         this._clientSideSort();
         this._sortObservable.next();
-        this.storeTableSettings();1
+        this.storeTableSettings();
     }
 
     // this fixes an infine loop of rerendering
@@ -115,17 +115,16 @@ export class TableData<T> {
             filter(() => this._displayedSortDirs !== this.sortDirs && this._displayedSortParams !== this.sortParams),
             tap((column) => {
                 // update the displayed sort when it is not the empty array
-                if(column.length > 0) {
+                if (column.length > 0) {
                     this._displayedSortDirs = this.sortDirs;
                     this._displayedSortParams = this.sortParams;
                 }
             })
-        ).subscribe(columns => this._displayedColumns = columns)
+        ).subscribe(columns => this._displayedColumns = columns);
     }
 
     private init() {
         this.subscribeSortHeaders();
-        console.debug("init");
         if (this._key) {
             const settings = new Settings(this._key);
             settings.load();
@@ -134,7 +133,7 @@ export class TableData<T> {
                 this._sortDirs = settings.sortDirs;
                 this._sortParams = settings.sortParams;
             } else {
-                console.warn("Stored tableSettings are invalid. Using default");
+                console.warn('Stored tableSettings are invalid. Using default');
             }
         }
     }
@@ -150,8 +149,8 @@ export class TableData<T> {
         }
 
         // check if columns are the same
-        for (var column of settings.columns) {
-            var match = this._columns.value.filter(c => c.id == column.id && c.name == column.name);
+        for (const column of settings.columns) {
+            const match = this._columns.value.filter(c => c.id === column.id && c.name === column.name);
             if (match === undefined) {
                 return false;
             }
@@ -160,7 +159,6 @@ export class TableData<T> {
     }
 
     public storeTableSettings(): void {
-        console.log("Store")
         if (this._key) {
             const settings: Settings = new Settings(this._key);
             settings.columns = this._columns.value;
@@ -181,9 +179,7 @@ export class TableData<T> {
     public set displayedColumns(displayedColumns: string[]) {
         this._displayedColumns = displayedColumns;
         this._columns.next(this._columns.value.map(c => {
-            if (this._displayedColumns.includes(c.id)) {
-                c.isActive = true;
-            } else c.isActive = false;
+            c.isActive = this._displayedColumns.includes(c.id);
             return c;
         }));
     }
