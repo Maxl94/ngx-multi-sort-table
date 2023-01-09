@@ -18,10 +18,12 @@ export class TableData<T> {
 
     private _nextObservable: Subject<void> = new Subject<void>();
     private _previousObservable: Subject<void> = new Subject<void>();
+    private _lastObservable: Subject<void> = new Subject<void>();
+    private _firstObservable: Subject<void> = new Subject<void>();
     private _sizeObservable: Subject<void> = new Subject<void>();
     private _sortObservable: Subject<void> = new Subject<void>();
-    private _displayedSortDirs?: string[]
-    private _displayedSortParams?: string[]
+    private _displayedSortDirs?: string[];
+    private _displayedSortParams?: string[];
 
     private _sortHeadersObservable: Subject<string[]> = new Subject<string[]>();
 
@@ -77,17 +79,22 @@ export class TableData<T> {
     }
 
     public onPaginationEvent($event: PageEvent) {
+        const pageDifference = $event.pageIndex - $event.previousPageIndex;
         const tmpPageSize: number = this.pageSize;
         this.pageSize = $event.pageSize;
         this.pageIndex = $event.pageIndex;
 
-        if (tmpPageSize !== this.pageSize) {
-            this._sizeObservable.next();
-        } else if ($event.previousPageIndex < $event.pageIndex) {
-            this._nextObservable.next();
-        } else if ($event.previousPageIndex > $event.pageIndex) {
-            this._previousObservable.next();
-        }
+      if (tmpPageSize !== this.pageSize) {
+        this._sizeObservable.next();
+      } else if (pageDifference > 0 && Math.abs(pageDifference) === 1) {
+        this._nextObservable.next();
+      } else if (pageDifference < 0 && Math.abs(pageDifference) === 1) {
+        this._previousObservable.next();
+      } else if (pageDifference > 1) {
+        this._lastObservable.next();
+      } else if (pageDifference < -1) {
+        this._firstObservable.next();
+      }
     }
 
     public updateSortHeaders(): void {
@@ -223,6 +230,14 @@ export class TableData<T> {
 
     public get previousObservable(): Subject<any> {
         return this._previousObservable;
+    }
+
+    public get firstObservable(): Subject<any> {
+      return this._firstObservable;
+    }
+
+    public get lastObservable(): Subject<any> {
+      return this._lastObservable;
     }
 
     public get sizeObservable(): Subject<any> {
