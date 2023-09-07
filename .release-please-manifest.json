@@ -1,7 +1,3 @@
 {
-    "packages": {
-        "projects/mat-multi-sort": {
-            "release-as": "16.0.0"
-        }
-    }
+    "projects/mat-multi-sort": "16.0.0"
 }
