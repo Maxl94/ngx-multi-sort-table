@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v1.0.0...v2.0.0) (2023-09-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* update to angular 16 (hack)
+
+### Features
+
+* update to angular 16 (hack) ([db7abed](https://github.com/Maxl94/ngx-multi-sort-table/commit/db7abed98413cafcf4228ffd5a6a0665b8c79004))
+
 ## [1.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v0.10.2...v1.0.0) (2023-09-07)
 
 
