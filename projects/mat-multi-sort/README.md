@@ -2,19 +2,6 @@
 
 This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that, the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
-
-## Supported Angular Versions
-
-| Angular Version | Latest Update of this lib   | Branch          | Tag     |
-| --------------- | --------------------------- | --------------- |-------- |
-| Angular 15      | 0.10.1                      | master          | v0.10.1 |
-| Angular 14      | 0.8.4                       | -               | v0.9.0  |
-| Angular 13      | 0.8.4                       | -               | v0.8.4  |
-| Angular 12      | 0.7.4                       | angular-12      | -       |
-| Angular 11      | 0.6.2                       | angular-11      | -       |
-| Angular 10      | 0.7.4                       | angular-10      | -       |
-| Angular 8       | 0.7.4                       | angular-8       | -       |
-
 ---
 **Warning:**
 
@@ -212,3 +199,17 @@ export class AppComponent implements OnInit {
   }
 }
 ```
+
+## Contributing
+
+### How should I write my commits?
+
+Release Please assume you are using [Conventional Commit messages](https://www.conventionalcommits.org/).
+
+The most important prefixes you should have in mind are:
+
+- `fix:` which represents bug fixes, and correlates to a [SemVer](https://semver.org/)
+  patch.
+- `feat:` which represents a new feature, and correlates to a SemVer minor.
+- `feat!:`, or `fix!:`, `refactor!:`, etc., which represent a breaking change
+  (indicated by the `!`) and will result in a SemVer major.
