@@ -19,7 +19,7 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
-          path: "packages/mat-multi-sort"
+          path: "projects/mat-multi-sort"
           release-type: node
           package-name: ngx-mat-multi-sort
           release-as: "16.0.0"
