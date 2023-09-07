@@ -2,6 +2,7 @@
 
 This is the implementation for a multiple sortable table based on the Angular Material Design. The focus is on server-side loaded and sorted data. Next to that, the library provides some useful classes to reduce the duplicated code when using the material `paginator`.
 The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesrodrigues) repository [repo](https://github.com/farantesrodrigues/ng-mat-multi-sort), so thanks for your great work.
+
 ---
 **Warning:**
 
@@ -12,7 +13,7 @@ The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesro
 
 ## Discussion
 
-**I like to improve the library, so please use [this](https://github.com/Maxl94/ngx-multi-sort-table/issues/33) thread, if you have any feature requests, bug fixes or suggest api changes.**
+**I like to improve the library, so please use [this](https://github.com/Maxl94/ngx-multi-sort-table/issues/33) thread, if you have any feature requests, bug fixes **or suggest **API** changes.****
 
 ## Demo
 Visit the [GitHub pages demo](https://maxl94.github.io/ngx-multi-sort-table/) or clone and run it locally.
