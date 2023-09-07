@@ -1,4 +1,4 @@
-name: package-release
+name: release-please
 on:
   push:
     branches:
@@ -7,8 +7,8 @@ on:
 permissions:
   contents: write
   pull-requests: write
-    
-  
+
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
@@ -22,7 +22,8 @@ jobs:
           path: "projects/mat-multi-sort"
           release-type: node
           package-name: ngx-mat-multi-sort
-  realease-package:
+
+  release-package:
     runs-on: ubuntu-latest
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
@@ -51,10 +52,10 @@ jobs:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: package
-
-      - run: npm publish
+      - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          cd dist/mat-multi-sort  
+          npm publish
+          
