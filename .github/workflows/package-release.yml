@@ -22,7 +22,6 @@ jobs:
           path: "projects/mat-multi-sort"
           release-type: node
           package-name: ngx-mat-multi-sort
-          release-as: "16.0.0"
 
   release-package:
     runs-on: ubuntu-latest
