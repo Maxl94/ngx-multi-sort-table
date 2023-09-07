@@ -1,3 +1,4 @@
 {
-    "projects/mat-multi-sort": "16.0.0"
+    "projects/mat-multi-sort": "16.0.0",
+    ".": "1.0.1"
 }
