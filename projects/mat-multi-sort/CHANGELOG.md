@@ -1,5 +1,12 @@
 # Changelog
 
+## [16.0.2](https://github.com/Maxl94/ngx-multi-sort-table/compare/v16.0.1...v16.0.2) (2023-09-07)
+
+
+### Bug Fixes
+
+* **deps:** corrects dependency version for material and cdk ([#155](https://github.com/Maxl94/ngx-multi-sort-table/issues/155)) ([2778962](https://github.com/Maxl94/ngx-multi-sort-table/commit/27789621cd77718cddb39e9d8a04c49de2b7c922))
+
 ## [16.0.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v16.0.0...v16.0.1) (2023-09-07)
 
 
