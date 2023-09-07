@@ -1,0 +1,22 @@
+name: Git Lint
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-commits:
+    name: Validate Commit Messages
+    runs-on: self-hosted-dev
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Gitlint
+        run: pip install gitlint==0.19.1
+
+      - name: Lint PR Commit Messages
+        if: github.event_name == 'pull_request'
+        run: gitlint --commits "${{ github.event.pull_request.base.sha }}..HEAD"
