@@ -1,12 +1,12 @@
 name: Git Lint
 on:
   pull_request:
-    branches: [main]
+    branches: [master]
 
 jobs:
   validate-commits:
     name: Validate Commit Messages
-    runs-on: self-hosted-dev
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
