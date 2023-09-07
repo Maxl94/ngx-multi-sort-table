@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-multi-sort",
-  "version": "15.0.0",
+  "version": "1.0.0",
   "description": "An extension for the angular material table to support multi-sorting.",
   "author": "Maximilian Balluff",
   "repository": {
@@ -10,7 +10,14 @@
   "bugs": {
     "url": "https://github.com/Maxl94/ngx-multi-sort-table/issues"
   },
-  "keywords": ["angular", "javascript", "typescript", "angular-material", "table", "multi-sort"],
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "angular-material",
+    "table",
+    "multi-sort"
+  ],
   "license": "MIT",
   "dependencies": {
     "tslib": "^2.2.0"
