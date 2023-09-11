@@ -53,7 +53,7 @@
     </tr>
   </table>
   <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
-    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPaginationEvent($event)"
+    [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPaginationEvent($event)" showFirstLastButtons
     [disabled]="CLIENT_SIDE">
   </mat-paginator>
 </div>

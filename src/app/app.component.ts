@@ -33,13 +33,15 @@ export class AppComponent implements OnInit {
     this.table.sortObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
     this.table.sizeObservable.subscribe(() => { this.getData(); });
-    this.changeDetectorRef.detectChanges()
+    this.table.firstObservable.subscribe(() => { this.getData(); });
+    this.table.lastObservable.subscribe(() => { this.getData(); });
+    this.changeDetectorRef.detectChanges();
     this.initData();
   }
 
   initData() {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
-    this.table.displayedColumns = ['id', 'name'] // intentionally left out 'progress' to show the bug
+    this.table.displayedColumns = ['id', 'name']; // intentionally left out 'progress' to show the bug
     if (this.CLIENT_SIDE) {
       this.table.updateColumnNames([
         { id: 'id', name: 'Inter ID' },

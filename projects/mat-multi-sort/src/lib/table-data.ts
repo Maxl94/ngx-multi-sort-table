@@ -18,10 +18,12 @@ export class TableData<T> {
 
     private _nextObservable: Subject<void> = new Subject<void>();
     private _previousObservable: Subject<void> = new Subject<void>();
+    private _lastObservable: Subject<void> = new Subject<void>();
+    private _firstObservable: Subject<void> = new Subject<void>();
     private _sizeObservable: Subject<void> = new Subject<void>();
     private _sortObservable: Subject<void> = new Subject<void>();
-    private _displayedSortDirs?: string[]
-    private _displayedSortParams?: string[]
+    private _displayedSortDirs?: string[];
+    private _displayedSortParams?: string[];
 
     private _sortHeadersObservable: Subject<string[]> = new Subject<string[]>();
 
@@ -77,17 +79,22 @@ export class TableData<T> {
     }
 
     public onPaginationEvent($event: PageEvent) {
+        const pageDifference = $event.pageIndex - $event.previousPageIndex;
         const tmpPageSize: number = this.pageSize;
         this.pageSize = $event.pageSize;
         this.pageIndex = $event.pageIndex;
 
-        if (tmpPageSize !== this.pageSize) {
-            this._sizeObservable.next();
-        } else if ($event.previousPageIndex < $event.pageIndex) {
-            this._nextObservable.next();
-        } else if ($event.previousPageIndex > $event.pageIndex) {
-            this._previousObservable.next();
-        }
+      if (tmpPageSize !== this.pageSize) {
+        this._sizeObservable.next();
+      } else if (pageDifference > 0 && Math.abs(pageDifference) === 1) {
+        this._nextObservable.next();
+      } else if (pageDifference < 0 && Math.abs(pageDifference) === 1) {
+        this._previousObservable.next();
+      } else if (pageDifference > 1) {
+        this._lastObservable.next();
+      } else if (pageDifference < -1) {
+        this._firstObservable.next();
+      }
     }
 
     public updateSortHeaders(): void {
@@ -97,7 +104,7 @@ export class TableData<T> {
         this._sortHeadersObservable.next(temp);
         this._clientSideSort();
         this._sortObservable.next();
-        this.storeTableSettings();1
+        this.storeTableSettings();
     }
 
     // this fixes an infine loop of rerendering
@@ -108,17 +115,16 @@ export class TableData<T> {
             filter(() => this._displayedSortDirs !== this.sortDirs && this._displayedSortParams !== this.sortParams),
             tap((column) => {
                 // update the displayed sort when it is not the empty array
-                if(column.length > 0) {
+                if (column.length > 0) {
                     this._displayedSortDirs = this.sortDirs;
                     this._displayedSortParams = this.sortParams;
                 }
             })
-        ).subscribe(columns => this._displayedColumns = columns)
+        ).subscribe(columns => this._displayedColumns = columns);
     }
 
     private init() {
         this.subscribeSortHeaders();
-        console.debug("init");
         if (this._key) {
             const settings = new Settings(this._key);
             settings.load();
@@ -127,7 +133,7 @@ export class TableData<T> {
                 this._sortDirs = settings.sortDirs;
                 this._sortParams = settings.sortParams;
             } else {
-                console.warn("Stored tableSettings are invalid. Using default");
+                console.warn('Stored tableSettings are invalid. Using default');
             }
         }
     }
@@ -143,8 +149,8 @@ export class TableData<T> {
         }
 
         // check if columns are the same
-        for (var column of settings.columns) {
-            var match = this._columns.value.filter(c => c.id == column.id && c.name == column.name);
+        for (const column of settings.columns) {
+            const match = this._columns.value.filter(c => c.id === column.id && c.name === column.name);
             if (match === undefined) {
                 return false;
             }
@@ -153,7 +159,6 @@ export class TableData<T> {
     }
 
     public storeTableSettings(): void {
-        console.log("Store")
         if (this._key) {
             const settings: Settings = new Settings(this._key);
             settings.columns = this._columns.value;
@@ -174,9 +179,7 @@ export class TableData<T> {
     public set displayedColumns(displayedColumns: string[]) {
         this._displayedColumns = displayedColumns;
         this._columns.next(this._columns.value.map(c => {
-            if (this._displayedColumns.includes(c.id)) {
-                c.isActive = true;
-            } else c.isActive = false;
+            c.isActive = this._displayedColumns.includes(c.id);
             return c;
         }));
     }
@@ -223,6 +226,14 @@ export class TableData<T> {
 
     public get previousObservable(): Subject<any> {
         return this._previousObservable;
+    }
+
+    public get firstObservable(): Subject<any> {
+      return this._firstObservable;
+    }
+
+    public get lastObservable(): Subject<any> {
+      return this._lastObservable;
     }
 
     public get sizeObservable(): Subject<any> {
