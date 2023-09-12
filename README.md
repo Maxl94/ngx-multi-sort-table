@@ -78,7 +78,7 @@ This is the datasource of the MultiSortTable, it works like the ` MatTableDataSo
 
 ## Example code for the template
 ```html
-<mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern"  [closeDialogOnChoice]="false">>
+<mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfole ändern"  [closeDialogOnChoice]="false">
   <button mat-stroked-button>
     Spalten bearbeiten &nbsp;
     <mat-icon>menu</mat-icon>
@@ -118,7 +118,7 @@ This is the datasource of the MultiSortTable, it works like the ` MatTableDataSo
   </tr>
 </table>
 <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
-  [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPagnationEvent($event)" [disabled]="CLIENT_SIDE">
+  [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPaginationEvent($event)" [disabled]="CLIENT_SIDE">
 </mat-paginator>
 ```
 ## Example code for the component.ts
