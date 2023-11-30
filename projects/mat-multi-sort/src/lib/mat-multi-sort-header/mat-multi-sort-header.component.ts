@@ -37,7 +37,7 @@ interface C2MatSortHeaderColumnDef {
 })
 export class MatMultiSortHeaderComponent extends MatSortHeader {
   start = 'asc' as 'asc' | 'desc';
-  @Input('mat-multi-sort-header') id: string;
+  @Input('mat-multi-sort-header') id!: string;
 
   constructor(public _intl: MatSortHeaderIntl,
     changeDetectorRef: ChangeDetectorRef,
