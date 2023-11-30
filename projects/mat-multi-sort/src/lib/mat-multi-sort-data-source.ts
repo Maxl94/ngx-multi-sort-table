@@ -44,8 +44,11 @@ export class MatMultiSortTableDataSource<T> extends DataSource<T> {
     }
 
     _sortData(d1: T, d2: T, params: string[], dirs: string[]): number {
+        // @ts-ignore -- need a typesafe way to express these accessor operations, ts-ignore could be a solution
+        // if there's not a suitable solution offered by typescript
         if (d1[params[0]] > d2[params[0]]) {
             return dirs[0] === 'asc' ? 1 : -1;
+        // @ts-ignore
         } else if (d1[params[0]] < d2[params[0]]) {
             return dirs[0] === 'asc' ? -1 : 1;
         } else {
