@@ -12,7 +12,7 @@ export class Settings {
     }
 
     public load() {
-        const value = JSON.parse(localStorage.getItem(this._key));
+        const value = JSON.parse(localStorage.getItem(this._key)!);
         if (value) {
             this._columns = value._columns || [];
             this._sortDirs = value._sortDirs || [];

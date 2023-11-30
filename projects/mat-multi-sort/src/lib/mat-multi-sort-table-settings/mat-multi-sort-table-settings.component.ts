@@ -11,18 +11,18 @@ import {TemplatePortal} from '@angular/cdk/portal';
   styleUrls: ['./mat-multi-sort-table-settings.component.scss']
 })
 export class MatMultiSortTableSettingsComponent implements OnInit {
-  _tableData: TableData<any>;
-  sort = [];
-  overlayRef: OverlayRef;
+  _tableData!: TableData<any>;
+  sort: { id: string, name: string, direction: string }[] = [];
+  overlayRef!: OverlayRef;
 
-  @ViewChild('templateRef', { static: true }) private templateRef: TemplateRef<HTMLElement>;
+  @ViewChild('templateRef', { static: true }) private templateRef!: TemplateRef<HTMLElement>;
 
-  @ViewChild('settingsMenu') buttonRef: ElementRef;
+  @ViewChild('settingsMenu') buttonRef!: ElementRef;
 
-  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef: TemplateRef<any>;
+  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef!: TemplateRef<any>;
 
   @Input()
-  sortToolTip: string;
+  sortToolTip: string = '';
 
   @Input()
   closeDialogOnChoice = true;
@@ -101,11 +101,11 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   }
 
   getSort(): { id: string, name: string, direction: string }[] {
-    const sorting = [];
+    const sorting: { id: string, name: string, direction: string }[] = [];
     for (let i = 0; i < this._tableData.sortParams.length; i++) {
       sorting.push({
         id: this._tableData.sortParams[i],
-        name: this._tableData.columns.find(c => c.id === this._tableData.sortParams[i]).name,
+        name: this._tableData.columns.find(c => c.id === this._tableData.sortParams[i])!.name,
         direction: this._tableData.sortDirs[i]
       });
     }
