@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   TOGGLE_INDICATOR_ICONS = false;
 
   table: TableData<UserData>;
-  @ViewChild(MatMultiSort) sort: MatMultiSort;
+  @ViewChild(MatMultiSort) sort!: MatMultiSort;
 
   constructor(
     private dummyService: DummyService,

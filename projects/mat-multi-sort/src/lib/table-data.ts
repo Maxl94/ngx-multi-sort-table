@@ -5,16 +5,16 @@ import { Settings } from './utils';
 import { PageEvent } from '@angular/material/paginator';
 
 export class TableData<T> {
-    private _dataSource: MatMultiSortTableDataSource<T>;
+    private _dataSource!: MatMultiSortTableDataSource<T>;
     private readonly _columns: BehaviorSubject<{ id: string, name: string, isActive?: boolean }[]>;
     private _displayedColumns: string[];
-    pageSize: number;
-    pageIndex: number;
+    pageSize!: number;
+    pageIndex!: number;
     private _pageSizeOptions: number[];
-    private _totalElements: number;
+    private _totalElements!: number;
     private _sortParams: string[];
     private _sortDirs: string[];
-    private _key: string;
+    private _key!: string;
 
     private _nextObservable: Subject<void> = new Subject<void>();
     private _previousObservable: Subject<void> = new Subject<void>();
@@ -59,7 +59,7 @@ export class TableData<T> {
 
             this._totalElements = options.totalElements || 0;
             this._pageSizeOptions = options.pageSizeOptions || [10, 20, 50, 100];
-            this._key = options.localStorageKey;
+            this._key = options.localStorageKey!;
         } else {
             this._pageSizeOptions = [10, 20, 50, 100];
             this._sortParams = [];
@@ -83,9 +83,9 @@ export class TableData<T> {
 
         if (tmpPageSize !== this.pageSize) {
             this._sizeObservable.next();
-        } else if ($event.previousPageIndex < $event.pageIndex) {
+        } else if ($event.previousPageIndex && $event.previousPageIndex < $event.pageIndex) {
             this._nextObservable.next();
-        } else if ($event.previousPageIndex > $event.pageIndex) {
+        } else if ($event.previousPageIndex && $event.previousPageIndex > $event.pageIndex) {
             this._previousObservable.next();
         }
     }
@@ -212,7 +212,7 @@ export class TableData<T> {
     }
 
     public updateColumnNames(v: { id: string, name: string }[]) {
-        const dict = {};
+        const dict: { [key: string]: any } = {};
         v.forEach(c => dict[c.id] = c.name);
         this._columns.next(this._columns.value.map(c => { c.name = dict[c.id] || c.name; return c; }));
     }

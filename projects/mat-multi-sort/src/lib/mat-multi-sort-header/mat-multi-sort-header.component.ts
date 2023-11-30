@@ -75,7 +75,7 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
   @HostBinding('attr.aria-sort')
   _getAriaSortAttribute() {
     if (!this._isSorted()) {
-      return null;
+      return 'none';
     }
 
     return this.getSortDirection() === 'asc' ? 'ascending' : 'descending';
