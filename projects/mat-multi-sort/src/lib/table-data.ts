@@ -118,7 +118,6 @@ export class TableData<T> {
 
     private init() {
         this.subscribeSortHeaders();
-        console.debug("init");
         if (this._key) {
             const settings = new Settings(this._key);
             settings.load();
