@@ -1,6 +1,6 @@
 {
   "name": "ngx-mat-multi-sort",
-  "version": "16.0.2",
+  "version": "17.0.0",
   "description": "An extension for the angular material table to support multi-sorting.",
   "author": "Maximilian Balluff",
   "repository": {
