@@ -1,5 +1,12 @@
 # Changelog
 
+## [17.0.2](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.0.1...v17.0.2) (2024-02-19)
+
+
+### Bug Fixes
+
+* **ci:** set correct package name for build ([2f8c793](https://github.com/Maxl94/ngx-multi-sort-table/commit/2f8c79323f83ebfb6bd3f22c7863ed731b081f0d))
+
 ## [17.0.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.0.0...v17.0.1) (2024-02-19)
 
 
