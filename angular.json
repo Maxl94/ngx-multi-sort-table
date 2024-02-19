@@ -145,37 +145,37 @@
       }
     },
     "mat-multi-sort": {
-      "root": "projects/mat-multi-sort",
-      "sourceRoot": "projects/mat-multi-sort/src",
+      "root": ".",
+      "sourceRoot": "./src",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/mat-multi-sort/tsconfig.lib.json",
-            "project": "projects/mat-multi-sort/ng-package.json"
-          }
-        ,          "configurations": {
+            "tsConfig": "./tsconfig.lib.json",
+            "project": "./ng-package.json"
+          },
+          "configurations": {
             "production": {
-              "tsConfig": "projects/mat-multi-sort/tsconfig.lib.prod.json"
+              "tsConfig": "./tsconfig.lib.prod.json"
             }
           }
-},
+        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/mat-multi-sort/src/test.ts",
-            "tsConfig": "projects/mat-multi-sort/tsconfig.spec.json",
-            "karmaConfig": "projects/mat-multi-sort/karma.conf.js"
+            "main": "./src/test.ts",
+            "tsConfig": "./tsconfig.spec.json",
+            "karmaConfig": "./karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/mat-multi-sort/tsconfig.lib.json",
-              "projects/mat-multi-sort/tsconfig.spec.json"
+              "./tsconfig.lib.json",
+              "./tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
