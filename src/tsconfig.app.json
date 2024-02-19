@@ -1,8 +1,8 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/app",
-    "rootDir": "./../src",
+    "outDir": "./out-tsc/app",
+    "rootDir": ".",
     "types": []
   },
   "files": [
