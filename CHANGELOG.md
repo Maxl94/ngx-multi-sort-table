@@ -1,5 +1,12 @@
 # Changelog
 
+## [17.0.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.0.0...v17.0.1) (2024-02-19)
+
+
+### Bug Fixes
+
+* updates docs, test release please (171) ([8a74311](https://github.com/Maxl94/ngx-multi-sort-table/commit/8a7431159d7dde56f340cbd04c5f8becbd840397))
+
 ## [17.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v16.0.2...v17.0.0) (2024-01-10)
 
 
