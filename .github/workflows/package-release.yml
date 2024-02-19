@@ -39,7 +39,7 @@ jobs:
       - run: npm install -g @angular/cli
         name: Install angular cli
 
-      - run: ng build ngx-mat-multi-sort --configuration production
+      - run: ng build mat-multi-sort --configuration production
         name: npm build
 
       - uses: actions/upload-artifact@v3
