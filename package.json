@@ -31,6 +31,10 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.2.0",
+    "@angular/compiler-cli": "^17.2.0",
+    "@angular/platform-browser-dynamic": "^17.2.1",
+    "@angular/platform-browser": "^17.2.1",
+    "@angular/forms": "^17.2.1",
     "ng-packagr": "^17.2.0"
   }
 }

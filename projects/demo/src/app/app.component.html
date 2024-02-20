@@ -1,0 +1,59 @@
+<div class="mat-elevation-z8" style="padding: 8px; margin-bottom: 48px;">
+  <p>
+    <mat-checkbox [(ngModel)]="CLIENT_SIDE" (ngModelChange)="initData()">Use client-side sorting and data only
+      (pagination is disabled, only 25 entries available)</mat-checkbox>
+  </p>
+  <p>
+    <mat-checkbox [(ngModel)]="CLOSE_MENU_BEHAVIOR">Close settings menu on selection (if disabled it stays open, so the
+      user can select/deselect multiple items)</mat-checkbox>
+  </p>
+  <p>
+    <mat-checkbox [(ngModel)]="TOGGLE_INDICATOR_ICONS">
+      Toggle sort Indicator icons instead of text based labels
+    </mat-checkbox>
+  </p>
+</div>
+
+<div class="mat-elevation-z8" style="padding: 8px;">
+  <mat-multi-sort-table-settings [tableData]="table" sortToolTip="Sortierreihenfolge ändern"
+                                 [closeDialogOnChoice]="CLOSE_MENU_BEHAVIOR">
+    <button mat-stroked-button> Spalten bearbeiten &nbsp; <mat-icon>menu</mat-icon>
+    </button>
+    <ng-template *ngIf="TOGGLE_INDICATOR_ICONS"  #sortIndicator let-direction='direction' let-columnName='columnName'>
+      {{columnName}}
+      <mat-icon [matTooltip]="'Sortierreihenfolge ändern'" *ngIf="direction">{{direction === 'asc' ? 'arrow_upward' : 'arrow_downward'}}</mat-icon>
+    </ng-template>
+  </mat-multi-sort-table-settings>
+  <table mat-table [dataSource]="table.dataSource" matMultiSort (matSortChange)="table.onSortEvent()">
+
+    <!-- Create all your columns with *ngfor, this is the lazy way out and only works if the display of the data does not differ -->
+    <ng-container *ngFor="let column of table.columns" [matColumnDef]="column.id">
+      <th mat-header-cell *matHeaderCellDef [mat-multi-sort-header]="column.id"> {{column.name}} </th>
+      <td mat-cell *matCellDef="let row"> {{row[column.id]}} </td>
+    </ng-container>
+
+    <!-- Or define your columns in a normal, more individual way -->
+    <!-- <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="id"> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="progress"> Progress </th>
+      <td mat-cell *matCellDef="let row"> {{row.progress}} % </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-multi-sort-header="name"> Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container> -->
+
+    <tr mat-header-row *matHeaderRowDef="table.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: table.displayedColumns;">
+    </tr>
+  </table>
+  <mat-paginator [pageSize]="table.pageSize" [pageIndex]="table.pageIndex" [pageSizeOptions]="table.pageSizeOptions"
+                 [length]="table.totalElements ? table.totalElements : 0" (page)="table.onPaginationEvent($event)"
+                 [disabled]="CLIENT_SIDE">
+  </mat-paginator>
+</div>
