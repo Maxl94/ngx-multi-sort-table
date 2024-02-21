@@ -83,9 +83,9 @@ export class TableData<T> {
 
         if (tmpPageSize !== this.pageSize) {
             this._sizeObservable.next();
-        } else if ($event.previousPageIndex && $event.previousPageIndex < $event.pageIndex) {
+        } else if ($event.previousPageIndex !== undefined && $event.previousPageIndex < $event.pageIndex) {
             this._nextObservable.next();
-        } else if ($event.previousPageIndex && $event.previousPageIndex > $event.pageIndex) {
+        } else if ($event.previousPageIndex !== undefined && $event.previousPageIndex > $event.pageIndex) {
             this._previousObservable.next();
         }
     }
