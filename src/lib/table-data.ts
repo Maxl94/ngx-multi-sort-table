@@ -152,7 +152,6 @@ export class TableData<T> {
     }
 
     public storeTableSettings(): void {
-        console.log("Store")
         if (this._key) {
             const settings: Settings = new Settings(this._key);
             settings.columns = this._columns.value;
