@@ -1,5 +1,17 @@
 # Changelog
 
+## [17.1.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.0.2...v17.1.0) (2024-02-21)
+
+
+### Features
+
+* use only 6 dots icon as a drag handle for table menu ([9aba71e](https://github.com/Maxl94/ngx-multi-sort-table/commit/9aba71ebb74307b39bbeedb0a7e686758a21153e))
+
+
+### Bug Fixes
+
+* next observable not fired on page index 0 ([#182](https://github.com/Maxl94/ngx-multi-sort-table/issues/182)) ([70c3311](https://github.com/Maxl94/ngx-multi-sort-table/commit/70c33114d6e9385c9633ceb1185dd2a1a52bfb39))
+
 ## [17.0.2](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.0.1...v17.0.2) (2024-02-19)
 
 
