@@ -13,7 +13,7 @@ class UserData {
 export class AppComponent {
   CLIENT_SIDE = true;
   CLOSE_MENU_BEHAVIOR = true;
-  TOGGLE_INDICATOR_ICONS = false;
+  TOGGLE_INDICATOR_ICONS = true;
 
   table: TableData<UserData>;
   @ViewChild(MatMultiSort) sort!: MatMultiSort;
@@ -42,7 +42,7 @@ export class AppComponent {
 
   initData() {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
-    this.table.displayedColumns = ['id', 'name'] // intentionally left out 'progress' to show the bug
+    this.table.displayedColumns = ['id', 'name', 'progress'];
     if (this.CLIENT_SIDE) {
       this.table.updateColumnNames([
         { id: 'id', name: 'Inter ID' },
