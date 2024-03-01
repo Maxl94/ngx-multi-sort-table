@@ -3,10 +3,13 @@ ignore=body-is-missing
 
 contrib=contrib-title-conventional-commits
 
-### Configuring rules ### 
+### Configuring rules ###
 
 [title-max-length]
-line-length=80 
+line-length=80
 
 [title-min-length]
 min-length=5
+
+[body-max-line-length]
+line-length=999

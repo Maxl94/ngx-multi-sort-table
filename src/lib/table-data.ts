@@ -83,9 +83,9 @@ export class TableData<T> {
 
         if (tmpPageSize !== this.pageSize) {
             this._sizeObservable.next();
-        } else if ($event.previousPageIndex && $event.previousPageIndex < $event.pageIndex) {
+        } else if ($event.previousPageIndex !== undefined && $event.previousPageIndex < $event.pageIndex) {
             this._nextObservable.next();
-        } else if ($event.previousPageIndex && $event.previousPageIndex > $event.pageIndex) {
+        } else if ($event.previousPageIndex !== undefined && $event.previousPageIndex > $event.pageIndex) {
             this._previousObservable.next();
         }
     }
@@ -152,7 +152,6 @@ export class TableData<T> {
     }
 
     public storeTableSettings(): void {
-        console.log("Store")
         if (this._key) {
             const settings: Settings = new Settings(this._key);
             settings.columns = this._columns.value;
