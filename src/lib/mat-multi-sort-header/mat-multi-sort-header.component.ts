@@ -5,7 +5,6 @@ import {
   Optional,
   Inject,
   HostListener,
-  HostBinding,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ElementRef
@@ -70,15 +69,6 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
 
   _updateArrowDirection() {
     this._arrowDirection = this.getSortDirection();
-  }
-
-  @HostBinding('attr.aria-sort')
-  _getAriaSortAttribute() {
-    if (!this._isSorted()) {
-      return 'none';
-    }
-
-    return this.getSortDirection() === 'asc' ? 'ascending' : 'descending';
   }
 
   _renderArrow() {
