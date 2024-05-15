@@ -1,5 +1,12 @@
 # Changelog
 
+## [17.1.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.1.0...v17.1.1) (2024-05-15)
+
+
+### Bug Fixes
+
+* visibility of displayed columns after loading settings from local storage ([#192](https://github.com/Maxl94/ngx-multi-sort-table/issues/192)) ([fff269e](https://github.com/Maxl94/ngx-multi-sort-table/commit/fff269ea46adee41705e8236a060d9f68b3cdd79))
+
 ## [17.1.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.0.2...v17.1.0) (2024-02-21)
 
 
