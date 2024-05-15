@@ -127,8 +127,8 @@ export class TableData<T> {
             } else {
                 console.warn("Stored tableSettings are invalid. Using default");
             }
-            this.displayedColumns = this.columns.filter(c => c.isActive).map(c => c.id);
         }
+        this.displayedColumns = this.columns.filter(c => c.isActive).map(c => c.id);
     }
 
     private _clientSideSort() {

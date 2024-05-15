@@ -42,7 +42,6 @@ export class AppComponent {
 
   initData() {
     this.table.dataSource = new MatMultiSortTableDataSource(this.sort, this.CLIENT_SIDE);
-    this.table.displayedColumns = ['id', 'name', 'progress'];
     if (this.CLIENT_SIDE) {
       this.table.updateColumnNames([
         { id: 'id', name: 'Inter ID' },
