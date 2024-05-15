@@ -7,7 +7,7 @@ import { PageEvent } from '@angular/material/paginator';
 export class TableData<T> {
     private _dataSource!: MatMultiSortTableDataSource<T>;
     private readonly _columns: BehaviorSubject<{ id: string, name: string, isActive?: boolean }[]>;
-    private _displayedColumns: string[];
+    private _displayedColumns: string[] = [];
     pageSize!: number;
     pageIndex!: number;
     private _pageSizeOptions: number[];
@@ -35,7 +35,6 @@ export class TableData<T> {
             localStorageKey?: string
         }) {
         this._columns = new BehaviorSubject(columns.map(c => { if (c.isActive === undefined) { c.isActive = true; } return c; }));
-        this._displayedColumns = this._columns.value.filter(c => c.isActive).map(c => c.id);
 
         if (options) {
             if (options.pageSizeOptions && options.pageSizeOptions.length < 1) {
@@ -129,6 +128,7 @@ export class TableData<T> {
                 console.warn("Stored tableSettings are invalid. Using default");
             }
         }
+        this.displayedColumns = this.columns.filter(c => c.isActive).map(c => c.id);
     }
 
     private _clientSideSort() {
@@ -172,9 +172,7 @@ export class TableData<T> {
     public set displayedColumns(displayedColumns: string[]) {
         this._displayedColumns = displayedColumns;
         this._columns.next(this._columns.value.map(c => {
-            if (this._displayedColumns.includes(c.id)) {
-                c.isActive = true;
-            } else c.isActive = false;
+            c.isActive = this._displayedColumns.includes(c.id);
             return c;
         }));
     }

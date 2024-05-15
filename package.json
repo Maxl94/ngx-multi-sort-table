@@ -3,6 +3,9 @@
   "version": "17.1.0",
   "description": "An extension for the angular material table to support multi-sorting.",
   "author": "Maximilian Balluff",
+  "scripts": {
+    "demo": "ng build && ng serve demo"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Maxl94/ngx-multi-sort-table"
