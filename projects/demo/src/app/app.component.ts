@@ -27,7 +27,11 @@ export class AppComponent {
         { id: 'id', name: 'ID' },
         { id: 'name', name: 'Name' },
         { id: 'progress', name: 'Progess' }
-      ], { localStorageKey: 'settings' }
+      ], {
+        localStorageKey: 'settings',
+        defaultSortDirs: ['asc', 'desc'],
+        defaultSortParams: ['id', 'name']
+      }
     );
   }
 

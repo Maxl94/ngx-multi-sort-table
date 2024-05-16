@@ -43,7 +43,7 @@ export class TableData<T> {
 
             if (options.defaultSortParams) {
                 options.defaultSortParams.map(s => {
-                    if (!this._displayedColumns.includes(s)) {
+                    if (this._columns.value.find(column => column.id === s) === undefined) {
                         throw Error(`Provided sort parameter "${s}" is not a column.`);
                     }
                 });
