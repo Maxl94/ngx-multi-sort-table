@@ -1,5 +1,12 @@
 # Changelog
 
+## [17.1.2](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.1.1...v17.1.2) (2024-05-16)
+
+
+### Bug Fixes
+
+* table not loading when sort params are provided ([#194](https://github.com/Maxl94/ngx-multi-sort-table/issues/194)) ([fc07c11](https://github.com/Maxl94/ngx-multi-sort-table/commit/fc07c111322ee58de0dcabbffd92db830a32010e))
+
 ## [17.1.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.1.0...v17.1.1) (2024-05-15)
 
 
