@@ -1,5 +1,16 @@
 # Changelog
 
+## [18.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.1.2...v18.0.0) (2024-05-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade to Angular 18 and Material 18 ([#197](https://github.com/Maxl94/ngx-multi-sort-table/issues/197))
+
+### Features
+
+* Upgrade to Angular 18 and Material 18 ([#197](https://github.com/Maxl94/ngx-multi-sort-table/issues/197)) ([0c85639](https://github.com/Maxl94/ngx-multi-sort-table/commit/0c856394359812bc50398830fb65bb01237d33c6))
+
 ## [17.1.2](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.1.1...v17.1.2) (2024-05-16)
 
 
