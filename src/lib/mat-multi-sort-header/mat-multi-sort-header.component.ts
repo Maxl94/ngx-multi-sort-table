@@ -51,16 +51,20 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
     super(_intl, changeDetectorRef, _sort, _columnDef, _focusMonitor, _elementRef);
   }
 
+  _disableViewStateAnimation = false;
+
   @HostListener('mouseenter', ['true'])
   @HostListener('longpress', ['true'])
   @HostListener('mouseleave', ['false'])
   __setIndicatorHintVisible(visible: string | boolean) {
-    super._setIndicatorHintVisible(visible as boolean);
+    // TODO
+    // super._setIndicatorHintVisible(visible as boolean);
   }
 
   _handleClick() {
     this._sort.direction = this.getSortDirection();
-    super._handleClick();
+    //TODO
+    // super._handleClick();
   }
 
   _isSorted() {
@@ -72,7 +76,8 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
   }
 
   _updateArrowDirection() {
-    this._arrowDirection = this.getSortDirection();
+    // TODO
+    // this._arrowDirection = this.getSortDirection();
   }
 
   _renderArrow() {
@@ -85,4 +90,11 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
     return this._isSorted() ? direction : (this.start || this._sort.start);
   }
 
+  _getArrowViewState() {
+    return undefined;
+  }
+
+  _getArrowDirectionState() {
+    return undefined;
+  }
 }

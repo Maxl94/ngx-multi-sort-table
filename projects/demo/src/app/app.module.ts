@@ -15,6 +15,10 @@ import {FormsModule} from '@angular/forms';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  MatMultiSortTableSettingsComponent
+} from '../../../../src/lib/mat-multi-sort-table-settings/mat-multi-sort-table-settings.component';
+import {MatMultiSortHeaderComponent} from '../../../../src/lib/mat-multi-sort-header/mat-multi-sort-header.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatDividerModule,
     MatCheckboxModule,
     FormsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMultiSortTableSettingsComponent,
+    MatMultiSortHeaderComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
