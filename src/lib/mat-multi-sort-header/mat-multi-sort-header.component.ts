@@ -12,6 +12,7 @@ import {
 import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
 import { MatMultiSort } from '../mat-multi-sort.directive';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import {NgIf} from '@angular/common';
 
 /** Column definition associated with a `MatSortHeader`. */
 interface C2MatSortHeaderColumnDef {
@@ -25,6 +26,9 @@ interface C2MatSortHeaderColumnDef {
   styleUrls: ['./mat-multi-sort-header.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    NgIf
+  ],
   animations: [
     matSortAnimations.indicator,
     matSortAnimations.leftPointer,

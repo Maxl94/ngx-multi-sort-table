@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MatMultiSortHeaderComponent } from './mat-multi-sort-header.component';
 
@@ -6,12 +6,12 @@ describe('MatMultiSortHeaderComponent', () => {
   let component: MatMultiSortHeaderComponent;
   let fixture: ComponentFixture<MatMultiSortHeaderComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ MatMultiSortHeaderComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MatMultiSortHeaderComponent);

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { MatMultiSortTableSettingsComponent } from './mat-multi-sort-table-settings.component';
 
@@ -6,12 +6,12 @@ describe('MatMultiSortTableComponent', () => {
   let component: MatMultiSortTableSettingsComponent;
   let fixture: ComponentFixture<MatMultiSortTableSettingsComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ MatMultiSortTableSettingsComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MatMultiSortTableSettingsComponent);
