@@ -3,8 +3,8 @@ import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from 
 import { TableData } from '../table-data';
 import {BlockScrollStrategy, Overlay, OverlayRef, ScrollStrategy, ViewportRuler} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
-import {MatCheckbox, MatCheckboxModule} from '@angular/material/checkbox';
-import {MatChip} from '@angular/material/chips';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipRow, MatChipSet} from '@angular/material/chips';
 import {NgForOf, NgIf, NgTemplateOutlet} from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
@@ -15,7 +15,7 @@ import {FormsModule} from '@angular/forms';
     selector: 'mat-multi-sort-table-settings',
     templateUrl: './mat-multi-sort-table-settings.component.html',
     styleUrls: ['./mat-multi-sort-table-settings.component.scss'],
-  imports: [MatCheckboxModule, CdkDropList, MatChip, NgTemplateOutlet, MatTooltip, MatIcon, NgForOf, CdkDrag, NgIf, CdkDragHandle, FormsModule]
+  imports: [MatCheckboxModule, CdkDropList, NgTemplateOutlet, MatTooltip, MatIcon, NgForOf, CdkDrag, NgIf, CdkDragHandle, FormsModule, MatChipSet, MatChipRow]
 })
 export class MatMultiSortTableSettingsComponent implements OnInit {
   _tableData!: TableData<any>;

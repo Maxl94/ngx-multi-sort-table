@@ -1,9 +1,10 @@
 <div class="table-settings">
     <div class="table-settings-sort">
-        <mat-chip-list class="drag-chip-list" cdkDropList cdkDropListOrientation='horizontal'
+        <mat-chip-set class="drag-chip-list" cdkDropList cdkDropListOrientation='horizontal'
             (cdkDropListDropped)="dropSort($event)">
-            <mat-chip class="drag-chip" *ngFor="let item of sort" cdkDrag (removed)="remove(item.id)"
+            <mat-chip-row class="drag-chip" *ngFor="let item of sort" cdkDrag (removed)="remove(item.id)"
                 (click)="updateDirection(item.id)">
+              <div class="chip-content">
                 <ng-container *ngIf="sortIndicatorRef"
                               [ngTemplateOutlet]="sortIndicatorRef"
                               [ngTemplateOutletContext]="{direction:item.direction, columnName: item.name }">
@@ -14,9 +15,10 @@
                         {{item.direction}}
                     </div>
                 </div>
-                <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
-        </mat-chip-list>
+                <mat-icon class="mat-mdc-chip-remove mat-mdc-chip-trailing-icon" (click)="remove(item.id)">cancel</mat-icon>
+              </div>
+            </mat-chip-row>
+        </mat-chip-set>
     </div>
     <div style="flex: 1 1 auto;"></div>
     <div #settingsMenu (click)="openDialog()" class="table-settings-menu">
