@@ -2,6 +2,7 @@ name: Git Lint
 on:
   pull_request:
     branches: [master]
+    types: [edited, opened, reopened]
 
 jobs:
   validate-commits:
