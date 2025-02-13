@@ -7,10 +7,7 @@ describe('MatMultiSortHeaderComponent', () => {
   let fixture: ComponentFixture<MatMultiSortHeaderComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ MatMultiSortHeaderComponent ]
-    })
-    .compileComponents();
+    await TestBed.configureTestingModule({}).compileComponents();
   });
 
   beforeEach(() => {

@@ -7,9 +7,7 @@ describe('MatMultiSortTableComponent', () => {
   let fixture: ComponentFixture<MatMultiSortTableSettingsComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ MatMultiSortTableSettingsComponent ]
-    })
+    await TestBed.configureTestingModule({})
     .compileComponents();
   });
 

@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Optional,
   Inject,
-  HostListener,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ElementRef
@@ -54,31 +53,12 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
 
   _disableViewStateAnimation = false;
 
-  @HostListener('mouseenter', ['true'])
-  @HostListener('longpress', ['true'])
-  @HostListener('mouseleave', ['false'])
-  __setIndicatorHintVisible(visible: string | boolean) {
-    // TODO
-    // super._setIndicatorHintVisible(visible as boolean);
-  }
-
-  _handleClick() {
-    this._sort.direction = this.getSortDirection();
-    //TODO
-    // super._handleClick();
-  }
-
   _isSorted() {
     return this._sort.actives.findIndex(activeId => activeId === this.id) > -1;
   }
 
   _sortId() {
     return this._sort.actives.findIndex(activeId => activeId === this.id) + 1;
-  }
-
-  _updateArrowDirection() {
-    // TODO
-    // this._arrowDirection = this.getSortDirection();
   }
 
   _renderArrow() {
