@@ -19,4 +19,4 @@ jobs:
 
       - name: Lint PR Commit Messages
         if: github.event_name == 'pull_request'
-        run: "${{ github.event.pull_request.title }} | gitlint"
+        run: echo "${{ github.event.pull_request.title }}" | gitlint
