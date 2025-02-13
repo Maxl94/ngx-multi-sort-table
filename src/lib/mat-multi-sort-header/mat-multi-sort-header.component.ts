@@ -9,7 +9,7 @@ import {
   ChangeDetectionStrategy,
   ElementRef
 } from '@angular/core';
-import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
+import {MatSort, matSortAnimations, MatSortHeader, MatSortHeaderIntl} from '@angular/material/sort';
 import { MatMultiSort } from '../mat-multi-sort.directive';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import {NgIf} from '@angular/common';
@@ -36,7 +36,8 @@ interface C2MatSortHeaderColumnDef {
     matSortAnimations.arrowOpacity,
     matSortAnimations.arrowPosition,
     matSortAnimations.allowChildren
-  ]
+  ],
+  providers: [{provide: MatSort, useExisting: MatMultiSort}],
 })
 export class MatMultiSortHeaderComponent extends MatSortHeader {
   start = 'asc' as 'asc' | 'desc';
