@@ -2,6 +2,7 @@ name: Git Lint
 on:
   pull_request:
     branches: [master]
+    types: [edited, opened, synchronize, reopened]
 
 jobs:
   validate-commits:
@@ -19,4 +20,4 @@ jobs:
 
       - name: Lint PR Commit Messages
         if: github.event_name == 'pull_request'
-        run: gitlint --commits "${{ github.event.pull_request.base.sha }}..HEAD"
+        run: echo "${{ github.event.pull_request.title }}" | gitlint
