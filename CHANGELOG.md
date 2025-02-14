@@ -1,5 +1,16 @@
 # Changelog
 
+## [19.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v18.0.0...v19.0.0) (2025-02-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* Upgrade to Angular 19 and Material 19
+
+### Features
+
+* Upgrade to Angular 19 and Material 19 ([dbd30b9](https://github.com/Maxl94/ngx-multi-sort-table/commit/dbd30b94d56a584249a25135d0de4e054f050dd5))
+
 ## [18.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v17.1.2...v18.0.0) (2024-05-28)
 
 
