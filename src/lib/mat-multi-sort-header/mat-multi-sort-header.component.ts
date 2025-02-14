@@ -4,14 +4,14 @@ import {
   ChangeDetectorRef,
   Optional,
   Inject,
-  HostListener,
   ViewEncapsulation,
   ChangeDetectionStrategy,
   ElementRef
 } from '@angular/core';
-import { matSortAnimations, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
+import {MatSort, matSortAnimations, MatSortHeader, MatSortHeaderIntl} from '@angular/material/sort';
 import { MatMultiSort } from '../mat-multi-sort.directive';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import {NgIf} from '@angular/common';
 
 /** Column definition associated with a `MatSortHeader`. */
 interface C2MatSortHeaderColumnDef {
@@ -25,6 +25,9 @@ interface C2MatSortHeaderColumnDef {
   styleUrls: ['./mat-multi-sort-header.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    NgIf
+  ],
   animations: [
     matSortAnimations.indicator,
     matSortAnimations.leftPointer,
@@ -32,7 +35,8 @@ interface C2MatSortHeaderColumnDef {
     matSortAnimations.arrowOpacity,
     matSortAnimations.arrowPosition,
     matSortAnimations.allowChildren
-  ]
+  ],
+  providers: [{provide: MatSort, useExisting: MatMultiSort}],
 })
 export class MatMultiSortHeaderComponent extends MatSortHeader {
   start = 'asc' as 'asc' | 'desc';
@@ -47,17 +51,7 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
     super(_intl, changeDetectorRef, _sort, _columnDef, _focusMonitor, _elementRef);
   }
 
-  @HostListener('mouseenter', ['true'])
-  @HostListener('longpress', ['true'])
-  @HostListener('mouseleave', ['false'])
-  __setIndicatorHintVisible(visible: string | boolean) {
-    super._setIndicatorHintVisible(visible as boolean);
-  }
-
-  _handleClick() {
-    this._sort.direction = this.getSortDirection();
-    super._handleClick();
-  }
+  _disableViewStateAnimation = false;
 
   _isSorted() {
     return this._sort.actives.findIndex(activeId => activeId === this.id) > -1;
@@ -65,10 +59,6 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
 
   _sortId() {
     return this._sort.actives.findIndex(activeId => activeId === this.id) + 1;
-  }
-
-  _updateArrowDirection() {
-    this._arrowDirection = this.getSortDirection();
   }
 
   _renderArrow() {
@@ -81,4 +71,11 @@ export class MatMultiSortHeaderComponent extends MatSortHeader {
     return this._isSorted() ? direction : (this.start || this._sort.start);
   }
 
+  _getArrowViewState() {
+    return undefined;
+  }
+
+  _getArrowDirectionState() {
+    return undefined;
+  }
 }

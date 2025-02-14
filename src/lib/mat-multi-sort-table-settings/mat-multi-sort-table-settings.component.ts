@@ -1,14 +1,21 @@
 import {Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
 import {BlockScrollStrategy, Overlay, OverlayRef, ScrollStrategy, ViewportRuler} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipRow, MatChipSet} from '@angular/material/chips';
+import {NgForOf, NgIf, NgTemplateOutlet} from '@angular/common';
+import {MatTooltip} from '@angular/material/tooltip';
+import {MatIcon} from '@angular/material/icon';
+import {FormsModule} from '@angular/forms';
 
 
 @Component({
-  selector: 'mat-multi-sort-table-settings',
-  templateUrl: './mat-multi-sort-table-settings.component.html',
-  styleUrls: ['./mat-multi-sort-table-settings.component.scss']
+    selector: 'mat-multi-sort-table-settings',
+    templateUrl: './mat-multi-sort-table-settings.component.html',
+    styleUrls: ['./mat-multi-sort-table-settings.component.scss'],
+  imports: [MatCheckboxModule, CdkDropList, NgTemplateOutlet, MatTooltip, MatIcon, NgForOf, CdkDrag, NgIf, CdkDragHandle, FormsModule, MatChipSet, MatChipRow]
 })
 export class MatMultiSortTableSettingsComponent implements OnInit {
   _tableData!: TableData<any>;

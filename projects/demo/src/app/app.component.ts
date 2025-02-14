@@ -1,6 +1,28 @@
 import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
-import {MatMultiSort, MatMultiSortTableDataSource, TableData} from 'mat-multi-sort';
+import {
+  MatMultiSort,
+  MatMultiSortHeaderComponent,
+  MatMultiSortTableDataSource,
+  MatMultiSortTableSettingsComponent,
+  TableData
+} from 'mat-multi-sort';
 import {DummyService} from './dummy.service';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {FormsModule} from '@angular/forms';
+import {MatButton} from '@angular/material/button';
+import {MatTooltip} from '@angular/material/tooltip';
+import {MatIcon} from '@angular/material/icon';
+import {NgForOf, NgIf} from '@angular/common';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable
+} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 class UserData {
 }
@@ -8,6 +30,29 @@ class UserData {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  imports: [
+    MatCheckbox,
+    FormsModule,
+    MatMultiSortTableSettingsComponent,
+    MatButton,
+    MatTooltip,
+    MatIcon,
+    NgIf,
+    MatTable,
+    MatMultiSort,
+    MatColumnDef,
+    NgForOf,
+    MatHeaderCell,
+    MatMultiSortHeaderComponent,
+    MatHeaderCellDef,
+    MatCell,
+    MatCellDef,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow,
+    MatRowDef,
+    MatPaginator
+  ],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {

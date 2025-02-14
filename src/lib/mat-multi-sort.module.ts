@@ -17,16 +17,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [
-    MatMultiSortHeaderComponent,
-    MatMultiSort,
-    MatMultiSortTableSettingsComponent,
-  ],
-  exports: [
-    MatMultiSortHeaderComponent,
-    MatMultiSort,
-    MatMultiSortTableSettingsComponent
-  ],
+  declarations: [],
+  exports: [],
   imports: [
     CommonModule,
     MatCommonModule,
@@ -39,7 +31,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     MatChipsModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMultiSort,
+    MatMultiSortHeaderComponent,
+    MatMultiSortTableSettingsComponent
   ]
 })
 export class MatMultiSortModule {

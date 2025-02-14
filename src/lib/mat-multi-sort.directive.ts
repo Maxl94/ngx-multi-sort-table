@@ -2,8 +2,8 @@ import { Directive, OnChanges, OnInit } from '@angular/core';
 import { MatSort, MatSortable, SortDirection } from '@angular/material/sort';
 
 @Directive({
-  selector: '[matMultiSort]',
-  exportAs: 'matMultiSort'
+    selector: '[matMultiSort]',
+    exportAs: 'matMultiSort'
 })
 export class MatMultiSort extends MatSort implements OnInit, OnChanges {
 
