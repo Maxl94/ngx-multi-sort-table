@@ -146,7 +146,7 @@ export class TableData<T> {
 
         // check if columns are the same
         for (const column of settings.columns) {
-            const match = this._columns.value.find(c => c.id == column.id);
+            const match = this._columns.value.find(c => c.id === column.id);
             if (match === undefined) {
                 return false;
             }
