@@ -1,5 +1,12 @@
 # Changelog
 
+## [19.1.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.1.0...v19.1.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* Update column names on initialization ([#215](https://github.com/Maxl94/ngx-multi-sort-table/issues/215)) ([586b679](https://github.com/Maxl94/ngx-multi-sort-table/commit/586b6795c48958937fef8bdcfce89f75be81ae7a))
+
 ## [19.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v18.0.0...v19.0.0) (2025-02-14)
 
 
