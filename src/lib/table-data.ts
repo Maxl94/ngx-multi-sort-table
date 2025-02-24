@@ -127,7 +127,6 @@ export class TableData<T> {
                 });
                 this._sortDirs = settings.sortDirs;
                 this._sortParams = settings.sortParams;
-                console.log('VALID: '+this.columns.map(c => c.name).join(', '));
             } else {
                 console.warn("Stored tableSettings are invalid. Using default");
             }
