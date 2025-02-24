@@ -121,9 +121,13 @@ export class TableData<T> {
             const settings = new Settings(this._key);
             settings.load();
             if (this._isLocalStorageSettingsValid(settings)) {
-                this.columns = settings.columns;
+                // load column configuration from localstorage and update the name
+                this.columns = settings.columns.map(storedColumn => {
+                  return {...storedColumn, name: this.columns.find(column => column.id === storedColumn.id)?.name ?? storedColumn.name};
+                });
                 this._sortDirs = settings.sortDirs;
                 this._sortParams = settings.sortParams;
+                console.log('VALID: '+this.columns.map(c => c.name).join(', '));
             } else {
                 console.warn("Stored tableSettings are invalid. Using default");
             }
@@ -142,8 +146,8 @@ export class TableData<T> {
         }
 
         // check if columns are the same
-        for (var column of settings.columns) {
-            var match = this._columns.value.filter(c => c.id == column.id && c.name == column.name);
+        for (const column of settings.columns) {
+            const match = this._columns.value.find(c => c.id == column.id);
             if (match === undefined) {
                 return false;
             }
