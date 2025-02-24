@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: [master]
     types: [edited, opened, synchronize, reopened]
+  workflow_dispatch: # enables "Run workflow" button
 
 jobs:
   validate-commits:
