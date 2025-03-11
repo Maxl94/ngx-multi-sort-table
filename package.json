@@ -9,7 +9,8 @@
     }
   ],
   "scripts": {
-    "demo": "ng build && ng serve demo"
+    "demo": "ng lint && ng build && ng serve demo",
+    "lint": "ng lint"
   },
   "repository": {
     "type": "git",
@@ -41,16 +42,19 @@
     "@angular-devkit/build-angular": "^19.1.6",
     "@angular/cli": "^19.1.5",
     "@angular/compiler-cli": "^19.1.5",
-    "@angular/platform-browser-dynamic": "^19.1.5",
-    "@angular/platform-browser": "^19.1.5",
     "@angular/forms": "^19.1.5",
-    "ng-packagr": "^19.1.2",
-    "jasmine-core": "^5.5.0",
+    "@angular/platform-browser": "^19.1.5",
+    "@angular/platform-browser-dynamic": "^19.1.5",
     "@types/jasmine": "^5.1.4",
+    "angular-eslint": "19.2.1",
+    "eslint": "^9.22.0",
+    "jasmine-core": "^5.5.0",
     "karma": "^6.4.4",
+    "karma-chrome-launcher": "^3.2.0",
     "karma-coverage": "^2.2.1",
     "karma-jasmine": "^5.1.0",
-    "karma-chrome-launcher": "^3.2.0",
-    "karma-jasmine-html-reporter": "^2.1.0"
+    "karma-jasmine-html-reporter": "^2.1.0",
+    "ng-packagr": "^19.1.2",
+    "typescript-eslint": "8.26.0"
   }
 }

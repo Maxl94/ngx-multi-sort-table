@@ -8,13 +8,13 @@ export class TableData<T> {
     private _dataSource!: MatMultiSortTableDataSource<T>;
     private readonly _columns: BehaviorSubject<{ id: string, name: string, isActive?: boolean }[]>;
     private _displayedColumns: string[] = [];
-    pageSize!: number;
-    pageIndex!: number;
+    pageSize = 0;
+    pageIndex = 0;
     private _pageSizeOptions: number[];
-    private _totalElements!: number;
+    private _totalElements = 0
     private _sortParams: string[];
     private _sortDirs: string[];
-    private _key!: string;
+    private _key = '';
 
     private _nextObservable: Subject<void> = new Subject<void>();
     private _previousObservable: Subject<void> = new Subject<void>();
@@ -58,7 +58,7 @@ export class TableData<T> {
 
             this._totalElements = options.totalElements || 0;
             this._pageSizeOptions = options.pageSizeOptions || [10, 20, 50, 100];
-            this._key = options.localStorageKey!;
+            this._key = options.localStorageKey ?? '';
         } else {
             this._pageSizeOptions = [10, 20, 50, 100];
             this._sortParams = [];
@@ -96,7 +96,7 @@ export class TableData<T> {
         this._sortHeadersObservable.next(temp);
         this._clientSideSort();
         this._sortObservable.next();
-        this.storeTableSettings();1
+        this.storeTableSettings();
     }
 
     // this fixes an infine loop of rerendering
@@ -211,24 +211,24 @@ export class TableData<T> {
     }
 
     public updateColumnNames(v: { id: string, name: string }[]) {
-        const dict: { [key: string]: any } = {};
+        const dict: { [key: string]: string } = {};
         v.forEach(c => dict[c.id] = c.name);
         this._columns.next(this._columns.value.map(c => { c.name = dict[c.id] || c.name; return c; }));
     }
 
-    public get nextObservable(): Subject<any> {
+    public get nextObservable() {
         return this._nextObservable;
     }
 
-    public get previousObservable(): Subject<any> {
+    public get previousObservable() {
         return this._previousObservable;
     }
 
-    public get sizeObservable(): Subject<any> {
+    public get sizeObservable() {
         return this._sizeObservable;
     }
 
-    public get sortObservable(): Subject<any> {
+    public get sortObservable() {
         return this._sortObservable;
     }
 
