@@ -22,3 +22,18 @@ jobs:
       - name: Lint PR Commit Messages
         if: github.event_name == 'pull_request'
         run: echo "${{ github.event.pull_request.title }}" | gitlint
+
+  validate-code:
+    name: Validate Code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code
+        run: |
+          npm install
+          npm run lint

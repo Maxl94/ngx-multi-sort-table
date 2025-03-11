@@ -18,7 +18,7 @@ import {FormsModule} from '@angular/forms';
   imports: [MatCheckboxModule, CdkDropList, NgTemplateOutlet, MatTooltip, MatIcon, NgForOf, CdkDrag, NgIf, CdkDragHandle, FormsModule, MatChipSet, MatChipRow]
 })
 export class MatMultiSortTableSettingsComponent implements OnInit {
-  _tableData!: TableData<any>;
+  _tableData!: TableData<unknown>;
   sort: { id: string, name: string, direction: string }[] = [];
   overlayRef!: OverlayRef;
 
@@ -26,7 +26,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
 
   @ViewChild('settingsMenu') buttonRef!: ElementRef;
 
-  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef!: TemplateRef<any>;
+  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef!: TemplateRef<unknown>;
 
   @Input()
   sortToolTip: string = '';
@@ -38,7 +38,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   scrollStrategy: ScrollStrategy = new BlockScrollStrategy(this.viewportRuler, document);
 
   @Input()
-  set tableData(tableData: TableData<any>) {
+  set tableData(tableData: TableData<unknown>) {
     this._tableData = tableData;
   }
 
@@ -112,7 +112,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
     for (let i = 0; i < this._tableData.sortParams.length; i++) {
       sorting.push({
         id: this._tableData.sortParams[i],
-        name: this._tableData.columns.find(c => c.id === this._tableData.sortParams[i])!.name,
+        name: this._tableData.columns.find(c => c.id === this._tableData.sortParams[i])?.name ?? '',
         direction: this._tableData.sortDirs[i]
       });
     }
