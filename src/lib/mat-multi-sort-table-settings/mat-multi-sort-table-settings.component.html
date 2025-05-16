@@ -1,7 +1,7 @@
 <div class="table-settings">
     <div class="table-settings-sort">
         <mat-chip-set class="drag-chip-list" cdkDropList cdkDropListOrientation='horizontal'
-            (cdkDropListDropped)="dropSort($event)">
+            (cdkDropListDropped)="dropSort($event)" [disabled]="disableSortIndicators">
             <mat-chip-row class="drag-chip" *ngFor="let item of sort" cdkDrag (removed)="remove(item.id)"
                 (click)="updateDirection(item.id)">
               <div class="chip-content">
