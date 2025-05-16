@@ -13,11 +13,14 @@
 .chip-content {
   display: flex;
   align-items: center;
+
+  mat-icon {
+    opacity: 0.6;
+  }
 }
 .sorting {
   display: inline-block;
   margin: 0 6px;
-  color: #757575;
 }
 
 .sorting:hover {
@@ -46,9 +49,6 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.column-overlay {
-
-}
 .column-list {
   max-height: 70vh;
   overflow: auto;
