@@ -42,6 +42,8 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
     this._tableData = tableData;
   }
 
+  @Input()
+  disableSortIndicators = false;
 
   constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef, private viewportRuler: ViewportRuler) { }
 
