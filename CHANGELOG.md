@@ -1,5 +1,18 @@
 # Changelog
 
+## [19.2.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.1.1...v19.2.0) (2025-05-16)
+
+
+### Features
+
+* add missing Angular animations module and improve localStorage handling ([#224](https://github.com/Maxl94/ngx-multi-sort-table/issues/224)) ([87f80b1](https://github.com/Maxl94/ngx-multi-sort-table/commit/87f80b11d15c97b31683dd27549709922da70a38))
+* add option to disable sort indicators in multi-sort table settings ([#227](https://github.com/Maxl94/ngx-multi-sort-table/issues/227)) ([2c03735](https://github.com/Maxl94/ngx-multi-sort-table/commit/2c03735e0811eb884fc119ce3b1521850c69064f))
+
+
+### Bug Fixes
+
+* handle update sorting and cancel events correctly ([#228](https://github.com/Maxl94/ngx-multi-sort-table/issues/228)) ([7a23235](https://github.com/Maxl94/ngx-multi-sort-table/commit/7a23235dc5e268f204e1b70ece885a5020ac2b80))
+
 ## [19.1.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.1.0...v19.1.1) (2025-02-24)
 
 
