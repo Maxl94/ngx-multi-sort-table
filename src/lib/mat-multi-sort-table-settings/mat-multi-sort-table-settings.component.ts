@@ -17,8 +17,8 @@ import {FormsModule} from '@angular/forms';
     styleUrls: ['./mat-multi-sort-table-settings.component.scss'],
   imports: [MatCheckboxModule, CdkDropList, NgTemplateOutlet, MatTooltip, MatIcon, NgForOf, CdkDrag, NgIf, CdkDragHandle, FormsModule, MatChipSet, MatChipRow]
 })
-export class MatMultiSortTableSettingsComponent implements OnInit {
-  _tableData!: TableData<unknown>;
+export class MatMultiSortTableSettingsComponent<T> implements OnInit {
+  _tableData!: TableData<T>;
   sort: { id: string, name: string, direction: string }[] = [];
   overlayRef!: OverlayRef;
 
@@ -26,7 +26,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
 
   @ViewChild('settingsMenu') buttonRef!: ElementRef;
 
-  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef!: TemplateRef<unknown>;
+  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef!: TemplateRef<T>;
 
   @Input()
   sortToolTip: string = '';
@@ -38,7 +38,7 @@ export class MatMultiSortTableSettingsComponent implements OnInit {
   scrollStrategy: ScrollStrategy = new BlockScrollStrategy(this.viewportRuler, document);
 
   @Input()
-  set tableData(tableData: TableData<unknown>) {
+  set tableData(tableData: TableData<T>) {
     this._tableData = tableData;
   }
 
