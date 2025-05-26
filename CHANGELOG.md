@@ -1,5 +1,12 @@
 # Changelog
 
+## [19.2.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.2.0...v19.2.1) (2025-05-26)
+
+
+### Bug Fixes
+
+* make MatMultiSortTableSettingsComponent generic for improved type safety ([#229](https://github.com/Maxl94/ngx-multi-sort-table/issues/229)) ([2f35469](https://github.com/Maxl94/ngx-multi-sort-table/commit/2f35469e15cef3403e4ef07aad11ce9fa6c553fd))
+
 ## [19.2.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.1.1...v19.2.0) (2025-05-16)
 
 
