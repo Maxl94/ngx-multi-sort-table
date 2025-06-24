@@ -1,25 +1,28 @@
 <div class="mat-sort-header-container"
-     [class.mat-sort-header-sorted]="_isSorted()"
-     [class.mat-sort-header-position-before]="arrowPosition === 'before'"
-     [class.mat-sort-header-ascending]="getSortDirection() === 'asc'"
-     [class.mat-sort-header-deascending]="getSortDirection() === 'desc'">
+  [class.mat-sort-header-sorted]="_isSorted()"
+  [class.mat-sort-header-position-before]="arrowPosition === 'before'"
+  [class.mat-sort-header-ascending]="getSortDirection() === 'asc'"
+  [class.mat-sort-header-deascending]="getSortDirection() === 'desc'">
 
   <div class="mat-sort-header-content">
     <ng-content></ng-content>
   </div>
   <!-- Disable animations while a current animation is running -->
-  <div class="mat-sort-header-arrow"
-       *ngIf="_renderArrow() && _isSorted()"
-       [@arrowOpacity]="_getArrowViewState()"
-       [@arrowPosition]="_getArrowViewState()"
-       [@allowChildren]="_getArrowDirectionState()"
-       (@arrowPosition.start)="_disableViewStateAnimation = true"
-       (@arrowPosition.done)="_disableViewStateAnimation = false">
-    <svg [class.asc]="getSortDirection() === 'asc'"
-         [class.desc]="getSortDirection() === 'desc'"
-      viewBox="0 -960 960 960" focusable="false" aria-hidden="true">
-      <path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"></path>
-    </svg>
-  </div>
-  <div *ngIf="_isSorted()">{{_sortId()}}</div>
+  @if (_renderArrow() && _isSorted()) {
+    <div class="mat-sort-header-arrow"
+      [@arrowOpacity]="_getArrowViewState()"
+      [@arrowPosition]="_getArrowViewState()"
+      [@allowChildren]="_getArrowDirectionState()"
+      (@arrowPosition.start)="_disableViewStateAnimation = true"
+      (@arrowPosition.done)="_disableViewStateAnimation = false">
+      <svg [class.asc]="getSortDirection() === 'asc'"
+        [class.desc]="getSortDirection() === 'desc'"
+        viewBox="0 -960 960 960" focusable="false" aria-hidden="true">
+        <path d="M440-240v-368L296-464l-56-56 240-240 240 240-56 56-144-144v368h-80Z"></path>
+      </svg>
+    </div>
+  }
+  @if (_isSorted()) {
+    <div>{{_sortId()}}</div>
+  }
 </div>

@@ -9,7 +9,7 @@
     "declaration": false,
     "module": "es2020",
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "target": "ES2022",
     "typeRoots": [

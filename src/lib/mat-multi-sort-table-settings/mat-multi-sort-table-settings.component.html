@@ -1,36 +1,43 @@
 <div class="table-settings">
-    <div class="table-settings-sort">
-        <mat-chip-set class="drag-chip-list" cdkDropList cdkDropListOrientation='horizontal'
-            (cdkDropListDropped)="dropSort($event)" [disabled]="disableSortIndicators">
-            <mat-chip-row class="drag-chip" *ngFor="let item of sort" cdkDrag (removed)="remove(item.id)"
-                (click)="updateDirection(item.id)">
-              <div class="chip-content">
-                <ng-container *ngIf="sortIndicatorRef"
-                              [ngTemplateOutlet]="sortIndicatorRef"
-                              [ngTemplateOutletContext]="{direction:item.direction, columnName: item.name }">
-                </ng-container>
-                <div *ngIf="!sortIndicatorRef">
-                    {{item.name}}:
-                    <div class="sorting" [matTooltip]="sortToolTip">
-                        {{item.direction}}
-                    </div>
+  <div class="table-settings-sort">
+    <mat-chip-set class="drag-chip-list" cdkDropList cdkDropListOrientation='horizontal'
+      (cdkDropListDropped)="dropSort($event)" [disabled]="disableSortIndicators">
+      @for (item of sort; track item) {
+        <mat-chip-row class="drag-chip" cdkDrag (removed)="remove(item.id)"
+          (click)="updateDirection(item.id)">
+          <div class="chip-content">
+            @if (sortIndicatorRef) {
+              <ng-container
+                [ngTemplateOutlet]="sortIndicatorRef"
+                [ngTemplateOutletContext]="{direction:item.direction, columnName: item.name }">
+              </ng-container>
+            } @else {
+              <div>
+                {{item.name}}:
+                <div class="sorting" [matTooltip]="sortToolTip">
+                  {{item.direction}}
                 </div>
-                <mat-icon class="mat-mdc-chip-trailing-icon" (click)="remove(item.id)">cancel</mat-icon>
               </div>
-            </mat-chip-row>
-        </mat-chip-set>
-    </div>
-    <div style="flex: 1 1 auto;"></div>
-    <div #settingsMenu (click)="openDialog()" class="table-settings-menu">
-        <ng-content #menuRef></ng-content>
-    </div>
+            }
+            <mat-icon class="mat-mdc-chip-trailing-icon" (click)="remove(item.id)">cancel</mat-icon>
+          </div>
+        </mat-chip-row>
+      }
+    </mat-chip-set>
+  </div>
+  <div style="flex: 1 1 auto;"></div>
+  <div #settingsMenu (click)="openDialog()" class="table-settings-menu">
+    <ng-content #menuRef></ng-content>
+  </div>
 </div>
 
 <ng-template #templateRef>
   <div cdkDropList class="column-list" (cdkDropListDropped)="drop($event)">
-    <div class="column-item" *ngFor="let column of _tableData.columns" cdkDrag>
-      <mat-icon cdkDragHandle>drag_indicator</mat-icon>
-      <mat-checkbox [(ngModel)]="column.isActive" (change)="toggle()">{{column.name}}</mat-checkbox>
-    </div>
+    @for (column of _tableData.columns; track column) {
+      <div class="column-item" cdkDrag>
+        <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+        <mat-checkbox [(ngModel)]="column.isActive" (change)="toggle()">{{column.name}}</mat-checkbox>
+      </div>
+    }
   </div>
 </ng-template>
