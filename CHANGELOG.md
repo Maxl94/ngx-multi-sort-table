@@ -1,5 +1,16 @@
 # Changelog
 
+## [20.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.2.1...v20.0.0) (2025-06-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* update Angular dependencies to version 20 and adjust module resolution settings ([#232](https://github.com/Maxl94/ngx-multi-sort-table/issues/232))
+
+### Miscellaneous Chores
+
+* update Angular dependencies to version 20 and adjust module resolution settings ([#232](https://github.com/Maxl94/ngx-multi-sort-table/issues/232)) ([65fce7d](https://github.com/Maxl94/ngx-multi-sort-table/commit/65fce7d32918d23b91d3f723d20f06ca520ceb10))
+
 ## [19.2.1](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.2.0...v19.2.1) (2025-05-26)
 
 
