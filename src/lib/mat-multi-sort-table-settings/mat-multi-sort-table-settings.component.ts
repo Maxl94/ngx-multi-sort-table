@@ -5,7 +5,7 @@ import {BlockScrollStrategy, Overlay, OverlayRef, ScrollStrategy, ViewportRuler}
 import {TemplatePortal} from '@angular/cdk/portal';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipRow, MatChipSet} from '@angular/material/chips';
-import {NgForOf, NgIf, NgTemplateOutlet} from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
 import {FormsModule} from '@angular/forms';
@@ -15,7 +15,7 @@ import {FormsModule} from '@angular/forms';
     selector: 'mat-multi-sort-table-settings',
     templateUrl: './mat-multi-sort-table-settings.component.html',
     styleUrls: ['./mat-multi-sort-table-settings.component.scss'],
-  imports: [MatCheckboxModule, CdkDropList, NgTemplateOutlet, MatTooltip, MatIcon, NgForOf, CdkDrag, NgIf, CdkDragHandle, FormsModule, MatChipSet, MatChipRow]
+  imports: [MatCheckboxModule, CdkDropList, NgTemplateOutlet, MatTooltip, MatIcon, CdkDrag, CdkDragHandle, FormsModule, MatChipSet, MatChipRow]
 })
 export class MatMultiSortTableSettingsComponent<T> implements OnInit {
   _tableData!: TableData<T>;
@@ -26,7 +26,7 @@ export class MatMultiSortTableSettingsComponent<T> implements OnInit {
 
   @ViewChild('settingsMenu') buttonRef!: ElementRef;
 
-  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef!: TemplateRef<T>;
+  @ContentChild('sortIndicator', { static: false }) sortIndicatorRef!: TemplateRef<{direction:string, columnName: string}>;
 
   @Input()
   sortToolTip: string = '';

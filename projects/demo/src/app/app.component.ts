@@ -12,7 +12,7 @@ import {FormsModule} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
 import {MatTooltip} from '@angular/material/tooltip';
 import {MatIcon} from '@angular/material/icon';
-import {NgForOf, NgIf} from '@angular/common';
+
 import {
   MatCell,
   MatCellDef,
@@ -37,11 +37,9 @@ class UserData {
     MatButton,
     MatTooltip,
     MatIcon,
-    NgIf,
     MatTable,
     MatMultiSort,
     MatColumnDef,
-    NgForOf,
     MatHeaderCell,
     MatMultiSortHeaderComponent,
     MatHeaderCellDef,
@@ -52,7 +50,7 @@ class UserData {
     MatRow,
     MatRowDef,
     MatPaginator
-  ],
+],
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
