@@ -1,5 +1,12 @@
 # Changelog
 
+## [20.1.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v20.0.0...v20.1.0) (2025-07-25)
+
+
+### Features
+
+* Refactor components to use inject-method and update deps ([#236](https://github.com/Maxl94/ngx-multi-sort-table/issues/236)) ([b832c07](https://github.com/Maxl94/ngx-multi-sort-table/commit/b832c07a59a4a1938aafeed7d08d558d3f762aa1))
+
 ## [20.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v19.2.1...v20.0.0) (2025-06-24)
 
 
