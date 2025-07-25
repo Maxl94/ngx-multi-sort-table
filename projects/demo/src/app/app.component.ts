@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
 import {
   MatMultiSort,
   MatMultiSortHeaderComponent,
@@ -54,6 +54,9 @@ class UserData {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  private dummyService = inject(DummyService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
   CLIENT_SIDE = true;
   CLOSE_MENU_BEHAVIOR = true;
   TOGGLE_INDICATOR_ICONS = true;
@@ -61,10 +64,7 @@ export class AppComponent {
   table: TableData<UserData>;
   @ViewChild(MatMultiSort) sort!: MatMultiSort;
 
-  constructor(
-    private dummyService: DummyService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) {
+  constructor() {
     this.table = new TableData<UserData>(
       [
         { id: 'id', name: 'ID' },
