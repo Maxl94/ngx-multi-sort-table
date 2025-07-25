@@ -1,4 +1,4 @@
-import {Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild, ViewContainerRef, inject } from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 import { TableData } from '../table-data';
 import {BlockScrollStrategy, Overlay, OverlayRef, ScrollStrategy, ViewportRuler} from '@angular/cdk/overlay';
@@ -18,6 +18,10 @@ import {FormsModule} from '@angular/forms';
   imports: [MatCheckboxModule, CdkDropList, NgTemplateOutlet, MatTooltip, MatIcon, CdkDrag, CdkDragHandle, FormsModule, MatChipSet, MatChipRow]
 })
 export class MatMultiSortTableSettingsComponent<T> implements OnInit {
+  private overlay = inject(Overlay);
+  private viewContainerRef = inject(ViewContainerRef);
+  private viewportRuler = inject(ViewportRuler);
+
   _tableData!: TableData<T>;
   sort: { id: string, name: string, direction: string }[] = [];
   overlayRef!: OverlayRef;
@@ -44,8 +48,6 @@ export class MatMultiSortTableSettingsComponent<T> implements OnInit {
 
   @Input()
   disableSortIndicators = false;
-
-  constructor(private overlay: Overlay, private viewContainerRef: ViewContainerRef, private viewportRuler: ViewportRuler) { }
 
   ngOnInit(): void {
     this.sort = this.getSort();
