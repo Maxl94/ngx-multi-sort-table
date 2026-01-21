@@ -2,7 +2,7 @@
   <div class="table-settings-sort">
     <mat-chip-set class="drag-chip-list" cdkDropList cdkDropListOrientation='horizontal'
       (cdkDropListDropped)="dropSort($event)" [disabled]="disableSortIndicators">
-      @for (item of sort; track item) {
+      @for (item of sort; track item.id) {
         <mat-chip-row class="drag-chip" cdkDrag (removed)="remove(item.id)"
           (click)="updateDirection(item.id)">
           <div class="chip-content">

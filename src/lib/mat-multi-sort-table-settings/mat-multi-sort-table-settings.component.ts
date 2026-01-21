@@ -12,6 +12,7 @@ import {FormsModule} from '@angular/forms';
 
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
     selector: 'mat-multi-sort-table-settings',
     templateUrl: './mat-multi-sort-table-settings.component.html',
     styleUrls: ['./mat-multi-sort-table-settings.component.scss'],
@@ -130,10 +131,12 @@ export class MatMultiSortTableSettingsComponent<T> implements OnInit {
 
   updateDirection(id: string) {
     const i = this.sort.findIndex(v => v.id === id);
-    if (this.sort[i].direction === 'asc') {
-      this.sort[i].direction = 'desc';
-    } else {
-      this.sort[i].direction = 'asc';
+    if(i !== -1) {
+      if (this.sort[i].direction === 'asc') {
+        this.sort[i].direction = 'desc';
+      } else {
+        this.sort[i].direction = 'asc';
+      }
     }
     this.updateSort();
   }
