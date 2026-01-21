@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, ViewChild, inject, OnInit, AfterViewInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ViewChild, inject, OnInit} from '@angular/core';
 import {
   MatMultiSort,
   MatMultiSortHeaderComponent,

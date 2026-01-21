@@ -1,4 +1,4 @@
-import {AfterViewInit, Directive, OnChanges, OnInit} from '@angular/core';
+import { Directive, OnInit} from '@angular/core';
 import { MatSort, MatSortable, SortDirection } from '@angular/material/sort';
 
 @Directive({

@@ -3,7 +3,6 @@ import {
   Input,
   ChangeDetectorRef,
   ViewEncapsulation,
-  ChangeDetectionStrategy,
   ElementRef,
   inject,
   InjectionToken
