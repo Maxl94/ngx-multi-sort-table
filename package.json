@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.0.3",
-    "@angular/cli": "^20.0.3",
+    "@angular/cli": "^21.1.0",
     "@angular/compiler-cli": "^20.0.4",
     "@angular/forms": "^20.0.4",
     "@angular/platform-browser": "^20.0.4",
