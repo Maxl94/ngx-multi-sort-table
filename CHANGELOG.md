@@ -1,5 +1,16 @@
 # Changelog
 
+## [21.0.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v20.1.0...v21.0.0) (2026-01-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update to Angular 21
+
+### Features
+
+* Update to Angular 21 ([64ffd71](https://github.com/Maxl94/ngx-multi-sort-table/commit/64ffd71e13d30106d932af8494aab526eb2dc15b))
+
 ## [20.1.0](https://github.com/Maxl94/ngx-multi-sort-table/compare/v20.0.0...v20.1.0) (2025-07-25)
 
 
