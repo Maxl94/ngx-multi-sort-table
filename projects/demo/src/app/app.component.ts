@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild, inject } from '@angular/core';
+import {ChangeDetectorRef, Component, ViewChild, inject, OnInit} from '@angular/core';
 import {
   MatMultiSort,
   MatMultiSortHeaderComponent,
@@ -53,7 +53,7 @@ class UserData {
 ],
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private dummyService = inject(DummyService);
   private changeDetectorRef = inject(ChangeDetectorRef);
 
@@ -83,7 +83,7 @@ export class AppComponent {
     this.table.sortObservable.subscribe(() => { this.getData(); });
     this.table.previousObservable.subscribe(() => { this.getData(); });
     this.table.sizeObservable.subscribe(() => { this.getData(); });
-    this.changeDetectorRef.detectChanges()
+    this.changeDetectorRef.detectChanges();
     this.initData();
   }
 

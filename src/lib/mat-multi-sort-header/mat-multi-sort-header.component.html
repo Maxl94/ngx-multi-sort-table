@@ -7,14 +7,10 @@
   <div class="mat-sort-header-content">
     <ng-content></ng-content>
   </div>
-  <!-- Disable animations while a current animation is running -->
   @if (_renderArrow() && _isSorted()) {
     <div class="mat-sort-header-arrow"
-      [@arrowOpacity]="_getArrowViewState()"
-      [@arrowPosition]="_getArrowViewState()"
-      [@allowChildren]="_getArrowDirectionState()"
-      (@arrowPosition.start)="_disableViewStateAnimation = true"
-      (@arrowPosition.done)="_disableViewStateAnimation = false">
+         animate.enter="opacity: 1; transform: translateY(0)"
+         animate.leave="opacity: 0; transform: translateY(-25%)">
       <svg [class.asc]="getSortDirection() === 'asc'"
         [class.desc]="getSortDirection() === 'desc'"
         viewBox="0 -960 960 960" focusable="false" aria-hidden="true">

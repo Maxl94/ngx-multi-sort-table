@@ -1,16 +1,18 @@
-import { Directive, OnChanges, OnInit } from '@angular/core';
+import { Directive, OnInit} from '@angular/core';
 import { MatSort, MatSortable, SortDirection } from '@angular/material/sort';
 
 @Directive({
+    // eslint-disable-next-line @angular-eslint/directive-selector
     selector: '[matMultiSort]',
     exportAs: 'matMultiSort'
 })
-export class MatMultiSort extends MatSort implements OnInit, OnChanges {
+export class MatMultiSort extends MatSort implements OnInit {
 
   start = 'asc' as 'asc' | 'desc';
+  private _allDirections: SortDirection[] = ['asc', 'desc'];
 
-  actives: string[] = [];
   directions: SortDirection[] = [];
+  actives: string[] = [];
 
   ngOnInit(): void {
     super.ngOnInit();
@@ -47,4 +49,8 @@ export class MatMultiSort extends MatSort implements OnInit, OnChanges {
     return this.directions[i] || (sortable.start ? sortable.start : this.start);
   }
 
+  getNextSortDirection(sortable: MatSortable): SortDirection {
+    const i = this._allDirections.indexOf(this.activeDirection(sortable));
+    return this._allDirections[(i + 1) % this._allDirections.length];
+  }
 }
