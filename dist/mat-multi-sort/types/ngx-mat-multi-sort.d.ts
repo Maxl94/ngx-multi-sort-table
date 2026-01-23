@@ -1,22 +1,11 @@
 import * as i0 from '@angular/core';
 import { OnInit, ElementRef, TemplateRef } from '@angular/core';
 import { MatSort, SortDirection, MatSortable, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
-import * as i3 from '@angular/cdk/drag-drop';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 import { PageEvent } from '@angular/material/paginator';
 import { OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
-import * as i1 from '@angular/common';
-import * as i2 from '@angular/material/divider';
-import * as i4 from '@angular/material/icon';
-import * as i5 from '@angular/material/checkbox';
-import * as i6 from '@angular/material/menu';
-import * as i7 from '@angular/material/button';
-import * as i8 from '@angular/forms';
-import * as i9 from '@angular/material/chips';
-import * as i10 from '@angular/material/tooltip';
-import * as i11 from '@angular/material/dialog';
 
 declare class MatMultiSort extends MatSort implements OnInit {
     start: "asc" | "desc";
@@ -179,11 +168,5 @@ declare class MatMultiSortTableSettingsComponent<T> implements OnInit {
     static ɵcmp: i0.ɵɵComponentDeclaration<MatMultiSortTableSettingsComponent<any>, "mat-multi-sort-table-settings", never, { "sortToolTip": { "alias": "sortToolTip"; "required": false; }; "closeDialogOnChoice": { "alias": "closeDialogOnChoice"; "required": false; }; "scrollStrategy": { "alias": "scrollStrategy"; "required": false; }; "tableData": { "alias": "tableData"; "required": false; }; "disableSortIndicators": { "alias": "disableSortIndicators"; "required": false; }; }, {}, ["sortIndicatorRef"], ["*"], true, never>;
 }
 
-declare class MatMultiSortModule {
-    static ɵfac: i0.ɵɵFactoryDeclaration<MatMultiSortModule, never>;
-    static ɵmod: i0.ɵɵNgModuleDeclaration<MatMultiSortModule, never, [typeof i1.CommonModule, typeof i2.MatDividerModule, typeof i3.DragDropModule, typeof i4.MatIconModule, typeof i5.MatCheckboxModule, typeof i6.MatMenuModule, typeof i7.MatButtonModule, typeof i8.FormsModule, typeof i9.MatChipsModule, typeof i10.MatTooltipModule, typeof i11.MatDialogModule, typeof MatMultiSort, typeof MatMultiSortHeaderComponent, typeof MatMultiSortTableSettingsComponent], never>;
-    static ɵinj: i0.ɵɵInjectorDeclaration<MatMultiSortModule>;
-}
-
-export { MatMultiSort, MatMultiSortHeaderComponent, MatMultiSortModule, MatMultiSortTableDataSource, MatMultiSortTableSettingsComponent, TableData };
+export { MatMultiSort, MatMultiSortHeaderComponent, MatMultiSortTableDataSource, MatMultiSortTableSettingsComponent, TableData };
 //# sourceMappingURL=ngx-mat-multi-sort.d.ts.map

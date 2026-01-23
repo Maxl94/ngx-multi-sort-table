@@ -1,22 +1,18 @@
 import * as i0 from '@angular/core';
-import { Directive, inject, ChangeDetectorRef, InjectionToken, ElementRef, ViewEncapsulation, Component, Input, ViewContainerRef, ContentChild, ViewChild, NgModule } from '@angular/core';
+import { Directive, inject, ChangeDetectorRef, InjectionToken, ElementRef, ViewEncapsulation, Component, Input, ViewContainerRef, ContentChild, ViewChild } from '@angular/core';
 import { MatSort, MatSortHeader, MatSortHeaderIntl } from '@angular/material/sort';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle, DragDropModule } from '@angular/cdk/drag-drop';
+import { moveItemInArray, CdkDropList, CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { Overlay, ViewportRuler, BlockScrollStrategy } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import * as i1 from '@angular/material/checkbox';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatChipSet, MatChipRow, MatChipsModule } from '@angular/material/chips';
-import { NgTemplateOutlet, CommonModule } from '@angular/common';
-import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatChipSet, MatChipRow } from '@angular/material/chips';
+import { NgTemplateOutlet } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
 import * as i2 from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
 import { Subject, BehaviorSubject, delay, filter, tap } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
 
@@ -385,60 +381,6 @@ class MatMultiSortTableSettingsComponent {
         }] }); })();
 (() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassDebugInfo(MatMultiSortTableSettingsComponent, { className: "MatMultiSortTableSettingsComponent", filePath: "lib/mat-multi-sort-table-settings/mat-multi-sort-table-settings.component.ts", lineNumber: 21 }); })();
 
-class MatMultiSortModule {
-    static { this.ɵfac = function MatMultiSortModule_Factory(__ngFactoryType__) { return new (__ngFactoryType__ || MatMultiSortModule)(); }; }
-    static { this.ɵmod = /*@__PURE__*/ i0.ɵɵdefineNgModule({ type: MatMultiSortModule }); }
-    static { this.ɵinj = /*@__PURE__*/ i0.ɵɵdefineInjector({ imports: [CommonModule,
-            MatDividerModule,
-            DragDropModule,
-            MatIconModule,
-            MatCheckboxModule,
-            MatMenuModule,
-            MatButtonModule,
-            FormsModule,
-            MatChipsModule,
-            MatTooltipModule,
-            MatDialogModule,
-            MatMultiSortTableSettingsComponent] }); }
-}
-(() => { (typeof ngDevMode === "undefined" || ngDevMode) && i0.ɵsetClassMetadata(MatMultiSortModule, [{
-        type: NgModule,
-        args: [{
-                declarations: [],
-                exports: [],
-                imports: [
-                    CommonModule,
-                    MatDividerModule,
-                    DragDropModule,
-                    MatIconModule,
-                    MatCheckboxModule,
-                    MatMenuModule,
-                    MatButtonModule,
-                    FormsModule,
-                    MatChipsModule,
-                    MatTooltipModule,
-                    MatDialogModule,
-                    MatMultiSort,
-                    MatMultiSortHeaderComponent,
-                    MatMultiSortTableSettingsComponent
-                ]
-            }]
-    }], null, null); })();
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(MatMultiSortModule, { imports: [CommonModule,
-        MatDividerModule,
-        DragDropModule,
-        MatIconModule,
-        MatCheckboxModule,
-        MatMenuModule,
-        MatButtonModule,
-        FormsModule,
-        MatChipsModule,
-        MatTooltipModule,
-        MatDialogModule,
-        MatMultiSort,
-        MatMultiSortHeaderComponent,
-        MatMultiSortTableSettingsComponent] }); })();
-
 class Settings {
     constructor(key) {
         this._key = key;
@@ -752,5 +694,5 @@ class MatMultiSortTableDataSource extends DataSource {
  * Generated bundle index. Do not edit.
  */
 
-export { MatMultiSort, MatMultiSortHeaderComponent, MatMultiSortModule, MatMultiSortTableDataSource, MatMultiSortTableSettingsComponent, TableData };
+export { MatMultiSort, MatMultiSortHeaderComponent, MatMultiSortTableDataSource, MatMultiSortTableSettingsComponent, TableData };
 //# sourceMappingURL=ngx-mat-multi-sort.mjs.map

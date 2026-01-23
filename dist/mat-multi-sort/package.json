@@ -33,7 +33,7 @@
     "@angular/common": "^21.1.0",
     "@angular/core": "^21.1.0",
     "@angular/material": "^21.1.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.9.0"
   },
   "module": "fesm2022/ngx-mat-multi-sort.mjs",
   "typings": "types/ngx-mat-multi-sort.d.ts",
