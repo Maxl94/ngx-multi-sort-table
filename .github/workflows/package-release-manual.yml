@@ -35,4 +35,10 @@ jobs:
         working-directory: dist/mat-multi-sort
         env:
           NPM_CONFIG_PROVENANCE: "true"
-        run: npm publish --provenance
+          NODE_AUTH_TOKEN: ""
+          NPM_TOKEN: ""
+        run: |
+          rm -f .npmrc
+          rm -f ~/.npmrc
+          npm whoami --registry=https://registry.npmjs.org || true
+          npm publish --provenance --access public
