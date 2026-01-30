@@ -1,0 +1,38 @@
+name: release-manual
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+
+jobs:
+  release-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm install
+        name: Install dependencies
+
+      - run: npm install -g @angular/cli
+        name: Install angular cli
+
+      - run: ng build mat-multi-sort --configuration production
+        name: npm build
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: package
+          path: dist/mat-multi-sort
+
+      - name: Publish
+        run: |
+          cd dist/mat-multi-sort
+          npm publish
