@@ -13,7 +13,7 @@ The code is based on [Francisco Arantes Rodrigues](https://github.com/farantesro
 
 
 ## Demo
-Visit the [GitHub pages demo](https://maxl94.github.io/ngx-multi-sort-table/) or clone and run it locally.
+Visit the [GitHub pages demo](https://ngx-multi-sort.github.io/ngx-multi-sort-table/) or clone and run it locally.
 
 To run the demo:
 
