@@ -1,5 +1,12 @@
 # Changelog
 
+## [22.0.1](https://github.com/ngx-multi-sort/ngx-multi-sort-table/compare/v22.0.0...v22.0.1) (2026-09-08)
+
+
+### Bug Fixes
+
+* remove .drag-chip background ([#289](https://github.com/ngx-multi-sort/ngx-multi-sort-table/issues/289)) ([118aaa9](https://github.com/ngx-multi-sort/ngx-multi-sort-table/commit/118aaa995723f4b7d7381bdc4db85c46636c4338))
+
 ## [22.0.0](https://github.com/ngx-multi-sort/ngx-multi-sort-table/compare/v21.0.3...v22.0.0) (2026-08-12)
 
 
