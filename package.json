@@ -11,7 +11,7 @@
   "scripts": {
     "demo": "ng lint && ng build && ng serve demo",
     "lint": "ng lint",
-    "build:docs": "ng build demo --configuration production --base-href /ngx-multi-sort-table/"
+    "build:docs": "ng build demo --configuration docs"
   },
   "repository": {
     "type": "git",

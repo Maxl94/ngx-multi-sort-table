@@ -193,7 +193,8 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": {
-              "base": "dist/demo"
+              "base": "dist/demo",
+              "browser": ""
             },
             "index": "projects/demo/src/index.html",
             "polyfills": [
@@ -213,6 +214,26 @@
           },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "docs": {
+              "outputPath": {
+                "base": "docs",
+                "browser": ""
+              },
+              "baseHref": "/ngx-multi-sort-table/",
               "budgets": [
                 {
                   "type": "initial",
